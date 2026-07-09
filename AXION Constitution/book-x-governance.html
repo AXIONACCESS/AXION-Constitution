@@ -1,0 +1,848 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AXION Constitution - Book X: Governance</title>
+  <style>
+    :root {
+      --ink: #151b17;
+      --muted: #63705f;
+      --cream: #f4ecd8;
+      --paper: #fffaf0;
+      --line: rgba(118, 97, 47, .28);
+      --gold: #c8a83d;
+      --earth: #7d642d;
+      --deep: #0c120e;
+      --forest: #203a29;
+      --blue: #186c80;
+      --shadow: 0 18px 52px rgba(31, 24, 7, .12);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 14% -4%, rgba(32, 58, 41, .20), transparent 28rem),
+        radial-gradient(circle at 88% 6%, rgba(200, 168, 61, .22), transparent 30rem),
+        linear-gradient(180deg, #f8f1de 0%, #efe3c3 100%);
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.62;
+    }
+    a { color: inherit; }
+    .page { width: min(1120px, calc(100vw - 42px)); margin: 0 auto; }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(244, 236, 216, .92);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--line);
+    }
+    .topbar .page {
+      min-height: 62px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+    .brand {
+      text-decoration: none;
+      font-weight: 900;
+      letter-spacing: .15em;
+      font-size: 12px;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .sigil {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: var(--deep);
+      color: var(--gold);
+      border: 1px solid var(--gold);
+    }
+    .nav {
+      display: flex;
+      gap: 16px;
+      color: #4e584c;
+      font-size: 13px;
+      font-weight: 800;
+    }
+    .nav a { text-decoration: none; white-space: nowrap; }
+    .nav .back {
+      border: 1px solid rgba(118, 97, 47, .35);
+      border-radius: 999px;
+      padding: 8px 13px;
+      background: rgba(255,250,240,.68);
+    }
+
+    .hero {
+      min-height: calc(100vh - 62px);
+      display: grid;
+      grid-template-columns: 1fr .48fr;
+      gap: 54px;
+      align-items: center;
+      padding: 58px 0 44px;
+    }
+    .kicker {
+      color: var(--earth);
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: .28em;
+      text-transform: uppercase;
+      margin: 0 0 16px;
+    }
+    h1, h2, h3, p { margin-top: 0; }
+    h1 {
+      font-family: ui-serif, Georgia, "Times New Roman", serif;
+      font-size: clamp(52px, 8vw, 112px);
+      line-height: .94;
+      letter-spacing: 0;
+      margin-bottom: 20px;
+    }
+    .subtitle {
+      font-family: ui-serif, Georgia, "Times New Roman", serif;
+      color: var(--earth);
+      font-style: italic;
+      font-size: 25px;
+      margin-bottom: 26px;
+    }
+    .hero-copy {
+      max-width: 760px;
+      color: #384536;
+      font-size: 21px;
+    }
+    .quote {
+      border-left: 4px solid var(--gold);
+      padding: 16px 0 16px 22px;
+      margin: 28px 0 0;
+      font-family: ui-serif, Georgia, "Times New Roman", serif;
+      font-size: 21px;
+      line-height: 1.42;
+      color: #263224;
+    }
+    .toc {
+      background: rgba(255, 250, 240, .76);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+      padding: 22px;
+    }
+    .toc h2 {
+      font-size: 13px;
+      letter-spacing: .24em;
+      color: var(--earth);
+      text-transform: uppercase;
+      margin: 0 0 14px;
+    }
+    .toc a {
+      display: grid;
+      grid-template-columns: 42px 1fr;
+      gap: 10px;
+      align-items: center;
+      text-decoration: none;
+      padding: 6px 0;
+      border-top: 1px solid rgba(118,97,47,.18);
+      color: #29352a;
+      font-weight: 800;
+      font-size: 14px;
+    }
+    .toc a:first-of-type { border-top: 0; }
+    .toc span {
+      min-width: 30px;
+      height: 28px;
+      border-radius: 999px;
+      display: grid;
+      place-items: center;
+      background: #ecd36f;
+      font-size: 11px;
+      font-weight: 900;
+      padding: 0 8px;
+    }
+
+    section { padding: 66px 0; border-top: 1px solid rgba(118,97,47,.18); }
+    .reader {
+      display: grid;
+      grid-template-columns: 220px minmax(0, 1fr);
+      gap: 42px;
+      align-items: start;
+    }
+    .article-label {
+      position: sticky;
+      top: 86px;
+      color: var(--earth);
+      font-size: 12px;
+      letter-spacing: .24em;
+      text-transform: uppercase;
+      font-weight: 900;
+    }
+    .article {
+      background: rgba(255, 250, 240, .67);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 34px;
+      box-shadow: 0 14px 36px rgba(31,24,7,.08);
+    }
+    h2 {
+      font-family: ui-serif, Georgia, "Times New Roman", serif;
+      font-size: clamp(32px, 4.2vw, 56px);
+      line-height: 1;
+      letter-spacing: 0;
+      margin-bottom: 22px;
+    }
+    .article p {
+      max-width: 760px;
+      font-size: 18px;
+      color: #2f3c31;
+      margin-bottom: 18px;
+    }
+    .statement {
+      max-width: 800px;
+      border-radius: 8px;
+      border: 1px solid rgba(200,168,61,.45);
+      background: #fbf0ce;
+      padding: 18px 20px;
+      color: #1f2c1d;
+      font-weight: 800;
+      font-size: 18px;
+      margin: 24px 0;
+    }
+    .short-lines {
+      display: grid;
+      gap: 7px;
+      margin: 22px 0;
+      max-width: 720px;
+    }
+    .short-lines div {
+      border-left: 3px solid rgba(200,168,61,.65);
+      padding: 7px 0 7px 14px;
+      color: #2f3c31;
+      font-size: 18px;
+      background: rgba(255,255,255,.32);
+    }
+    .grid, .question-grid, .council-grid, .committee-grid, .authority-grid, .amend-grid, .ethics-grid, .risk-grid, .vote-grid, .succession-grid, .ip-grid, .security-grid, .compliance-grid, .transparency-grid, .conflict-grid, .account-grid, .resilience-grid, .steward-grid {
+      display: grid;
+      gap: 12px;
+      margin-top: 22px;
+    }
+    .grid { grid-template-columns: repeat(4, 1fr); }
+    .question-grid, .council-grid, .ethics-grid, .vote-grid, .conflict-grid { grid-template-columns: repeat(5, 1fr); }
+    .committee-grid { grid-template-columns: repeat(5, 1fr); }
+    .authority-grid { grid-template-columns: repeat(5, 1fr); }
+    .amend-grid, .steward-grid { grid-template-columns: repeat(5, 1fr); }
+    .risk-grid, .ip-grid, .security-grid, .compliance-grid, .transparency-grid, .account-grid { grid-template-columns: repeat(4, 1fr); }
+    .succession-grid, .resilience-grid { grid-template-columns: repeat(3, 1fr); }
+    .chip, .card, .committee-card, .authority-card {
+      border-radius: 7px;
+      border: 1px solid rgba(118,97,47,.22);
+      background: rgba(255,255,255,.42);
+      padding: 14px;
+      color: #33402f;
+    }
+    .chip { font-weight: 800; }
+    .card b, .committee-card b, .authority-card b {
+      display: block;
+      color: var(--earth);
+      margin-bottom: 6px;
+    }
+    .card span, .committee-card span, .authority-card span {
+      display: block;
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 650;
+      line-height: 1.45;
+    }
+    .committee-card, .authority-card {
+      min-height: 190px;
+      position: relative;
+      overflow: hidden;
+    }
+    .committee-card::before, .authority-card::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(90deg, var(--forest), var(--gold));
+    }
+    .flow {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 10px;
+      margin: 24px 0;
+      max-width: 940px;
+    }
+    .flow-step {
+      position: relative;
+      border-radius: 7px;
+      border: 1px solid rgba(118,97,47,.24);
+      background: rgba(255,255,255,.48);
+      padding: 13px;
+      font-weight: 900;
+      text-align: center;
+      color: #253224;
+    }
+    .flow-step::after {
+      content: "";
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      border-top: 2px solid var(--earth);
+      border-right: 2px solid var(--earth);
+      transform: rotate(45deg);
+      top: 50%;
+      right: -9px;
+      margin-top: -4px;
+    }
+    .flow-step:nth-child(5n)::after,
+    .flow-step:last-child::after { display: none; }
+    .pyramid {
+      max-width: 820px;
+      display: grid;
+      gap: 8px;
+      margin-top: 24px;
+    }
+    .pyramid-row {
+      margin: 0 auto;
+      border-radius: 8px;
+      border: 1px solid rgba(118,97,47,.26);
+      background: rgba(255,255,255,.50);
+      padding: 12px 18px;
+      text-align: center;
+      font-weight: 900;
+      color: #253224;
+    }
+    .pyramid-row:nth-child(1) { width: 44%; background: #18221b; color: #f7e9b8; border-color: rgba(200,168,61,.55); }
+    .pyramid-row:nth-child(2) { width: 54%; }
+    .pyramid-row:nth-child(3) { width: 64%; }
+    .pyramid-row:nth-child(4) { width: 74%; }
+    .pyramid-row:nth-child(5) { width: 84%; }
+    .pyramid-row:nth-child(6) { width: 94%; }
+    .flow-note {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 20px;
+      max-width: 820px;
+    }
+    .ending {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+    .ending-card {
+      border-radius: 8px;
+      padding: 24px;
+      border: 1px solid var(--line);
+      background: rgba(255,250,240,.76);
+      box-shadow: var(--shadow);
+    }
+    .ending-card blockquote {
+      margin: 0;
+      font-family: ui-serif, Georgia, "Times New Roman", serif;
+      font-size: 23px;
+      line-height: 1.38;
+      color: #22301f;
+    }
+    footer { padding: 34px 0 58px; color: var(--muted); font-size: 13px; }
+
+    @media (max-width: 980px) {
+      .nav { display: none; }
+      .hero, .reader, .ending, .flow-note { grid-template-columns: 1fr; }
+      .article-label { position: static; }
+      .grid, .question-grid, .council-grid, .committee-grid, .authority-grid, .amend-grid, .ethics-grid, .risk-grid, .vote-grid, .succession-grid, .ip-grid, .security-grid, .compliance-grid, .transparency-grid, .conflict-grid, .account-grid, .resilience-grid, .steward-grid, .flow { grid-template-columns: 1fr; }
+      .flow-step::after { display: none; }
+      .pyramid-row { width: 100% !important; }
+      .article { padding: 24px; }
+    }
+    @media print {
+      body { background: #fffaf0; }
+      .topbar { display: none; }
+      .page { width: auto; margin: 0 34px; }
+      .hero { min-height: auto; grid-template-columns: 1fr; padding: 38px 0; }
+      section { padding: 34px 0; }
+      .article, .toc, .ending-card { box-shadow: none; }
+      .reader { grid-template-columns: 140px 1fr; gap: 24px; }
+      .grid, .question-grid, .council-grid, .committee-grid, .authority-grid, .amend-grid, .ethics-grid, .risk-grid, .vote-grid, .succession-grid, .ip-grid, .security-grid, .compliance-grid, .transparency-grid, .conflict-grid, .account-grid, .resilience-grid, .steward-grid, .flow { grid-template-columns: repeat(2, 1fr); }
+      @page { size: letter; margin: .46in; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="page">
+      <a class="brand" href="index.html">
+        <span class="sigil">✦</span>
+        AXION Constitution
+      </a>
+      <nav class="nav" aria-label="Book X navigation">
+        <a href="#council">Council</a>
+        <a href="#committees">Committees</a>
+        <a href="#authority">Authority</a>
+        <a href="#risk">Risk</a>
+        <a href="#pyramid">Pyramid</a>
+        <a class="back" href="index.html">Back to Constitution</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page">
+    <section class="hero">
+      <div>
+        <p class="kicker">The AXION Constitution - Book X</p>
+        <h1>Governance</h1>
+        <p class="subtitle">Protecting the Mission Across Generations</p>
+        <p class="hero-copy">Book X defines governance as stewardship: the authority, accountability, ethical standards, councils, committees, risk systems, and transparency practices that keep AXION faithful to its mission across generations.</p>
+        <blockquote class="quote">Leadership builds organizations. Governance protects civilizations. Good leadership creates success. Good governance ensures that success never corrupts its original purpose.</blockquote>
+      </div>
+      <aside class="toc">
+        <h2>Book X Contents</h2>
+        <a href="#preamble"><span>0</span>Preamble</a>
+        <a href="#authority-doc"><span>I</span>Constitutional Authority</a>
+        <a href="#philosophy"><span>II</span>Governance Philosophy</a>
+        <a href="#council"><span>III</span>Stewardship Council</a>
+        <a href="#composition"><span>IV</span>Council Composition</a>
+        <a href="#committees"><span>V</span>Committees</a>
+        <a href="#authority"><span>VI</span>Decision Authority</a>
+        <a href="#founder"><span>VII</span>Founder Authority</a>
+        <a href="#amendments"><span>VIII</span>Amendments</a>
+        <a href="#ethics"><span>IX</span>Ethical Governance</a>
+        <a href="#risk"><span>X</span>Risk Stewardship</a>
+        <a href="#voting"><span>XI</span>Voting</a>
+        <a href="#succession"><span>XII</span>Succession</a>
+        <a href="#ip"><span>XIII</span>IP Governance</a>
+        <a href="#security"><span>XIV</span>Security</a>
+        <a href="#compliance"><span>XV</span>Compliance</a>
+        <a href="#transparency"><span>XVI</span>Transparency</a>
+        <a href="#conflict"><span>XVII</span>Conflict of Interest</a>
+        <a href="#accountability"><span>XVIII</span>Accountability</a>
+        <a href="#resilience"><span>XIX</span>Resilience</a>
+        <a href="#flywheel"><span>XX</span>Governance Flywheel</a>
+        <a href="#beyond"><span>XXI</span>Beyond Ourselves</a>
+      </aside>
+    </section>
+
+    <section id="preamble" class="reader">
+      <div class="article-label">Preamble</div>
+      <article class="article">
+        <h2>Governance as Stewardship</h2>
+        <p>Power without accountability eventually becomes corruption. Innovation without governance eventually becomes chaos. Growth without ethics eventually becomes exploitation.</p>
+        <p>History demonstrates that civilizations rarely collapse because they lacked intelligence. They collapse because they failed to govern intelligence wisely.</p>
+        <div class="statement">AXION recognizes governance not as bureaucracy, but as stewardship.</div>
+        <div class="short-lines">
+          <div>Governance preserves purpose.</div>
+          <div>Protects people.</div>
+          <div>Allocates authority.</div>
+          <div>Reduces unnecessary risk.</div>
+          <div>Safeguards institutional memory.</div>
+          <div>Maintains public trust.</div>
+        </div>
+        <p>Most importantly, governance ensures that the mission remains greater than any individual. Not even the Founder stands above the Constitution. The Constitution governs all.</p>
+      </article>
+    </section>
+
+    <section id="authority-doc" class="reader">
+      <div class="article-label">Article I</div>
+      <article class="article">
+        <h2>Constitutional Authority</h2>
+        <p>The AXION Constitution is the supreme governing document of the organization.</p>
+        <div class="grid">
+          <div class="chip">Mission</div>
+          <div class="chip">Vision</div>
+          <div class="chip">Principles</div>
+          <div class="chip">Structure</div>
+          <div class="chip">Financial Stewardship</div>
+          <div class="chip">Leadership Responsibilities</div>
+          <div class="chip">Decision Authority</div>
+          <div class="chip">Ethical Standards</div>
+        </div>
+        <div class="statement">Every executive, employee, venture, advisor, AI system, and partner operates under this Constitution. No policy may contradict it.</div>
+      </article>
+    </section>
+
+    <section id="philosophy" class="reader">
+      <div class="article-label">Article II</div>
+      <article class="article">
+        <h2>The Governance Philosophy</h2>
+        <p>Governance exists to answer five constitutional questions.</p>
+        <div class="question-grid">
+          <div class="card"><b>Authority</b><span>Who decides?</span></div>
+          <div class="card"><b>Accountability</b><span>Who is accountable?</span></div>
+          <div class="card"><b>Benefit</b><span>Who benefits?</span></div>
+          <div class="card"><b>Responsibility</b><span>Who bears responsibility?</span></div>
+          <div class="card"><b>Mission</b><span>How is the mission protected?</span></div>
+        </div>
+        <div class="statement">If governance cannot answer these questions clearly, it is incomplete.</div>
+      </article>
+    </section>
+
+    <section id="council" class="reader">
+      <div class="article-label">Article III</div>
+      <article class="article">
+        <h2>The Stewardship Council</h2>
+        <p>AXION is governed by a Stewardship Council, not merely a Board of Directors. Its primary responsibility is protecting the Constitution.</p>
+        <div class="council-grid">
+          <div class="chip">Mission</div>
+          <div class="chip">Culture</div>
+          <div class="chip">Long-term strategy</div>
+          <div class="chip">Ethics</div>
+          <div class="chip">Institutional continuity</div>
+          <div class="chip">Civilizational impact</div>
+        </div>
+        <div class="statement">The Stewardship Council exists to serve future generations rather than quarterly performance.</div>
+      </article>
+    </section>
+
+    <section id="composition" class="reader">
+      <div class="article-label">Article IV</div>
+      <article class="article">
+        <h2>Composition of the Stewardship Council</h2>
+        <p>The Council should represent diverse forms of intelligence rather than financial ownership alone.</p>
+        <div class="council-grid">
+          <div class="chip">Founder</div>
+          <div class="chip">Independent Governors</div>
+          <div class="chip">Scientific Advisors</div>
+          <div class="chip">Technology Leaders</div>
+          <div class="chip">Financial Stewards</div>
+          <div class="chip">Legal & Governance Experts</div>
+          <div class="chip">Medical & Health Experts</div>
+          <div class="chip">Education & Culture Leaders</div>
+          <div class="chip">Systems Thinkers</div>
+          <div class="chip">Ethics & Human Rights Specialists</div>
+        </div>
+        <div class="statement">Future generations deserve diverse wisdom, not concentrated authority.</div>
+      </article>
+    </section>
+
+    <section id="committees">
+      <p class="kicker">Article V</p>
+      <h2>Constitutional Committees</h2>
+      <p class="hero-copy">To preserve organizational excellence, the Council establishes specialized committees that protect ethics, finance, technology, ventures, and resilience.</p>
+      <div class="committee-grid">
+        <article class="committee-card"><h3>Ethics & Human Flourishing</h3><p>Reviews AI ethics, medical ethics, research ethics, human rights, emerging technologies, and civilizational impact.</p></article>
+        <article class="committee-card"><h3>Finance & Treasury</h3><p>Oversees capital, Treasury, investment policy, reserve management, and financial sustainability.</p></article>
+        <article class="committee-card"><h3>Intelligence & Technology</h3><p>Reviews ARI, AI governance, cybersecurity, data architecture, technology strategy, and digital infrastructure.</p></article>
+        <article class="committee-card"><h3>Venture & Innovation</h3><p>Approves new ventures, major investments, spin-offs, strategic acquisitions, and institutional partnerships.</p></article>
+        <article class="committee-card"><h3>Audit & Risk</h3><p>Monitors operational risk, legal compliance, security, financial controls, and enterprise resilience.</p></article>
+      </div>
+    </section>
+
+    <section id="authority">
+      <p class="kicker">Article VI</p>
+      <h2>Decision Authority</h2>
+      <p class="hero-copy">Authority is distributed according to responsibility. No AI system possesses constitutional authority. Only humans do.</p>
+      <div class="authority-grid">
+        <article class="authority-card"><h3>Founder</h3><p>Mission, vision, constitutional philosophy, and long-term direction.</p></article>
+        <article class="authority-card"><h3>Stewardship Council</h3><p>Mission protection, constitutional amendments, executive oversight, succession, and strategic continuity.</p></article>
+        <article class="authority-card"><h3>Executive Leadership</h3><p>Execution, operations, capital, people, and technology.</p></article>
+        <article class="authority-card"><h3>Division Heads</h3><p>Departmental strategy, operational excellence, and AI coordination.</p></article>
+        <article class="authority-card"><h3>ARI</h3><p>Recommendations, intelligence, analysis, workflow coordination, and institutional memory.</p></article>
+      </div>
+    </section>
+
+    <section id="founder" class="reader">
+      <div class="article-label">Article VII</div>
+      <article class="article">
+        <h2>Founder Authority</h2>
+        <p>The Founder serves as the First Steward of AXION. The Founder protects constitutional integrity, preserves institutional philosophy, represents long-term vision, approves constitutional evolution, and safeguards civilization strategy.</p>
+        <div class="statement">The Founder does not possess unlimited authority. The Constitution limits every office. Leadership exists to serve the mission, never the reverse.</div>
+      </article>
+    </section>
+
+    <section id="amendments" class="reader">
+      <div class="article-label">Article VIII</div>
+      <article class="article">
+        <h2>Constitutional Amendments</h2>
+        <p>The Constitution is designed to evolve. However, evolution requires discipline.</p>
+        <div class="amend-grid">
+          <div class="chip">Mission alignment</div>
+          <div class="chip">Scientific evidence</div>
+          <div class="chip">Ethical responsibility</div>
+          <div class="chip">Long-term benefit</div>
+          <div class="chip">Organizational coherence</div>
+        </div>
+        <div class="statement">No amendment may violate the foundational purpose of AXION. Principles endure. Practices evolve.</div>
+      </article>
+    </section>
+
+    <section id="ethics" class="reader">
+      <div class="article-label">Article IX</div>
+      <article class="article">
+        <h2>Ethical Governance</h2>
+        <p>Every decision shall satisfy five constitutional standards.</p>
+        <div class="ethics-grid">
+          <div class="card"><b>Truth</b><span>Is it truthful?</span></div>
+          <div class="card"><b>Ethics</b><span>Is it ethical?</span></div>
+          <div class="card"><b>Benefit</b><span>Is it beneficial?</span></div>
+          <div class="card"><b>Sustainability</b><span>Is it sustainable?</span></div>
+          <div class="card"><b>Alignment</b><span>Is it aligned with the Constitution?</span></div>
+        </div>
+        <div class="statement">Failure to satisfy any standard requires further review.</div>
+      </article>
+    </section>
+
+    <section id="risk" class="reader">
+      <div class="article-label">Article X</div>
+      <article class="article">
+        <h2>Risk Stewardship</h2>
+        <p>Risk is not avoided. Risk is understood. ARI continuously assists leadership in identifying emerging risks before they become crises.</p>
+        <div class="risk-grid">
+          <div class="chip">Financial risk</div>
+          <div class="chip">Operational risk</div>
+          <div class="chip">Technological risk</div>
+          <div class="chip">Legal risk</div>
+          <div class="chip">Reputational risk</div>
+          <div class="chip">Scientific uncertainty</div>
+          <div class="chip">Societal impact</div>
+          <div class="chip">Existential risk</div>
+        </div>
+      </article>
+    </section>
+
+    <section id="voting" class="reader">
+      <div class="article-label">Article XI</div>
+      <article class="article">
+        <h2>Voting</h2>
+        <p>Not every decision requires voting. Routine operational matters remain with responsible leadership.</p>
+        <div class="vote-grid">
+          <div class="chip">Constitutional amendments</div>
+          <div class="chip">Mission</div>
+          <div class="chip">Parent ownership</div>
+          <div class="chip">Major acquisitions</div>
+          <div class="chip">Organizational restructuring</div>
+          <div class="chip">Leadership succession</div>
+          <div class="chip">Long-term governance</div>
+        </div>
+        <div class="statement">Voting should pursue wisdom rather than popularity. Consensus is preferred.</div>
+      </article>
+    </section>
+
+    <section id="succession" class="reader">
+      <div class="article-label">Article XII</div>
+      <article class="article">
+        <h2>Succession</h2>
+        <p>Institutions should outlive individuals. Every leadership position requires a succession pathway.</p>
+        <div class="succession-grid">
+          <div class="chip">Knowledge transfer</div>
+          <div class="chip">Leadership development</div>
+          <div class="chip">Institutional mentoring</div>
+          <div class="chip">Documentation</div>
+          <div class="chip">ARI-supported continuity</div>
+        </div>
+        <div class="statement">The transition of leadership should strengthen, not disrupt, the organization.</div>
+      </article>
+    </section>
+
+    <section id="ip" class="reader">
+      <div class="article-label">Article XIII</div>
+      <article class="article">
+        <h2>Intellectual Property Governance</h2>
+        <p>Intellectual Property represents one of AXION's greatest strategic assets.</p>
+        <div class="ip-grid">
+          <div class="chip">Patents</div>
+          <div class="chip">Research</div>
+          <div class="chip">Software</div>
+          <div class="chip">Media</div>
+          <div class="chip">Publications</div>
+          <div class="chip">AI systems</div>
+          <div class="chip">Educational frameworks</div>
+          <div class="chip">Design systems</div>
+          <div class="chip">Institutional knowledge</div>
+        </div>
+        <div class="statement">Creators receive recognition. The ecosystem preserves stewardship. Knowledge serves humanity.</div>
+      </article>
+    </section>
+
+    <section id="security" class="reader">
+      <div class="article-label">Article XIV</div>
+      <article class="article">
+        <h2>Security</h2>
+        <p>Security protects trust. It is proactive rather than reactive, and every member contributes to organizational resilience.</p>
+        <div class="security-grid">
+          <div class="chip">People</div>
+          <div class="chip">Data</div>
+          <div class="chip">Technology</div>
+          <div class="chip">Research</div>
+          <div class="chip">Capital</div>
+          <div class="chip">Infrastructure</div>
+          <div class="chip">Artificial Intelligence</div>
+          <div class="chip">Communities</div>
+        </div>
+      </article>
+    </section>
+
+    <section id="compliance" class="reader">
+      <div class="article-label">Article XV</div>
+      <article class="article">
+        <h2>Compliance</h2>
+        <p>Compliance is not merely legal. It is ethical.</p>
+        <div class="compliance-grid">
+          <div class="chip">Applicable laws</div>
+          <div class="chip">Scientific standards</div>
+          <div class="chip">Medical regulations</div>
+          <div class="chip">Financial regulations</div>
+          <div class="chip">Data privacy</div>
+          <div class="chip">Research integrity</div>
+          <div class="chip">International best practices</div>
+        </div>
+        <div class="statement">Whenever legal standards fall below AXION's ethical standards, the higher ethical standard should guide organizational conduct.</div>
+      </article>
+    </section>
+
+    <section id="transparency" class="reader">
+      <div class="article-label">Article XVI</div>
+      <article class="article">
+        <h2>Transparency</h2>
+        <p>Trust requires visibility. Transparency does not require compromising privacy, security, or intellectual property. It requires honesty.</p>
+        <div class="transparency-grid">
+          <div class="chip">Governance</div>
+          <div class="chip">Financial stewardship</div>
+          <div class="chip">Research methodology</div>
+          <div class="chip">Decision rationale</div>
+          <div class="chip">Impact measurement</div>
+          <div class="chip">Strategic direction</div>
+        </div>
+      </article>
+    </section>
+
+    <section id="conflict" class="reader">
+      <div class="article-label">Article XVII</div>
+      <article class="article">
+        <h2>Conflict of Interest</h2>
+        <p>Every steward must disclose any circumstance that could compromise impartial judgment. The appearance of compromised judgment can be as damaging as actual misconduct.</p>
+        <div class="conflict-grid">
+          <div class="chip">Financial interests</div>
+          <div class="chip">Personal relationships</div>
+          <div class="chip">Outside employment</div>
+          <div class="chip">Board memberships</div>
+          <div class="chip">Vendor relationships</div>
+          <div class="chip">Investment positions</div>
+        </div>
+        <div class="statement">Integrity requires openness.</div>
+      </article>
+    </section>
+
+    <section id="accountability" class="reader">
+      <div class="article-label">Article XVIII</div>
+      <article class="article">
+        <h2>Accountability</h2>
+        <p>Authority and accountability are inseparable. ARI preserves this institutional memory, and governance improves through reflection.</p>
+        <div class="account-grid">
+          <div class="card"><b>Decision</b><span>Who decided?</span></div>
+          <div class="card"><b>Rationale</b><span>Why?</span></div>
+          <div class="card"><b>Evidence</b><span>What evidence supported the decision?</span></div>
+          <div class="card"><b>Outcomes</b><span>What outcomes were expected?</span></div>
+          <div class="card"><b>Learning</b><span>What was learned?</span></div>
+        </div>
+      </article>
+    </section>
+
+    <section id="resilience" class="reader">
+      <div class="article-label">Article XIX</div>
+      <article class="article">
+        <h2>Institutional Resilience</h2>
+        <p>The purpose of governance is not merely control. It is resilience.</p>
+        <div class="resilience-grid">
+          <div class="chip">Adapt</div>
+          <div class="chip">Learn</div>
+          <div class="chip">Recover</div>
+          <div class="chip">Improve</div>
+          <div class="chip">Lead</div>
+          <div class="chip">Serve</div>
+          <div class="chip">Across decades</div>
+          <div class="chip">Across generations</div>
+          <div class="chip">Across civilizations</div>
+        </div>
+      </article>
+    </section>
+
+    <section id="flywheel">
+      <p class="kicker">Article XX</p>
+      <h2>The Governance Flywheel</h2>
+      <p class="hero-copy">Governance becomes a continuous cycle of learning rather than a static system of rules.</p>
+      <div class="flow" aria-label="AXION governance flywheel">
+        <div class="flow-step">Mission</div>
+        <div class="flow-step">Constitution</div>
+        <div class="flow-step">Stewardship Council</div>
+        <div class="flow-step">Executive Leadership</div>
+        <div class="flow-step">ARI Intelligence</div>
+        <div class="flow-step">Execution</div>
+        <div class="flow-step">Measurement</div>
+        <div class="flow-step">Transparency</div>
+        <div class="flow-step">Learning</div>
+        <div class="flow-step">Constitutional Improvement</div>
+        <div class="flow-step">Mission</div>
+      </div>
+    </section>
+
+    <section id="beyond" class="reader">
+      <div class="article-label">Article XXI</div>
+      <article class="article">
+        <h2>Stewardship Beyond Ourselves</h2>
+        <p>The greatest test of governance is whether those who inherit the institution receive it stronger than those who built it.</p>
+        <div class="steward-grid">
+          <div class="chip">Every leader</div>
+          <div class="chip">Every executive</div>
+          <div class="chip">Every advisor</div>
+          <div class="chip">Every employee</div>
+          <div class="chip">Every AI architect</div>
+          <div class="chip">Every board member</div>
+          <div class="chip">Every future Founder</div>
+        </div>
+        <div class="statement">Our responsibility is not ownership. Our responsibility is stewardship.</div>
+      </article>
+    </section>
+
+    <section id="pyramid">
+      <p class="kicker">The Governance Pyramid</p>
+      <h2>Authority, Accountability, Trust</h2>
+      <p class="hero-copy">The pyramid clarifies how constitutional authority protects civilization while accountability preserves trust.</p>
+      <div class="pyramid" aria-label="AXION governance pyramid">
+        <div class="pyramid-row">Civilization</div>
+        <div class="pyramid-row">AXION Constitution</div>
+        <div class="pyramid-row">Stewardship Council</div>
+        <div class="pyramid-row">Founder • Executive Leadership</div>
+        <div class="pyramid-row">Division Heads • Committees</div>
+        <div class="pyramid-row">Human Specialists • ARI • AI Agents</div>
+        <div class="pyramid-row">Ventures • Communities • Partners</div>
+      </div>
+      <div class="flow-note">
+        <div class="card"><b>Authority</b><span>Authority flows downward.</span></div>
+        <div class="card"><b>Accountability</b><span>Accountability flows upward.</span></div>
+        <div class="card"><b>Trust</b><span>Trust flows in every direction.</span></div>
+      </div>
+    </section>
+
+    <section id="closing">
+      <div class="ending">
+        <div class="ending-card">
+          <p class="kicker">Book X Axiom</p>
+          <blockquote>Power seeks control. Governance protects purpose. Stewardship ensures that no individual becomes greater than the mission entrusted to them.</blockquote>
+        </div>
+        <div class="ending-card">
+          <p class="kicker">Steward's Commitment</p>
+          <p>Having completed Book X, I understand that governance is not an exercise in authority but a covenant of stewardship. I commit to exercising every responsibility with integrity, transparency, humility, and accountability. I will protect the Constitution above personal interest, welcome oversight as a source of wisdom, disclose conflicts honestly, and ensure that every decision strengthens the resilience, ethics, and long-term mission of AXION. I recognize that true governance is measured not by the power it accumulates, but by the trust it preserves and the future it safeguards.</p>
+        </div>
+      </div>
+    </section>
+
+    <nav class="booknav" aria-label="Book navigation" style="display:flex;align-items:center;gap:20px;padding:26px;margin:34px 0 0;border:1px solid rgba(118,97,47,.28);border-radius:8px;background:rgba(255,250,240,.72);box-shadow:0 14px 36px rgba(31,24,7,.08);">
+      <a href="book-ix-roles.html" style="text-decoration:none;color:#2f3c31;flex:1;min-width:0;"><span style="display:block;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#7d642d;font-weight:900;">← Book IX</span><span style="display:block;font-family:ui-serif,Georgia,serif;font-size:18px;">Roles</span></a>
+      <a href="index.html" style="flex:0 0 auto;text-decoration:none;font-size:11px;letter-spacing:.16em;text-transform:uppercase;font-weight:900;color:#161d12;background:#ecd36f;border-radius:999px;padding:11px 18px;">All Books</a>
+      <span style="flex:1;"></span>
+    </nav>
+    <footer>
+      <p>Book X: Governance. Part of The AXION Constitution.</p>
+    </footer>
+  </main>
+</body>
+</html>

@@ -1,0 +1,842 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AXION Constitution - Book VIII: Building Ventures</title>
+  <style>
+    :root {
+      --ink: #151b17;
+      --muted: #63705f;
+      --cream: #f4ecd8;
+      --paper: #fffaf0;
+      --line: rgba(118, 97, 47, .28);
+      --gold: #c8a83d;
+      --earth: #7d642d;
+      --deep: #0c120e;
+      --forest: #203a29;
+      --teal: #186c80;
+      --shadow: 0 18px 52px rgba(31, 24, 7, .12);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 16% -4%, rgba(24, 108, 128, .18), transparent 28rem),
+        radial-gradient(circle at 86% 8%, rgba(200, 168, 61, .22), transparent 30rem),
+        linear-gradient(180deg, #f8f1de 0%, #efe3c3 100%);
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.62;
+    }
+    a { color: inherit; }
+    .page { width: min(1120px, calc(100vw - 42px)); margin: 0 auto; }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(244, 236, 216, .92);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--line);
+    }
+    .topbar .page {
+      min-height: 62px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+    .brand {
+      text-decoration: none;
+      font-weight: 900;
+      letter-spacing: .15em;
+      font-size: 12px;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .sigil {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: var(--deep);
+      color: var(--gold);
+      border: 1px solid var(--gold);
+    }
+    .nav {
+      display: flex;
+      gap: 16px;
+      color: #4e584c;
+      font-size: 13px;
+      font-weight: 800;
+    }
+    .nav a { text-decoration: none; white-space: nowrap; }
+    .nav .back {
+      border: 1px solid rgba(118, 97, 47, .35);
+      border-radius: 999px;
+      padding: 8px 13px;
+      background: rgba(255,250,240,.68);
+    }
+
+    .hero {
+      min-height: calc(100vh - 62px);
+      display: grid;
+      grid-template-columns: 1fr .48fr;
+      gap: 54px;
+      align-items: center;
+      padding: 58px 0 44px;
+    }
+    .kicker {
+      color: var(--earth);
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: .28em;
+      text-transform: uppercase;
+      margin: 0 0 16px;
+    }
+    h1, h2, h3, p { margin-top: 0; }
+    h1 {
+      font-family: ui-serif, Georgia, "Times New Roman", serif;
+      font-size: clamp(48px, 7.3vw, 100px);
+      line-height: .94;
+      letter-spacing: 0;
+      margin-bottom: 20px;
+    }
+    .subtitle {
+      font-family: ui-serif, Georgia, "Times New Roman", serif;
+      color: var(--earth);
+      font-style: italic;
+      font-size: 25px;
+      margin-bottom: 26px;
+    }
+    .hero-copy {
+      max-width: 760px;
+      color: #384536;
+      font-size: 21px;
+    }
+    .quote {
+      border-left: 4px solid var(--gold);
+      padding: 16px 0 16px 22px;
+      margin: 28px 0 0;
+      font-family: ui-serif, Georgia, "Times New Roman", serif;
+      font-size: 21px;
+      line-height: 1.42;
+      color: #263224;
+    }
+    .toc {
+      background: rgba(255, 250, 240, .76);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+      padding: 22px;
+    }
+    .toc h2 {
+      font-size: 13px;
+      letter-spacing: .24em;
+      color: var(--earth);
+      text-transform: uppercase;
+      margin: 0 0 14px;
+    }
+    .toc a {
+      display: grid;
+      grid-template-columns: 42px 1fr;
+      gap: 10px;
+      align-items: center;
+      text-decoration: none;
+      padding: 7px 0;
+      border-top: 1px solid rgba(118,97,47,.18);
+      color: #29352a;
+      font-weight: 800;
+      font-size: 14px;
+    }
+    .toc a:first-of-type { border-top: 0; }
+    .toc span {
+      min-width: 30px;
+      height: 28px;
+      border-radius: 999px;
+      display: grid;
+      place-items: center;
+      background: #ecd36f;
+      font-size: 11px;
+      font-weight: 900;
+      padding: 0 8px;
+    }
+
+    section { padding: 66px 0; border-top: 1px solid rgba(118,97,47,.18); }
+    .reader {
+      display: grid;
+      grid-template-columns: 220px minmax(0, 1fr);
+      gap: 42px;
+      align-items: start;
+    }
+    .article-label {
+      position: sticky;
+      top: 86px;
+      color: var(--earth);
+      font-size: 12px;
+      letter-spacing: .24em;
+      text-transform: uppercase;
+      font-weight: 900;
+    }
+    .article {
+      background: rgba(255, 250, 240, .67);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 34px;
+      box-shadow: 0 14px 36px rgba(31,24,7,.08);
+    }
+    h2 {
+      font-family: ui-serif, Georgia, "Times New Roman", serif;
+      font-size: clamp(32px, 4.2vw, 56px);
+      line-height: 1;
+      letter-spacing: 0;
+      margin-bottom: 22px;
+    }
+    .article p {
+      max-width: 760px;
+      font-size: 18px;
+      color: #2f3c31;
+      margin-bottom: 18px;
+    }
+    .statement {
+      max-width: 800px;
+      border-radius: 8px;
+      border: 1px solid rgba(200,168,61,.45);
+      background: #fbf0ce;
+      padding: 18px 20px;
+      color: #1f2c1d;
+      font-weight: 800;
+      font-size: 18px;
+      margin: 24px 0;
+    }
+    .short-lines {
+      display: grid;
+      gap: 7px;
+      margin: 22px 0;
+      max-width: 720px;
+    }
+    .short-lines div {
+      border-left: 3px solid rgba(200,168,61,.65);
+      padding: 7px 0 7px 14px;
+      color: #2f3c31;
+      font-size: 18px;
+      background: rgba(255,255,255,.32);
+    }
+    .grid, .principle-grid, .question-grid, .gate-grid, .evidence-grid, .funding-grid, .incubation-grid, .scale-grid, .institution-grid, .spin-grid, .learning-grid, .graduation-grid, .portfolio-grid {
+      display: grid;
+      gap: 12px;
+      margin-top: 22px;
+    }
+    .grid { grid-template-columns: repeat(5, 1fr); }
+    .principle-grid { grid-template-columns: repeat(3, 1fr); }
+    .question-grid { grid-template-columns: repeat(5, 1fr); }
+    .gate-grid { grid-template-columns: repeat(3, 1fr); }
+    .evidence-grid { grid-template-columns: repeat(4, 1fr); }
+    .funding-grid { grid-template-columns: repeat(4, 1fr); }
+    .incubation-grid, .scale-grid, .institution-grid, .spin-grid, .learning-grid, .graduation-grid { grid-template-columns: repeat(4, 1fr); }
+    .portfolio-grid { grid-template-columns: repeat(4, 1fr); }
+    .chip, .card, .principle-card, .gate-card {
+      border-radius: 7px;
+      border: 1px solid rgba(118,97,47,.22);
+      background: rgba(255,255,255,.42);
+      padding: 14px;
+      color: #33402f;
+    }
+    .chip { font-weight: 800; }
+    .card b, .principle-card b, .gate-card b {
+      display: block;
+      color: var(--earth);
+      margin-bottom: 6px;
+    }
+    .card span, .principle-card span, .gate-card span {
+      display: block;
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 650;
+      line-height: 1.45;
+    }
+    .gate-card {
+      min-height: 190px;
+      position: relative;
+      overflow: hidden;
+    }
+    .gate-card::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(90deg, var(--teal), var(--gold));
+    }
+    .gate-number {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: #ecd36f;
+      color: #161d12;
+      font-size: 12px;
+      font-weight: 900;
+      margin-bottom: 12px;
+    }
+    .flow {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin: 24px 0;
+      max-width: 940px;
+    }
+    .flow-step {
+      position: relative;
+      border-radius: 7px;
+      border: 1px solid rgba(118,97,47,.24);
+      background: rgba(255,255,255,.48);
+      padding: 13px;
+      font-weight: 900;
+      text-align: center;
+      color: #253224;
+    }
+    .flow-step::after {
+      content: "";
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      border-top: 2px solid var(--earth);
+      border-right: 2px solid var(--earth);
+      transform: rotate(45deg);
+      top: 50%;
+      right: -9px;
+      margin-top: -4px;
+    }
+    .flow-step:nth-child(4n)::after,
+    .flow-step:last-child::after { display: none; }
+    .venture-model {
+      display: grid;
+      gap: 10px;
+      max-width: 760px;
+      margin-top: 24px;
+    }
+    .model-row {
+      border-radius: 8px;
+      border: 1px solid rgba(118,97,47,.24);
+      background: rgba(255,255,255,.46);
+      padding: 14px 16px;
+      font-weight: 900;
+      text-align: center;
+      color: #243023;
+    }
+    .model-row.primary {
+      background: #18221b;
+      color: #f7e9b8;
+      border-color: rgba(200,168,61,.55);
+    }
+    .connector {
+      height: 24px;
+      width: 1px;
+      margin: 0 auto;
+      background: rgba(125,100,45,.55);
+    }
+    .ending {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+    .ending-card {
+      border-radius: 8px;
+      padding: 24px;
+      border: 1px solid var(--line);
+      background: rgba(255,250,240,.76);
+      box-shadow: var(--shadow);
+    }
+    .ending-card blockquote {
+      margin: 0;
+      font-family: ui-serif, Georgia, "Times New Roman", serif;
+      font-size: 23px;
+      line-height: 1.38;
+      color: #22301f;
+    }
+    footer { padding: 34px 0 58px; color: var(--muted); font-size: 13px; }
+
+    @media (max-width: 980px) {
+      .nav { display: none; }
+      .hero, .reader, .ending { grid-template-columns: 1fr; }
+      .article-label { position: static; }
+      .grid, .principle-grid, .question-grid, .gate-grid, .evidence-grid, .funding-grid, .incubation-grid, .scale-grid, .institution-grid, .spin-grid, .learning-grid, .graduation-grid, .portfolio-grid, .flow { grid-template-columns: 1fr; }
+      .flow-step::after { display: none; }
+      .article { padding: 24px; }
+    }
+    @media print {
+      body { background: #fffaf0; }
+      .topbar { display: none; }
+      .page { width: auto; margin: 0 34px; }
+      .hero { min-height: auto; grid-template-columns: 1fr; padding: 38px 0; }
+      section { padding: 34px 0; }
+      .article, .toc, .ending-card { box-shadow: none; }
+      .reader { grid-template-columns: 140px 1fr; gap: 24px; }
+      .grid, .principle-grid, .question-grid, .gate-grid, .evidence-grid, .funding-grid, .incubation-grid, .scale-grid, .institution-grid, .spin-grid, .learning-grid, .graduation-grid, .portfolio-grid, .flow { grid-template-columns: repeat(2, 1fr); }
+      @page { size: letter; margin: .46in; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="page">
+      <a class="brand" href="index.html">
+        <span class="sigil">✦</span>
+        AXION Constitution
+      </a>
+      <nav class="nav" aria-label="Book VIII navigation">
+        <a href="#gates">Gates</a>
+        <a href="#validation">Validation</a>
+        <a href="#failure">Failure</a>
+        <a href="#flywheel">Flywheel</a>
+        <a href="#model">Venture Model</a>
+        <a class="back" href="index.html">Back to Constitution</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page">
+    <section class="hero">
+      <div>
+        <p class="kicker">The AXION Constitution - Book VIII</p>
+        <h1>Building Ventures</h1>
+        <p class="subtitle">From Intelligence to Institution</p>
+        <p class="hero-copy">Book VIII defines how AXION transforms intelligence into enduring ventures: disciplined research, gated validation, ethical capital formation, incubation, scale, institutionalization, and knowledge returned to ARI.</p>
+        <blockquote class="quote">Ideas are abundant. Institutions are rare. The purpose of AXION is not merely to generate ideas, but to systematically transform intelligence into enduring civilization infrastructure.</blockquote>
+      </div>
+      <aside class="toc">
+        <h2>Book VIII Contents</h2>
+        <a href="#preamble"><span>0</span>Preamble</a>
+        <a href="#venture"><span>I</span>What Is a Venture?</a>
+        <a href="#philosophy"><span>II</span>Venture Philosophy</a>
+        <a href="#discovery"><span>G0</span>Intelligence Discovery</a>
+        <a href="#research"><span>G1</span>Research</a>
+        <a href="#concept"><span>G2</span>Concept Architecture</a>
+        <a href="#prototype"><span>G3</span>Prototype</a>
+        <a href="#validation"><span>G4</span>Validation</a>
+        <a href="#capital"><span>G5</span>Capital Formation</a>
+        <a href="#incubation"><span>G6</span>Incubation</a>
+        <a href="#scale"><span>G7</span>Scale</a>
+        <a href="#institution"><span>G8</span>Institutionalization</a>
+        <a href="#spin-offs"><span>XII</span>Spin-Offs</a>
+        <a href="#failure"><span>XIII</span>Failure</a>
+        <a href="#learning"><span>XIV</span>Organizational Learning</a>
+        <a href="#flywheel"><span>XV</span>Venture Flywheel</a>
+        <a href="#graduation"><span>XVI</span>Graduation</a>
+        <a href="#portfolio"><span>XVII</span>Civilization Portfolio</a>
+        <a href="#beyond"><span>XVIII</span>Beyond Ourselves</a>
+      </aside>
+    </section>
+
+    <section id="preamble" class="reader">
+      <div class="article-label">Preamble</div>
+      <article class="article">
+        <h2>Institutions Are Never Accidental</h2>
+        <p>Every civilization is remembered by the institutions it creates. Some educate. Some heal. Some protect. Some connect. Some expand human understanding.</p>
+        <p>The greatest institutions emerge through disciplined observation, rigorous research, ethical leadership, thoughtful experimentation, and continuous learning.</p>
+        <div class="statement">AXION begins with one question: What problem facing humanity, if solved, would permanently increase human flourishing?</div>
+        <p>A venture is not simply a company. It is an organized solution to an important problem. Every venture exists to strengthen civilization.</p>
+      </article>
+    </section>
+
+    <section id="venture" class="reader">
+      <div class="article-label">Article I</div>
+      <article class="article">
+        <h2>What Is a Venture?</h2>
+        <p>Within AXION, a venture is not defined by valuation. It is defined by contribution.</p>
+        <div class="statement">A venture is an institution designed to solve meaningful problems while strengthening the collective intelligence of the AXION ecosystem.</div>
+        <div class="grid">
+          <div class="chip">Human Health</div>
+          <div class="chip">Education</div>
+          <div class="chip">Technology</div>
+          <div class="chip">Intelligence</div>
+          <div class="chip">Economic Opportunity</div>
+          <div class="chip">Environmental Stewardship</div>
+          <div class="chip">Culture</div>
+          <div class="chip">Governance</div>
+          <div class="chip">Community</div>
+          <div class="chip">Human Potential</div>
+        </div>
+        <p>If it does not improve civilization, it does not belong within AXION.</p>
+      </article>
+    </section>
+
+    <section id="philosophy" class="reader">
+      <div class="article-label">Article II</div>
+      <article class="article">
+        <h2>The Venture Philosophy</h2>
+        <p>Every venture follows six constitutional principles.</p>
+        <div class="principle-grid">
+          <div class="principle-card"><b>Purpose Before Product</b><span>Solve a meaningful problem before building a solution.</span></div>
+          <div class="principle-card"><b>Research Before Assumption</b><span>Evidence precedes opinion.</span></div>
+          <div class="principle-card"><b>Validation Before Scale</b><span>Demand must exist before expansion.</span></div>
+          <div class="principle-card"><b>Systems Before Features</b><span>Solve the whole problem, not isolated symptoms.</span></div>
+          <div class="principle-card"><b>Long-Term Before Short-Term</b><span>Enduring institutions outperform temporary trends.</span></div>
+          <div class="principle-card"><b>Knowledge Before Ego</b><span>Learning always outranks personal attachment.</span></div>
+        </div>
+      </article>
+    </section>
+
+    <section id="gates">
+      <p class="kicker">Articles III-XI</p>
+      <h2>The AXION Venture Gates</h2>
+      <p class="hero-copy">Each venture advances through gates that convert intelligence into evidence, evidence into operations, and operations into enduring institutions.</p>
+      <div class="gate-grid">
+        <article class="gate-card"><div class="gate-number">0</div><h3>Intelligence Discovery</h3><p>ARI scans scientific discoveries, societal problems, technologies, community needs, founder experience, and global intelligence.</p><span>No idea advances without constitutional alignment.</span></article>
+        <article class="gate-card"><div class="gate-number">1</div><h3>Research</h3><p>Market dynamics, scientific evidence, competition, psychology, technology readiness, regulation, economics, and social impact are studied.</p><span>The objective is discovery, not confirmation.</span></article>
+        <article class="gate-card"><div class="gate-number">2</div><h3>Concept Architecture</h3><p>The venture defines the problem, beneficiary, transformation, business model, AI architecture, human experience, contribution, and vision.</p><span>Complexity is removed until only the essential system remains.</span></article>
+        <article class="gate-card"><div class="gate-number">3</div><h3>Prototype</h3><p>Ideas become tangible experiments that test function, problem fit, usage, scale potential, and ARI improvement.</p><span>The objective is learning, not perfection.</span></article>
+        <article class="gate-card"><div class="gate-number">4</div><h3>Validation</h3><p>Markets determine usefulness through adoption, outcomes, revenue, retention, engagement, behavioral change, validation, or partnerships.</p><span>Ignoring evidence is failure.</span></article>
+        <article class="gate-card"><div class="gate-number">5</div><h3>Capital Formation</h3><p>Validated ventures may receive capital from the AXION Treasury, investors, grants, partnerships, revenue, philanthropy, or research funding.</p><span>Capital follows demonstrated value.</span></article>
+        <article class="gate-card"><div class="gate-number">6</div><h3>Incubation</h3><p>Leadership, systems, technology, culture, ARI workflows, legal structures, and operations mature.</p><span>The venture learns independence while staying connected.</span></article>
+        <article class="gate-card"><div class="gate-number">7</div><h3>Scale</h3><p>Growth occurs when mission, culture, operations, technology, customers, finances, and research remain healthy.</p><span>Growth is measured by resilience, not speed.</span></article>
+        <article class="gate-card"><div class="gate-number">8</div><h3>Institutionalization</h3><p>The mature venture outlives founders, preserves knowledge, develops leaders, strengthens communities, and contributes to civilization.</p><span>The objective is not merely companies. It is institutions.</span></article>
+      </div>
+    </section>
+
+    <section id="discovery" class="reader">
+      <div class="article-label">Gate 0</div>
+      <article class="article">
+        <h2>Intelligence Discovery</h2>
+        <p>Every venture begins with observation. ARI continuously scans global intelligence to identify opportunities before markets fully recognize them.</p>
+        <div class="question-grid">
+          <div class="card"><b>Problem</b><span>Does this solve an important problem?</span></div>
+          <div class="card"><b>Mission</b><span>Does it align with AXION's mission?</span></div>
+          <div class="card"><b>Civilization</b><span>Can it improve civilization?</span></div>
+          <div class="card"><b>AI</b><span>Can AI strengthen the solution?</span></div>
+          <div class="card"><b>Time</b><span>Will this matter in twenty years?</span></div>
+        </div>
+      </article>
+    </section>
+
+    <section id="research" class="reader">
+      <div class="article-label">Gate 1</div>
+      <article class="article">
+        <h2>Research</h2>
+        <p>Research transforms curiosity into understanding. Before anything is built, AXION studies the terrain deeply.</p>
+        <div class="evidence-grid">
+          <div class="chip">Market dynamics</div>
+          <div class="chip">Scientific evidence</div>
+          <div class="chip">Competitive landscape</div>
+          <div class="chip">Behavioral psychology</div>
+          <div class="chip">Technology readiness</div>
+          <div class="chip">Regulatory considerations</div>
+          <div class="chip">Economic viability</div>
+          <div class="chip">Social impact</div>
+        </div>
+        <div class="statement">ARI synthesizes thousands of sources into a unified intelligence brief.</div>
+      </article>
+    </section>
+
+    <section id="concept" class="reader">
+      <div class="article-label">Gate 2</div>
+      <article class="article">
+        <h2>Concept Architecture</h2>
+        <p>Only after sufficient research is completed does design begin.</p>
+        <div class="evidence-grid">
+          <div class="chip">Problem</div>
+          <div class="chip">Beneficiary</div>
+          <div class="chip">Transformation</div>
+          <div class="chip">Business model</div>
+          <div class="chip">AI architecture</div>
+          <div class="chip">Human experience</div>
+          <div class="chip">Ecosystem contribution</div>
+          <div class="chip">Long-term vision</div>
+        </div>
+        <div class="statement">Complexity is removed until only the essential system remains.</div>
+      </article>
+    </section>
+
+    <section id="prototype" class="reader">
+      <div class="article-label">Gate 3</div>
+      <article class="article">
+        <h2>Prototype</h2>
+        <p>Ideas become tangible. Every prototype is considered an experiment.</p>
+        <div class="question-grid">
+          <div class="card"><b>Function</b><span>Does it function?</span></div>
+          <div class="card"><b>Problem Fit</b><span>Does it solve the problem?</span></div>
+          <div class="card"><b>Use</b><span>Will people use it?</span></div>
+          <div class="card"><b>Scale</b><span>Can it scale?</span></div>
+          <div class="card"><b>ARI</b><span>Can ARI improve it?</span></div>
+        </div>
+        <div class="statement">Failure is expected. Learning is mandatory.</div>
+      </article>
+    </section>
+
+    <section id="validation" class="reader">
+      <div class="article-label">Gate 4</div>
+      <article class="article">
+        <h2>Validation</h2>
+        <p>Markets determine usefulness. Validation requires evidence rather than optimism.</p>
+        <div class="evidence-grid">
+          <div class="chip">Customer adoption</div>
+          <div class="chip">Clinical outcomes</div>
+          <div class="chip">Revenue</div>
+          <div class="chip">Retention</div>
+          <div class="chip">Engagement</div>
+          <div class="chip">Behavioral change</div>
+          <div class="chip">Scientific validation</div>
+          <div class="chip">Strategic partnerships</div>
+        </div>
+        <div class="statement">Failure to validate is not failure. Ignoring evidence is.</div>
+      </article>
+    </section>
+
+    <section id="capital" class="reader">
+      <div class="article-label">Gate 5</div>
+      <article class="article">
+        <h2>Capital Formation</h2>
+        <p>Once validated, capital accelerates expansion. Every funding decision considers constitutional alignment before financial return.</p>
+        <div class="funding-grid">
+          <div class="chip">AXION Treasury</div>
+          <div class="chip">Strategic investors</div>
+          <div class="chip">Government grants</div>
+          <div class="chip">Institutional partnerships</div>
+          <div class="chip">Revenue</div>
+          <div class="chip">Philanthropic capital</div>
+          <div class="chip">Research funding</div>
+        </div>
+        <div class="statement">Capital follows demonstrated value, not speculation alone.</div>
+      </article>
+    </section>
+
+    <section id="incubation" class="reader">
+      <div class="article-label">Gate 6</div>
+      <article class="article">
+        <h2>Incubation</h2>
+        <p>Incubation transforms promising ventures into operational organizations.</p>
+        <div class="incubation-grid">
+          <div class="chip">Leadership recruited</div>
+          <div class="chip">Systems designed</div>
+          <div class="chip">Technology matures</div>
+          <div class="chip">Culture develops</div>
+          <div class="chip">ARI workflows integrated</div>
+          <div class="chip">Legal structures formed</div>
+          <div class="chip">Operations stabilized</div>
+        </div>
+        <div class="statement">Every venture learns to operate independently while remaining connected to AXION.</div>
+      </article>
+    </section>
+
+    <section id="scale" class="reader">
+      <div class="article-label">Gate 7</div>
+      <article class="article">
+        <h2>Scale</h2>
+        <p>Growth without coherence creates fragility. Scale occurs only when the operating foundation is healthy.</p>
+        <div class="scale-grid">
+          <div class="chip">Mission intact</div>
+          <div class="chip">Culture healthy</div>
+          <div class="chip">Operations reliable</div>
+          <div class="chip">Technology resilient</div>
+          <div class="chip">Customers delighted</div>
+          <div class="chip">Financial sustainability exists</div>
+          <div class="chip">Research continues</div>
+        </div>
+        <div class="statement">ARI monitors organizational health continuously during expansion. Growth is measured by resilience rather than speed.</div>
+      </article>
+    </section>
+
+    <section id="institution" class="reader">
+      <div class="article-label">Gate 8</div>
+      <article class="article">
+        <h2>Institutionalization</h2>
+        <p>The objective is never merely to build companies. The objective is to create institutions.</p>
+        <div class="institution-grid">
+          <div class="chip">Outlives founders</div>
+          <div class="chip">Preserves knowledge</div>
+          <div class="chip">Develops leaders</div>
+          <div class="chip">Strengthens communities</div>
+          <div class="chip">Continues learning</div>
+          <div class="chip">Contributes to civilization</div>
+        </div>
+        <div class="statement">Every mature venture becomes part of society's infrastructure.</div>
+      </article>
+    </section>
+
+    <section id="spin-offs" class="reader">
+      <div class="article-label">Article XII</div>
+      <article class="article">
+        <h2>Spin-Offs</h2>
+        <p>As ventures mature, new opportunities emerge. Every spin-off strengthens the parent ecosystem, and knowledge always returns to AXION.</p>
+        <div class="spin-grid">
+          <div class="chip">New companies</div>
+          <div class="chip">New technologies</div>
+          <div class="chip">New educational programs</div>
+          <div class="chip">New research institutes</div>
+          <div class="chip">New investment vehicles</div>
+          <div class="chip">New nonprofit initiatives</div>
+        </div>
+      </article>
+    </section>
+
+    <section id="failure" class="reader">
+      <div class="article-label">Article XIII</div>
+      <article class="article">
+        <h2>Failure</h2>
+        <p>Failure is inevitable. Waste is optional. Within AXION, failure is treated as research.</p>
+        <div class="question-grid">
+          <div class="card"><b>Assumptions</b><span>What assumptions proved incorrect?</span></div>
+          <div class="card"><b>Intelligence</b><span>What intelligence was gained?</span></div>
+          <div class="card"><b>ARI</b><span>How should ARI improve?</span></div>
+          <div class="card"><b>Systems</b><span>What systems should change?</span></div>
+          <div class="card"><b>Future</b><span>How can future ventures benefit?</span></div>
+        </div>
+        <div class="statement">Failure only becomes expensive when its lessons are ignored.</div>
+      </article>
+    </section>
+
+    <section id="learning" class="reader">
+      <div class="article-label">Article XIV</div>
+      <article class="article">
+        <h2>Organizational Learning</h2>
+        <p>Every venture contributes to institutional intelligence. The next venture begins where the previous one ended.</p>
+        <div class="learning-grid">
+          <div class="chip">Product decisions</div>
+          <div class="chip">Research</div>
+          <div class="chip">Market insights</div>
+          <div class="chip">Customer behavior</div>
+          <div class="chip">Financial performance</div>
+          <div class="chip">Leadership lessons</div>
+          <div class="chip">Operational improvements</div>
+          <div class="chip">Failures</div>
+          <div class="chip">Successes</div>
+        </div>
+        <div class="statement">Organizational intelligence compounds.</div>
+      </article>
+    </section>
+
+    <section id="flywheel">
+      <p class="kicker">Article XV</p>
+      <h2>The Venture Flywheel</h2>
+      <p class="hero-copy">Every venture strengthens the ecosystem. Each completed venture increases the probability of future success.</p>
+      <div class="flow" aria-label="AXION venture flywheel">
+        <div class="flow-step">Observation</div>
+        <div class="flow-step">Research</div>
+        <div class="flow-step">Intelligence</div>
+        <div class="flow-step">Concept</div>
+        <div class="flow-step">Prototype</div>
+        <div class="flow-step">Validation</div>
+        <div class="flow-step">Funding</div>
+        <div class="flow-step">Incubation</div>
+        <div class="flow-step">Scale</div>
+        <div class="flow-step">Institution</div>
+        <div class="flow-step">Knowledge Returned to ARI</div>
+        <div class="flow-step">Next Venture</div>
+      </div>
+      <div class="statement">The cycle never ends.</div>
+    </section>
+
+    <section id="graduation" class="reader">
+      <div class="article-label">Article XVI</div>
+      <article class="article">
+        <h2>Venture Graduation</h2>
+        <p>A venture is considered mature when it demonstrates stability, leadership, contribution, and continued alignment.</p>
+        <div class="graduation-grid">
+          <div class="chip">Financial sustainability</div>
+          <div class="chip">Strong leadership</div>
+          <div class="chip">Operational excellence</div>
+          <div class="chip">Healthy culture</div>
+          <div class="chip">Positive societal contribution</div>
+          <div class="chip">Continuous innovation</div>
+          <div class="chip">Alignment with AXION principles</div>
+        </div>
+        <div class="statement">Graduation is not independence. It is the transition from incubation to stewardship.</div>
+      </article>
+    </section>
+
+    <section id="portfolio" class="reader">
+      <div class="article-label">Article XVII</div>
+      <article class="article">
+        <h2>The Civilization Portfolio</h2>
+        <p>Traditional venture studios measure success by exits. AXION measures success by civilization impact.</p>
+        <div class="portfolio-grid">
+          <div class="chip">Healthcare</div>
+          <div class="chip">Artificial Intelligence</div>
+          <div class="chip">Education</div>
+          <div class="chip">Security</div>
+          <div class="chip">Media</div>
+          <div class="chip">Science</div>
+          <div class="chip">Finance</div>
+          <div class="chip">Energy</div>
+          <div class="chip">Housing</div>
+          <div class="chip">Food</div>
+          <div class="chip">Human Performance</div>
+          <div class="chip">Consciousness</div>
+          <div class="chip">Governance</div>
+        </div>
+        <div class="statement">Each venture becomes a living chapter in the architecture of a more coherent civilization.</div>
+      </article>
+    </section>
+
+    <section id="model">
+      <p class="kicker">The AXION Venture Model</p>
+      <h2>From Challenge to Civilization Impact</h2>
+      <p class="hero-copy">The model shows how planetary challenges become ventures, institutions, and intelligence returned to ARI.</p>
+      <div class="venture-model" aria-label="AXION venture model">
+        <div class="model-row primary">Planetary Challenges</div>
+        <div class="connector"></div>
+        <div class="model-row">Intelligence Discovery (ARI)</div>
+        <div class="connector"></div>
+        <div class="model-row">Research & Systems Analysis</div>
+        <div class="connector"></div>
+        <div class="model-row">Concept Architecture</div>
+        <div class="connector"></div>
+        <div class="model-row">Prototype & Experimentation</div>
+        <div class="connector"></div>
+        <div class="model-row">Validation & Evidence</div>
+        <div class="connector"></div>
+        <div class="model-row">Treasury & Capital Formation</div>
+        <div class="connector"></div>
+        <div class="model-row">Incubation & Team Formation</div>
+        <div class="connector"></div>
+        <div class="model-row">Scale & Institutionalization</div>
+        <div class="connector"></div>
+        <div class="model-row primary">Civilization Impact</div>
+        <div class="connector"></div>
+        <div class="model-row">Intelligence Returned to ARI</div>
+      </div>
+    </section>
+
+    <section id="beyond" class="reader">
+      <div class="article-label">Article XVIII</div>
+      <article class="article">
+        <h2>Building Beyond Ourselves</h2>
+        <p>The purpose of every venture is not to make AXION larger. The purpose is to make humanity stronger.</p>
+        <p>Every founder is entrusted with more than a business. They inherit a constitutional responsibility to build systems that increase health, intelligence, opportunity, resilience, and human flourishing.</p>
+        <div class="statement">Every venture is therefore both an enterprise and an act of stewardship.</div>
+      </article>
+    </section>
+
+    <section id="closing">
+      <div class="ending">
+        <div class="ending-card">
+          <p class="kicker">Book VIII Axiom</p>
+          <blockquote>Ideas become ventures. Ventures become institutions. Institutions become civilization. The true measure of innovation is not what we build today, but what continues building humanity long after we are gone.</blockquote>
+        </div>
+        <div class="ending-card">
+          <p class="kicker">Steward's Commitment</p>
+          <p>Having completed Book VIII, I understand that building a venture within AXION is an act of stewardship rather than entrepreneurship alone. I commit to grounding every idea in evidence, every prototype in learning, every investment in purpose, and every institution in service to humanity. I recognize that every venture I help create contributes not only to the success of AXION but to the future architecture of civilization itself. My responsibility is therefore not merely to launch companies, but to build enduring systems that leave the world wiser, healthier, and more coherent than I found it.</p>
+        </div>
+      </div>
+    </section>
+
+    <nav class="booknav" aria-label="Book navigation" style="display:flex;align-items:center;gap:20px;padding:26px;margin:34px 0 0;border:1px solid rgba(118,97,47,.28);border-radius:8px;background:rgba(255,250,240,.72);box-shadow:0 14px 36px rgba(31,24,7,.08);">
+      <a href="book-vii-equity.html" style="text-decoration:none;color:#2f3c31;flex:1;min-width:0;"><span style="display:block;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#7d642d;font-weight:900;">← Book VII</span><span style="display:block;font-family:ui-serif,Georgia,serif;font-size:18px;">Equity</span></a>
+      <a href="index.html" style="flex:0 0 auto;text-decoration:none;font-size:11px;letter-spacing:.16em;text-transform:uppercase;font-weight:900;color:#161d12;background:#ecd36f;border-radius:999px;padding:11px 18px;">All Books</a>
+      <a href="book-ix-roles.html" style="text-decoration:none;color:#2f3c31;flex:1;min-width:0;text-align:right;"><span style="display:block;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#7d642d;font-weight:900;">Book IX →</span><span style="display:block;font-family:ui-serif,Georgia,serif;font-size:18px;">Roles</span></a>
+    </nav>
+    <footer>
+      <p>Book VIII: Building Ventures. Part of The AXION Constitution.</p>
+    </footer>
+  </main>
+</body>
+</html>

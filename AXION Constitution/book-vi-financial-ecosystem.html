@@ -1,0 +1,693 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AXION Constitution - Book VI: The Financial Ecosystem</title>
+  <style>
+    :root {
+      --ink: #151b17;
+      --muted: #63705f;
+      --cream: #f4ecd8;
+      --paper: #fffaf0;
+      --line: rgba(118, 97, 47, .28);
+      --gold: #c8a83d;
+      --earth: #7d642d;
+      --deep: #0c120e;
+      --forest: #203a29;
+      --green: #2f6b4f;
+      --blue: #186c80;
+      --shadow: 0 18px 52px rgba(31, 24, 7, .12);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 15% -4%, rgba(47, 107, 79, .20), transparent 28rem),
+        radial-gradient(circle at 88% 6%, rgba(200, 168, 61, .22), transparent 30rem),
+        linear-gradient(180deg, #f8f1de 0%, #efe3c3 100%);
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.62;
+    }
+    a { color: inherit; }
+    .page { width: min(1120px, calc(100vw - 42px)); margin: 0 auto; }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(244, 236, 216, .92);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--line);
+    }
+    .topbar .page {
+      min-height: 62px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+    .brand {
+      text-decoration: none;
+      font-weight: 900;
+      letter-spacing: .15em;
+      font-size: 12px;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .sigil {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: var(--deep);
+      color: var(--gold);
+      border: 1px solid var(--gold);
+    }
+    .nav {
+      display: flex;
+      gap: 16px;
+      color: #4e584c;
+      font-size: 13px;
+      font-weight: 800;
+    }
+    .nav a { text-decoration: none; white-space: nowrap; }
+    .nav .back {
+      border: 1px solid rgba(118, 97, 47, .35);
+      border-radius: 999px;
+      padding: 8px 13px;
+      background: rgba(255,250,240,.68);
+    }
+
+    .hero {
+      min-height: calc(100vh - 62px);
+      display: grid;
+      grid-template-columns: 1fr .48fr;
+      gap: 54px;
+      align-items: center;
+      padding: 58px 0 44px;
+    }
+    .kicker {
+      color: var(--earth);
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: .28em;
+      text-transform: uppercase;
+      margin: 0 0 16px;
+    }
+    h1, h2, h3, p { margin-top: 0; }
+    h1 {
+      font-family: ui-serif, Georgia, "Times New Roman", serif;
+      font-size: clamp(48px, 7.2vw, 98px);
+      line-height: .94;
+      letter-spacing: 0;
+      margin-bottom: 20px;
+    }
+    .subtitle {
+      font-family: ui-serif, Georgia, "Times New Roman", serif;
+      color: var(--earth);
+      font-style: italic;
+      font-size: 25px;
+      margin-bottom: 26px;
+    }
+    .hero-copy {
+      max-width: 760px;
+      color: #384536;
+      font-size: 21px;
+    }
+    .quote {
+      border-left: 4px solid var(--gold);
+      padding: 16px 0 16px 22px;
+      margin: 28px 0 0;
+      font-family: ui-serif, Georgia, "Times New Roman", serif;
+      font-size: 21px;
+      line-height: 1.42;
+      color: #263224;
+    }
+    .toc {
+      background: rgba(255, 250, 240, .76);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+      padding: 22px;
+    }
+    .toc h2 {
+      font-size: 13px;
+      letter-spacing: .24em;
+      color: var(--earth);
+      text-transform: uppercase;
+      margin: 0 0 14px;
+    }
+    .toc a {
+      display: grid;
+      grid-template-columns: 38px 1fr;
+      gap: 10px;
+      align-items: center;
+      text-decoration: none;
+      padding: 8px 0;
+      border-top: 1px solid rgba(118,97,47,.18);
+      color: #29352a;
+      font-weight: 800;
+      font-size: 14px;
+    }
+    .toc a:first-of-type { border-top: 0; }
+    .toc span {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: #ecd36f;
+      font-size: 11px;
+      font-weight: 900;
+    }
+
+    section { padding: 66px 0; border-top: 1px solid rgba(118,97,47,.18); }
+    .reader {
+      display: grid;
+      grid-template-columns: 220px minmax(0, 1fr);
+      gap: 42px;
+      align-items: start;
+    }
+    .article-label {
+      position: sticky;
+      top: 86px;
+      color: var(--earth);
+      font-size: 12px;
+      letter-spacing: .24em;
+      text-transform: uppercase;
+      font-weight: 900;
+    }
+    .article {
+      background: rgba(255, 250, 240, .67);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 34px;
+      box-shadow: 0 14px 36px rgba(31,24,7,.08);
+    }
+    h2 {
+      font-family: ui-serif, Georgia, "Times New Roman", serif;
+      font-size: clamp(32px, 4.2vw, 56px);
+      line-height: 1;
+      letter-spacing: 0;
+      margin-bottom: 22px;
+    }
+    .article p {
+      max-width: 760px;
+      font-size: 18px;
+      color: #2f3c31;
+      margin-bottom: 18px;
+    }
+    .statement {
+      max-width: 800px;
+      border-radius: 8px;
+      border: 1px solid rgba(200,168,61,.45);
+      background: #fbf0ce;
+      padding: 18px 20px;
+      color: #1f2c1d;
+      font-weight: 800;
+      font-size: 18px;
+      margin: 24px 0;
+    }
+    .short-lines {
+      display: grid;
+      gap: 7px;
+      margin: 22px 0;
+      max-width: 720px;
+    }
+    .short-lines div {
+      border-left: 3px solid rgba(200,168,61,.65);
+      padding: 7px 0 7px 14px;
+      color: #2f3c31;
+      font-size: 18px;
+      background: rgba(255,255,255,.32);
+    }
+    .grid, .pillar-grid, .allocation-grid, .ip-grid, .venture-grid, .steward-grid, .investment-grid, .capital-grid, .regenerative-grid {
+      display: grid;
+      gap: 12px;
+      margin-top: 22px;
+    }
+    .grid { grid-template-columns: repeat(5, 1fr); }
+    .pillar-grid { grid-template-columns: repeat(3, 1fr); }
+    .allocation-grid { grid-template-columns: repeat(3, 1fr); }
+    .ip-grid { grid-template-columns: repeat(4, 1fr); }
+    .venture-grid { grid-template-columns: repeat(3, 1fr); }
+    .steward-grid { grid-template-columns: repeat(5, 1fr); }
+    .investment-grid { grid-template-columns: repeat(3, 1fr); }
+    .capital-grid { grid-template-columns: repeat(3, 1fr); }
+    .regenerative-grid { grid-template-columns: repeat(5, 1fr); }
+    .chip, .card, .pillar-card, .allocation-card, .capital-card {
+      border-radius: 7px;
+      border: 1px solid rgba(118,97,47,.22);
+      background: rgba(255,255,255,.42);
+      padding: 14px;
+      color: #33402f;
+    }
+    .chip { font-weight: 800; }
+    .card b, .pillar-card b, .allocation-card b, .capital-card b {
+      display: block;
+      color: var(--earth);
+      margin-bottom: 6px;
+    }
+    .card span, .pillar-card span, .allocation-card span, .capital-card span {
+      display: block;
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 650;
+      line-height: 1.45;
+    }
+    .pillar-card {
+      min-height: 204px;
+    }
+    .pillar-number {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: #ecd36f;
+      color: #161d12;
+      font-size: 12px;
+      font-weight: 900;
+      margin-bottom: 12px;
+    }
+    .treasury-band {
+      margin-top: 22px;
+      border-radius: 8px;
+      border: 1px solid rgba(47,107,79,.36);
+      background: linear-gradient(135deg, rgba(32,58,41,.96), rgba(47,107,79,.92));
+      color: #fff8df;
+      padding: 24px;
+      box-shadow: var(--shadow);
+    }
+    .treasury-band h3 { font-size: 24px; margin-bottom: 10px; }
+    .treasury-band p { color: #f7ebc7; margin-bottom: 0; }
+    .flywheel {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 10px;
+      margin: 24px 0;
+      max-width: 920px;
+    }
+    .wheel-step {
+      position: relative;
+      border-radius: 7px;
+      border: 1px solid rgba(118,97,47,.24);
+      background: rgba(255,255,255,.48);
+      padding: 13px;
+      font-weight: 900;
+      text-align: center;
+      color: #253224;
+    }
+    .wheel-step::after {
+      content: "";
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      border-top: 2px solid var(--earth);
+      border-right: 2px solid var(--earth);
+      transform: rotate(45deg);
+      top: 50%;
+      right: -9px;
+      margin-top: -4px;
+    }
+    .wheel-step:nth-child(5n)::after,
+    .wheel-step:last-child::after { display: none; }
+    .ending {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+    .ending-card {
+      border-radius: 8px;
+      padding: 24px;
+      border: 1px solid var(--line);
+      background: rgba(255,250,240,.76);
+      box-shadow: var(--shadow);
+    }
+    .ending-card blockquote {
+      margin: 0;
+      font-family: ui-serif, Georgia, "Times New Roman", serif;
+      font-size: 23px;
+      line-height: 1.38;
+      color: #22301f;
+    }
+    footer { padding: 34px 0 58px; color: var(--muted); font-size: 13px; }
+
+    @media (max-width: 980px) {
+      .nav { display: none; }
+      .hero, .reader, .ending { grid-template-columns: 1fr; }
+      .article-label { position: static; }
+      .grid, .pillar-grid, .allocation-grid, .ip-grid, .venture-grid, .steward-grid, .investment-grid, .capital-grid, .regenerative-grid, .flywheel { grid-template-columns: 1fr; }
+      .wheel-step::after { display: none; }
+      .article { padding: 24px; }
+    }
+    @media print {
+      body { background: #fffaf0; }
+      .topbar { display: none; }
+      .page { width: auto; margin: 0 34px; }
+      .hero { min-height: auto; grid-template-columns: 1fr; padding: 38px 0; }
+      section { padding: 34px 0; }
+      .article, .toc, .ending-card, .treasury-band { box-shadow: none; }
+      .reader { grid-template-columns: 140px 1fr; gap: 24px; }
+      .grid, .pillar-grid, .allocation-grid, .ip-grid, .venture-grid, .steward-grid, .investment-grid, .capital-grid, .regenerative-grid, .flywheel { grid-template-columns: repeat(2, 1fr); }
+      @page { size: letter; margin: .46in; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="page">
+      <a class="brand" href="index.html">
+        <span class="sigil">✦</span>
+        AXION Constitution
+      </a>
+      <nav class="nav" aria-label="Book VI navigation">
+        <a href="#pillars">Revenue Pillars</a>
+        <a href="#treasury">Treasury</a>
+        <a href="#allocation">Allocation</a>
+        <a href="#stewardship">Stewardship</a>
+        <a href="#flywheel">Flywheel</a>
+        <a class="back" href="index.html">Back to Constitution</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page">
+    <section class="hero">
+      <div>
+        <p class="kicker">The AXION Constitution - Book VI</p>
+        <h1>The Financial Ecosystem</h1>
+        <p class="subtitle">Capital in Service of Civilization</p>
+        <p class="hero-copy">Book VI defines capital as stored possibility: a financial architecture designed to sustain AXION, expand intelligence, build ventures, support communities, and preserve value across generations.</p>
+        <blockquote class="quote">Money is not the purpose of AXION. Money is the energy that allows purpose to become reality. Wealth is measured not by what is accumulated, but by what becomes possible through its stewardship.</blockquote>
+      </div>
+      <aside class="toc">
+        <h2>Book VI Contents</h2>
+        <a href="#preamble"><span>0</span>Preamble</a>
+        <a href="#philosophy"><span>I</span>Philosophy of Capital</a>
+        <a href="#model"><span>II</span>Economic Model</a>
+        <a href="#pillars"><span>III</span>Twelve Revenue Pillars</a>
+        <a href="#treasury"><span>IV</span>AXION Treasury</a>
+        <a href="#allocation"><span>V</span>Capital Allocation</a>
+        <a href="#reinvestment"><span>VI</span>Reinvestment</a>
+        <a href="#ip"><span>VII</span>Intellectual Property</a>
+        <a href="#ventures"><span>VIII</span>Venture Economics</a>
+        <a href="#stewardship"><span>IX</span>Financial Stewardship</a>
+        <a href="#investment"><span>X</span>Investment Philosophy</a>
+        <a href="#transparency"><span>XI</span>Transparency</a>
+        <a href="#civilization"><span>XII</span>Economics of Civilization</a>
+        <a href="#regenerative"><span>XIII</span>Regenerative Wealth</a>
+        <a href="#flywheel"><span>XIV</span>Financial Flywheel</a>
+        <a href="#abundance"><span>XV</span>Abundance</a>
+      </aside>
+    </section>
+
+    <section id="preamble" class="reader">
+      <div class="article-label">Preamble</div>
+      <article class="article">
+        <h2>What the Economy Rewards</h2>
+        <p>Every civilization develops an economic system. The quality of that civilization is determined by what its economy rewards.</p>
+        <p>Throughout history, financial systems have often measured success through extraction, accumulation, and short-term growth. AXION adopts a different philosophy.</p>
+        <div class="statement">Capital is not the objective. Capital is intelligence in motion.</div>
+        <p>Money represents stored human effort, creativity, innovation, trust, and possibility. When wisely allocated, it accelerates scientific discovery, improves human health, expands education, creates opportunity, and strengthens civilization itself.</p>
+        <div class="short-lines">
+          <div>Profit sustains the mission.</div>
+          <div>Purpose directs the profit.</div>
+          <div>Stewardship governs both.</div>
+        </div>
+      </article>
+    </section>
+
+    <section id="philosophy" class="reader">
+      <div class="article-label">Article I</div>
+      <article class="article">
+        <h2>The Philosophy of Capital</h2>
+        <p>Capital is neither good nor evil. It is an amplifier. It expands whatever philosophy governs its use.</p>
+        <div class="grid">
+          <div class="chip">Sustain the organization</div>
+          <div class="chip">Expand intelligence</div>
+          <div class="chip">Build new ventures</div>
+          <div class="chip">Invest in humanity</div>
+          <div class="chip">Preserve future generations</div>
+        </div>
+        <div class="statement">Every financial decision must strengthen at least one constitutional purpose.</div>
+      </article>
+    </section>
+
+    <section id="model" class="reader">
+      <div class="article-label">Article II</div>
+      <article class="article">
+        <h2>The Economic Model</h2>
+        <p>AXION operates as a Civilizational Holding Company. Unlike traditional companies dependent upon a single revenue stream, AXION develops an interconnected financial ecosystem where every venture strengthens the others.</p>
+        <div class="treasury-band">
+          <h3>Revenue flows into a centralized Treasury.</h3>
+          <p>The Treasury allocates resources according to constitutional priorities. Knowledge generated by one venture becomes available to all. Capital, intelligence, and infrastructure compound together.</p>
+        </div>
+        <p>The ecosystem becomes increasingly resilient over time.</p>
+      </article>
+    </section>
+
+    <section id="pillars">
+      <p class="kicker">Article III</p>
+      <h2>The Twelve Revenue Pillars</h2>
+      <p class="hero-copy">To ensure resilience, AXION intentionally diversifies its sources of income. No single business model should determine the future of the organization.</p>
+      <div class="pillar-grid">
+        <article class="pillar-card"><div class="pillar-number">1</div><h3>Venture Equity</h3><p>Ownership in companies created by the Venture Studio.</p><span>Every venture becomes both an operating company and a contributor to the parent ecosystem.</span></article>
+        <article class="pillar-card"><div class="pillar-number">2</div><h3>Artificial Intelligence Platforms</h3><p>ARI licensing, enterprise intelligence systems, AI infrastructure, and industry-specific AI platforms.</p><span>Intelligence becomes infrastructure others can responsibly adopt.</span></article>
+        <article class="pillar-card"><div class="pillar-number">3</div><h3>Software & Digital Platforms</h3><p>SaaS, operating systems, applications, marketplaces, and subscription technologies.</p><span>Digital platforms create recurring utility and operational scale.</span></article>
+        <article class="pillar-card"><div class="pillar-number">4</div><h3>Education</h3><p>AXION Academy, certifications, courses, masterclasses, executive education, and research programs.</p><span>Knowledge becomes a durable revenue source and public benefit.</span></article>
+        <article class="pillar-card"><div class="pillar-number">5</div><h3>Memberships</h3><p>The AXION Society, founder networks, research fellowships, innovation communities, private masterminds, and community access partnerships.</p><span>Individuals, institutions, or whole communities may fund access to AXION learning, library, health, and ecosystem resources.</span></article>
+        <article class="pillar-card"><div class="pillar-number">6</div><h3>Media</h3><p>Books, publishing, podcasts, films, documentaries, educational media, speaking, and events.</p><span>Ideas create cultural influence while supporting the ecosystem.</span></article>
+        <article class="pillar-card"><div class="pillar-number">7</div><h3>Licensing</h3><p>Intellectual property, frameworks, curriculum, software, methodologies, brand partnerships, and institutional licensing.</p><span>AXION methods can travel without diluting ownership or integrity.</span></article>
+        <article class="pillar-card"><div class="pillar-number">8</div><h3>Royalties</h3><p>Books, technology, patents, research, digital assets, educational materials, and creative works.</p><span>Past creation continues funding future creation.</span></article>
+        <article class="pillar-card"><div class="pillar-number">9</div><h3>Research</h3><p>Scientific grants, government funding, corporate partnerships, research commercialization, and innovation laboratories.</p><span>Discovery becomes both knowledge and economic engine.</span></article>
+        <article class="pillar-card"><div class="pillar-number">10</div><h3>Strategic Advisory</h3><p>Executive consulting, government advisory, institutional transformation, AI implementation, and innovation strategy.</p><span>AXION intelligence helps organizations evolve.</span></article>
+        <article class="pillar-card"><div class="pillar-number">11</div><h3>Capital Investments</h3><p>Investment funds, strategic holdings, acquisitions, portfolio appreciation, and dividend income.</p><span>Capital is positioned for resilience, learning, and long-term stewardship.</span></article>
+        <article class="pillar-card"><div class="pillar-number">12</div><h3>Future Economic Models</h3><p>Responsible new structures, including decentralized technologies, digital assets, and emerging financial systems.</p><span>New models must advance transparency, stewardship, and human flourishing.</span></article>
+      </div>
+    </section>
+
+    <section id="treasury" class="reader">
+      <div class="article-label">Article IV</div>
+      <article class="article">
+        <h2>The AXION Treasury</h2>
+        <p>The Treasury is the constitutional heart of the Financial Ecosystem. Its responsibility is not bookkeeping. Its responsibility is stewardship.</p>
+        <div class="grid">
+          <div class="chip">Protect stability</div>
+          <div class="chip">Allocate wisely</div>
+          <div class="chip">Preserve resilience</div>
+          <div class="chip">Fund innovation</div>
+          <div class="chip">Support ventures</div>
+          <div class="chip">Strengthen research</div>
+          <div class="chip">Ensure sustainability</div>
+          <div class="chip">Review constitutionally</div>
+        </div>
+        <div class="statement">Every financial decision must pass constitutional review.</div>
+      </article>
+    </section>
+
+    <section id="allocation" class="reader">
+      <div class="article-label">Article V</div>
+      <article class="article">
+        <h2>Capital Allocation</h2>
+        <p>Every dollar entering AXION serves a purpose. The Treasury allocates capital according to a constitutional model.</p>
+        <div class="allocation-grid">
+          <div class="allocation-card"><b>Operations & Delivery</b><span>Maintains the systems, people, and infrastructure that allow the organization to function with excellence.</span></div>
+          <div class="allocation-card"><b>Research & Intelligence</b><span>Funds scientific inquiry, ARI, laboratories, experimentation, data, and discovery.</span></div>
+          <div class="allocation-card"><b>Venture Creation</b><span>Provides seed capital for ventures emerging from the Venture Studio.</span></div>
+          <div class="allocation-card"><b>Innovation Fund</b><span>Supports bold experimentation, emerging technologies, and high-risk, high-reward initiatives.</span></div>
+          <div class="allocation-card"><b>Capital Reserve</b><span>Protects organizational resilience during uncertainty and ensures continuity across generations.</span></div>
+          <div class="allocation-card"><b>Community Development</b><span>Invests in education, accessibility, scholarships, local chapters, and initiatives that strengthen the broader ecosystem.</span></div>
+        </div>
+        <div class="statement">Capital is continually transformed into future capability.</div>
+      </article>
+    </section>
+
+    <section id="reinvestment" class="reader">
+      <div class="article-label">Article VI</div>
+      <article class="article">
+        <h2>Reinvestment</h2>
+        <p>AXION is not designed for short-term extraction. The majority of profits generated by the ecosystem are intentionally reinvested.</p>
+        <div class="grid">
+          <div class="chip">Research</div>
+          <div class="chip">Technology</div>
+          <div class="chip">People</div>
+          <div class="chip">Education</div>
+          <div class="chip">Infrastructure</div>
+          <div class="chip">Communities</div>
+          <div class="chip">Future ventures</div>
+        </div>
+        <div class="statement">Reinvestment creates compounding intelligence rather than temporary financial gain.</div>
+      </article>
+    </section>
+
+    <section id="ip" class="reader">
+      <div class="article-label">Article VII</div>
+      <article class="article">
+        <h2>Intellectual Property</h2>
+        <p>Ideas become civilization through protection and stewardship. Intellectual property remains one of the organization's most valuable long-term assets.</p>
+        <div class="ip-grid">
+          <div class="chip">Patents</div>
+          <div class="chip">Trademarks</div>
+          <div class="chip">Software</div>
+          <div class="chip">Research</div>
+          <div class="chip">Curricula</div>
+          <div class="chip">Books</div>
+          <div class="chip">Media</div>
+          <div class="chip">Design systems</div>
+          <div class="chip">Frameworks</div>
+          <div class="chip">Artificial intelligence</div>
+          <div class="chip">Institutional knowledge</div>
+        </div>
+        <div class="statement">IP is developed to benefit humanity while protecting the integrity of the ecosystem.</div>
+      </article>
+    </section>
+
+    <section id="ventures" class="reader">
+      <div class="article-label">Article VIII</div>
+      <article class="article">
+        <h2>Venture Economics</h2>
+        <p>Every venture strengthens the parent ecosystem. Rather than functioning independently, ventures contribute to an economy of cooperation rather than competition.</p>
+        <div class="venture-grid">
+          <div class="chip">Knowledge</div>
+          <div class="chip">Technology</div>
+          <div class="chip">Revenue</div>
+          <div class="chip">Talent</div>
+          <div class="chip">Research</div>
+          <div class="chip">Relationships</div>
+        </div>
+        <div class="statement">Every venture increases the value of every other venture.</div>
+      </article>
+    </section>
+
+    <section id="stewardship" class="reader">
+      <div class="article-label">Article IX</div>
+      <article class="article">
+        <h2>Financial Stewardship</h2>
+        <p>Every member of AXION acts as a steward of organizational resources.</p>
+        <div class="steward-grid">
+          <div class="card"><b>Responsibility</b><span>Practice fiscal responsibility.</span></div>
+          <div class="card"><b>Investment</b><span>Invest thoughtfully.</span></div>
+          <div class="card"><b>Spending</b><span>Spend responsibly.</span></div>
+          <div class="card"><b>Transparency</b><span>Make resource decisions visible and understandable.</span></div>
+          <div class="card"><b>Long-Term Thinking</b><span>Protect future innovation through present discipline.</span></div>
+        </div>
+        <div class="statement">Waste is considered the loss of opportunity.</div>
+      </article>
+    </section>
+
+    <section id="investment" class="reader">
+      <div class="article-label">Article X</div>
+      <article class="article">
+        <h2>Investment Philosophy</h2>
+        <p>AXION invests according to six principles.</p>
+        <div class="investment-grid">
+          <div class="card"><b>Purpose</b><span>Capital must advance the mission.</span></div>
+          <div class="card"><b>Intelligence</b><span>Investments should expand organizational capability.</span></div>
+          <div class="card"><b>Resilience</b><span>Diversification protects future generations.</span></div>
+          <div class="card"><b>Regeneration</b><span>Capital should create more value than it consumes.</span></div>
+          <div class="card"><b>Responsibility</b><span>Financial returns never justify unethical conduct.</span></div>
+          <div class="card"><b>Legacy</b><span>Every investment should remain valuable beyond the present generation.</span></div>
+        </div>
+      </article>
+    </section>
+
+    <section id="transparency" class="reader">
+      <div class="article-label">Article XI</div>
+      <article class="article">
+        <h2>Financial Transparency</h2>
+        <p>Trust requires visibility. Every stakeholder should understand how money enters, how money is allocated, how success is measured, how reserves are protected, and how decisions are made.</p>
+        <div class="statement">Transparency strengthens confidence. Confidence strengthens investment. Investment strengthens civilization.</div>
+      </article>
+    </section>
+
+    <section id="civilization" class="reader">
+      <div class="article-label">Article XII</div>
+      <article class="article">
+        <h2>The Economics of Civilization</h2>
+        <p>Traditional organizations optimize for quarterly earnings. AXION optimizes for generational impact.</p>
+        <div class="capital-grid">
+          <div class="capital-card"><b>Financial Capital</b><span>Money, assets, investments, and revenue.</span></div>
+          <div class="capital-card"><b>Intellectual Capital</b><span>Knowledge, research, innovation, technology, patents, and artificial intelligence.</span></div>
+          <div class="capital-card"><b>Human Capital</b><span>Health, education, leadership, communities, and relationships.</span></div>
+        </div>
+        <div class="statement">The strongest civilization grows all three simultaneously.</div>
+      </article>
+    </section>
+
+    <section id="regenerative" class="reader">
+      <div class="article-label">Article XIII</div>
+      <article class="article">
+        <h2>Wealth as Regenerative Intelligence</h2>
+        <p>True wealth is not accumulation. It is the continuous capacity to generate greater value for others.</p>
+        <div class="regenerative-grid">
+          <div class="chip">Health rather than illness</div>
+          <div class="chip">Wisdom rather than confusion</div>
+          <div class="chip">Innovation rather than stagnation</div>
+          <div class="chip">Opportunity rather than dependency</div>
+          <div class="chip">Hope rather than fear</div>
+        </div>
+        <div class="statement">Every financial decision should strengthen this regenerative cycle.</div>
+      </article>
+    </section>
+
+    <section id="flywheel">
+      <p class="kicker">Article XIV</p>
+      <h2>The Financial Flywheel</h2>
+      <p class="hero-copy">The Financial Ecosystem compounds through continuous reinvestment. Every cycle strengthens the next.</p>
+      <div class="flywheel" aria-label="AXION financial flywheel">
+        <div class="wheel-step">Intelligence</div>
+        <div class="wheel-step">Innovation</div>
+        <div class="wheel-step">Ventures</div>
+        <div class="wheel-step">Revenue</div>
+        <div class="wheel-step">Treasury</div>
+        <div class="wheel-step">Research</div>
+        <div class="wheel-step">New Ventures</div>
+        <div class="wheel-step">Education</div>
+        <div class="wheel-step">Community</div>
+        <div class="wheel-step">Greater Intelligence</div>
+      </div>
+      <div class="statement">The flywheel never stops.</div>
+    </section>
+
+    <section id="abundance" class="reader">
+      <div class="article-label">Article XV</div>
+      <article class="article">
+        <h2>The Stewardship of Abundance</h2>
+        <p>Abundance is not measured by possession. It is measured by the organization's ability to continually create meaningful value.</p>
+        <div class="statement">AXION seeks sufficiency, resilience, and purposeful abundance.</div>
+        <p>Financial prosperity is celebrated not because wealth has been accumulated, but because possibility has expanded.</p>
+      </article>
+    </section>
+
+    <section id="closing">
+      <div class="ending">
+        <div class="ending-card">
+          <p class="kicker">Book VI Axiom</p>
+          <blockquote>Capital is stored possibility. Wisdom determines whether that possibility becomes extraction or civilization.</blockquote>
+        </div>
+        <div class="ending-card">
+          <p class="kicker">Steward's Commitment</p>
+          <p>Having completed Book VI, I understand that every financial resource entrusted to AXION represents an opportunity to strengthen humanity's future. I commit to treating capital as a sacred responsibility, allocating resources with integrity, transparency, and long-term wisdom. I recognize that profit is not the destination but the fuel that enables intelligence, innovation, education, and human flourishing to continually expand. Through disciplined stewardship, I will help ensure that every investment made today becomes a greater inheritance for tomorrow.</p>
+        </div>
+      </div>
+    </section>
+
+    <nav class="booknav" aria-label="Book navigation" style="display:flex;align-items:center;gap:20px;padding:26px;margin:34px 0 0;border:1px solid rgba(118,97,47,.28);border-radius:8px;background:rgba(255,250,240,.72);box-shadow:0 14px 36px rgba(31,24,7,.08);">
+      <a href="book-v-the-culture.html" style="text-decoration:none;color:#2f3c31;flex:1;min-width:0;"><span style="display:block;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#7d642d;font-weight:900;">← Book V</span><span style="display:block;font-family:ui-serif,Georgia,serif;font-size:18px;">The Culture</span></a>
+      <a href="index.html" style="flex:0 0 auto;text-decoration:none;font-size:11px;letter-spacing:.16em;text-transform:uppercase;font-weight:900;color:#161d12;background:#ecd36f;border-radius:999px;padding:11px 18px;">All Books</a>
+      <a href="book-vii-equity.html" style="text-decoration:none;color:#2f3c31;flex:1;min-width:0;text-align:right;"><span style="display:block;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#7d642d;font-weight:900;">Book VII →</span><span style="display:block;font-family:ui-serif,Georgia,serif;font-size:18px;">Equity</span></a>
+    </nav>
+    <footer>
+      <p>Book VI: The Financial Ecosystem. Part of The AXION Constitution.</p>
+    </footer>
+  </main>
+</body>
+</html>

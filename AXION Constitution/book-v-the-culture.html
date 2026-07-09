@@ -1,0 +1,670 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AXION Constitution - Book V: The Culture</title>
+  <style>
+    :root {
+      --ink: #151b17;
+      --muted: #63705f;
+      --cream: #f4ecd8;
+      --paper: #fffaf0;
+      --line: rgba(118, 97, 47, .28);
+      --gold: #c8a83d;
+      --earth: #7d642d;
+      --deep: #0c120e;
+      --forest: #203a29;
+      --blue: #186c80;
+      --rose: #8a4d5b;
+      --shadow: 0 18px 52px rgba(31, 24, 7, .12);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 14% -4%, rgba(138, 77, 91, .16), transparent 28rem),
+        radial-gradient(circle at 86% 8%, rgba(200, 168, 61, .22), transparent 30rem),
+        linear-gradient(180deg, #f8f1de 0%, #efe3c3 100%);
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.62;
+    }
+    a { color: inherit; }
+    .page { width: min(1120px, calc(100vw - 42px)); margin: 0 auto; }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(244, 236, 216, .92);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--line);
+    }
+    .topbar .page {
+      min-height: 62px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+    .brand {
+      text-decoration: none;
+      font-weight: 900;
+      letter-spacing: .15em;
+      font-size: 12px;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .sigil {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: var(--deep);
+      color: var(--gold);
+      border: 1px solid var(--gold);
+    }
+    .nav {
+      display: flex;
+      gap: 16px;
+      color: #4e584c;
+      font-size: 13px;
+      font-weight: 800;
+    }
+    .nav a { text-decoration: none; white-space: nowrap; }
+    .nav .back {
+      border: 1px solid rgba(118, 97, 47, .35);
+      border-radius: 999px;
+      padding: 8px 13px;
+      background: rgba(255,250,240,.68);
+    }
+
+    .hero {
+      min-height: calc(100vh - 62px);
+      display: grid;
+      grid-template-columns: 1fr .48fr;
+      gap: 54px;
+      align-items: center;
+      padding: 58px 0 44px;
+    }
+    .kicker {
+      color: var(--earth);
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: .28em;
+      text-transform: uppercase;
+      margin: 0 0 16px;
+    }
+    h1, h2, h3, p { margin-top: 0; }
+    h1 {
+      font-family: ui-serif, Georgia, "Times New Roman", serif;
+      font-size: clamp(52px, 8vw, 112px);
+      line-height: .94;
+      letter-spacing: 0;
+      margin-bottom: 20px;
+    }
+    .subtitle {
+      font-family: ui-serif, Georgia, "Times New Roman", serif;
+      color: var(--earth);
+      font-style: italic;
+      font-size: 25px;
+      margin-bottom: 26px;
+    }
+    .hero-copy {
+      max-width: 760px;
+      color: #384536;
+      font-size: 21px;
+    }
+    .quote {
+      border-left: 4px solid var(--gold);
+      padding: 16px 0 16px 22px;
+      margin: 28px 0 0;
+      font-family: ui-serif, Georgia, "Times New Roman", serif;
+      font-size: 21px;
+      line-height: 1.42;
+      color: #263224;
+    }
+    .toc {
+      background: rgba(255, 250, 240, .76);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+      padding: 22px;
+    }
+    .toc h2 {
+      font-size: 13px;
+      letter-spacing: .24em;
+      color: var(--earth);
+      text-transform: uppercase;
+      margin: 0 0 14px;
+    }
+    .toc a {
+      display: grid;
+      grid-template-columns: 38px 1fr;
+      gap: 10px;
+      align-items: center;
+      text-decoration: none;
+      padding: 8px 0;
+      border-top: 1px solid rgba(118,97,47,.18);
+      color: #29352a;
+      font-weight: 800;
+      font-size: 14px;
+    }
+    .toc a:first-of-type { border-top: 0; }
+    .toc span {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: #ecd36f;
+      font-size: 11px;
+      font-weight: 900;
+    }
+
+    section { padding: 66px 0; border-top: 1px solid rgba(118,97,47,.18); }
+    .reader {
+      display: grid;
+      grid-template-columns: 220px minmax(0, 1fr);
+      gap: 42px;
+      align-items: start;
+    }
+    .article-label {
+      position: sticky;
+      top: 86px;
+      color: var(--earth);
+      font-size: 12px;
+      letter-spacing: .24em;
+      text-transform: uppercase;
+      font-weight: 900;
+    }
+    .article {
+      background: rgba(255, 250, 240, .67);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 34px;
+      box-shadow: 0 14px 36px rgba(31,24,7,.08);
+    }
+    h2 {
+      font-family: ui-serif, Georgia, "Times New Roman", serif;
+      font-size: clamp(32px, 4.2vw, 56px);
+      line-height: 1;
+      letter-spacing: 0;
+      margin-bottom: 22px;
+    }
+    .article p {
+      max-width: 760px;
+      font-size: 18px;
+      color: #2f3c31;
+      margin-bottom: 18px;
+    }
+    .statement {
+      max-width: 800px;
+      border-radius: 8px;
+      border: 1px solid rgba(200,168,61,.45);
+      background: #fbf0ce;
+      padding: 18px 20px;
+      color: #1f2c1d;
+      font-weight: 800;
+      font-size: 18px;
+      margin: 24px 0;
+    }
+    .short-lines {
+      display: grid;
+      gap: 7px;
+      margin: 22px 0;
+      max-width: 720px;
+    }
+    .short-lines div {
+      border-left: 3px solid rgba(200,168,61,.65);
+      padding: 7px 0 7px 14px;
+      color: #2f3c31;
+      font-size: 18px;
+      background: rgba(255,255,255,.32);
+    }
+    .grid, .standard-grid, .meeting-grid, .conflict-grid, .feedback-grid, .account-grid, .learning-grid, .ai-grid, .recognition-grid, .code-grid {
+      display: grid;
+      gap: 12px;
+      margin-top: 22px;
+    }
+    .grid { grid-template-columns: repeat(4, 1fr); }
+    .standard-grid { grid-template-columns: repeat(5, 1fr); }
+    .meeting-grid { grid-template-columns: repeat(7, 1fr); }
+    .conflict-grid { grid-template-columns: repeat(4, 1fr); }
+    .feedback-grid { grid-template-columns: repeat(4, 1fr); }
+    .account-grid { grid-template-columns: repeat(5, 1fr); }
+    .learning-grid { grid-template-columns: repeat(4, 1fr); }
+    .ai-grid { grid-template-columns: repeat(2, 1fr); }
+    .recognition-grid { grid-template-columns: repeat(4, 1fr); }
+    .code-grid { grid-template-columns: repeat(2, 1fr); }
+    .chip, .card, .practice-card {
+      border-radius: 7px;
+      border: 1px solid rgba(118,97,47,.22);
+      background: rgba(255,255,255,.42);
+      padding: 14px;
+      color: #33402f;
+    }
+    .chip {
+      font-weight: 800;
+    }
+    .card b, .practice-card b {
+      display: block;
+      color: var(--earth);
+      margin-bottom: 6px;
+    }
+    .card span, .practice-card span {
+      display: block;
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 650;
+      line-height: 1.45;
+    }
+    .practice-card {
+      display: grid;
+      grid-template-columns: 34px 1fr;
+      gap: 12px;
+      align-items: start;
+    }
+    .practice-card .n {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: #ecd36f;
+      color: #161d12;
+      font-size: 12px;
+      font-weight: 900;
+    }
+    .ending {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+    .ending-card {
+      border-radius: 8px;
+      padding: 24px;
+      border: 1px solid var(--line);
+      background: rgba(255,250,240,.76);
+      box-shadow: var(--shadow);
+    }
+    .ending-card blockquote {
+      margin: 0;
+      font-family: ui-serif, Georgia, "Times New Roman", serif;
+      font-size: 23px;
+      line-height: 1.38;
+      color: #22301f;
+    }
+    footer { padding: 34px 0 58px; color: var(--muted); font-size: 13px; }
+
+    @media (max-width: 980px) {
+      .nav { display: none; }
+      .hero, .reader, .ending { grid-template-columns: 1fr; }
+      .article-label { position: static; }
+      .grid, .standard-grid, .meeting-grid, .conflict-grid, .feedback-grid, .account-grid, .learning-grid, .ai-grid, .recognition-grid, .code-grid { grid-template-columns: 1fr; }
+      .article { padding: 24px; }
+    }
+    @media print {
+      body { background: #fffaf0; }
+      .topbar { display: none; }
+      .page { width: auto; margin: 0 34px; }
+      .hero { min-height: auto; grid-template-columns: 1fr; padding: 38px 0; }
+      section { padding: 34px 0; }
+      .article, .toc, .ending-card { box-shadow: none; }
+      .reader { grid-template-columns: 140px 1fr; gap: 24px; }
+      .grid, .standard-grid, .meeting-grid, .conflict-grid, .feedback-grid, .account-grid, .learning-grid, .ai-grid, .recognition-grid, .code-grid { grid-template-columns: repeat(2, 1fr); }
+      @page { size: letter; margin: .46in; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="page">
+      <a class="brand" href="index.html">
+        <span class="sigil">✦</span>
+        AXION Constitution
+      </a>
+      <nav class="nav" aria-label="Book V navigation">
+        <a href="#communication">Communication</a>
+        <a href="#meetings">Meetings</a>
+        <a href="#feedback">Feedback</a>
+        <a href="#ai">AI Practice</a>
+        <a href="#code">Cultural Code</a>
+        <a class="back" href="index.html">Back to Constitution</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page">
+    <section class="hero">
+      <div>
+        <p class="kicker">The AXION Constitution - Book V</p>
+        <h1>The Culture</h1>
+        <p class="subtitle">The Way We Think, Build, and Become</p>
+        <p class="hero-copy">Book V defines AXION culture as infrastructure: the daily practices, behaviors, standards, conversations, and commitments that allow intelligence to compound rather than fragment.</p>
+        <blockquote class="quote">Culture is not what an organization says it believes. Culture is what it repeatedly rewards, protects, and practices.</blockquote>
+      </div>
+      <aside class="toc">
+        <h2>Book V Contents</h2>
+        <a href="#preamble"><span>0</span>Preamble</a>
+        <a href="#builders"><span>I</span>Culture of Builders</a>
+        <a href="#communication"><span>II</span>Communication</a>
+        <a href="#meetings"><span>III</span>Meetings</a>
+        <a href="#conflict"><span>IV</span>Conflict</a>
+        <a href="#feedback"><span>V</span>Feedback</a>
+        <a href="#accountability"><span>VI</span>Accountability</a>
+        <a href="#writing"><span>VII</span>Writing</a>
+        <a href="#learning"><span>VIII</span>Learning</a>
+        <a href="#curiosity"><span>IX</span>Curiosity</a>
+        <a href="#ai"><span>X</span>AI Practice</a>
+        <a href="#decision"><span>XI</span>Decision Culture</a>
+        <a href="#safety"><span>XII</span>Psychological Safety</a>
+        <a href="#recognition"><span>XIII</span>Recognition</a>
+        <a href="#improvement"><span>XIV</span>Continuous Improvement</a>
+        <a href="#living"><span>XV</span>Living the Constitution</a>
+      </aside>
+    </section>
+
+    <section id="preamble" class="reader">
+      <div class="article-label">Preamble</div>
+      <article class="article">
+        <h2>Culture Is Infrastructure</h2>
+        <p>Every civilization possesses a culture. Every institution possesses a culture. Whether intentional or accidental. Whether healthy or dysfunctional.</p>
+        <div class="short-lines">
+          <div>Technology cannot compensate for poor culture.</div>
+          <div>Capital cannot compensate for poor culture.</div>
+          <div>Talent cannot compensate for poor culture.</div>
+          <div>Culture determines whether intelligence compounds or fragments.</div>
+        </div>
+        <p>Within AXION, culture is treated as infrastructure. It is deliberately designed, continuously cultivated, and collectively protected.</p>
+        <div class="statement">Culture is not Human Resources. Culture is everyone's responsibility.</div>
+      </article>
+    </section>
+
+    <section id="builders" class="reader">
+      <div class="article-label">Article I</div>
+      <article class="article">
+        <h2>The Culture of Builders</h2>
+        <p>AXION is a community of builders. Builders create, improve, question, experiment, take responsibility, and leave systems stronger than they found them.</p>
+        <div class="grid">
+          <div class="chip">Create</div>
+          <div class="chip">Improve</div>
+          <div class="chip">Question</div>
+          <div class="chip">Experiment</div>
+          <div class="chip">Take responsibility</div>
+          <div class="chip">Strengthen systems</div>
+          <div class="chip">Contribute evolution</div>
+          <div class="chip">Practice stewardship</div>
+        </div>
+        <div class="statement">We reject passive participation. There are no spectators. Only stewards.</div>
+      </article>
+    </section>
+
+    <section id="communication" class="reader">
+      <div class="article-label">Article II</div>
+      <article class="article">
+        <h2>Communication</h2>
+        <p>Communication exists to create clarity, not hierarchy, ego, or performance.</p>
+        <div class="grid">
+          <div class="chip">Understanding</div>
+          <div class="chip">Trust</div>
+          <div class="chip">Alignment</div>
+          <div class="chip">Intelligence</div>
+          <div class="chip">Respect</div>
+        </div>
+        <div class="standard-grid">
+          <div class="card"><b>Be Clear</b><span>Clarity is kindness. Confusion creates unnecessary work.</span></div>
+          <div class="card"><b>Be Honest</b><span>Speak truth respectfully. Withholding necessary information weakens the organization.</span></div>
+          <div class="card"><b>Be Direct</b><span>Address issues with the appropriate individuals rather than discussing them indirectly.</span></div>
+          <div class="card"><b>Be Curious</b><span>Seek understanding before judgment. Questions create better solutions than assumptions.</span></div>
+          <div class="card"><b>Be Constructive</b><span>Critique ideas. Never diminish people.</span></div>
+        </div>
+      </article>
+    </section>
+
+    <section id="meetings" class="reader">
+      <div class="article-label">Article III</div>
+      <article class="article">
+        <h2>Meetings</h2>
+        <p>Meetings are among the organization's most valuable investments. Every meeting must produce a decision, solution, alignment, learning, or action.</p>
+        <div class="statement">If none of these outcomes are expected, the meeting should not occur.</div>
+        <div class="meeting-grid">
+          <div class="chip">Purpose</div>
+          <div class="chip">Preparation</div>
+          <div class="chip">Discussion</div>
+          <div class="chip">Decision</div>
+          <div class="chip">Action Items</div>
+          <div class="chip">Owner</div>
+          <div class="chip">Deadline</div>
+        </div>
+        <p>ARI records outcomes and distributes action items. Meetings create momentum, not obligation.</p>
+      </article>
+    </section>
+
+    <section id="conflict" class="reader">
+      <div class="article-label">Article IV</div>
+      <article class="article">
+        <h2>Conflict</h2>
+        <p>Conflict is inevitable. Division is optional. Healthy organizations do not avoid disagreement; they cultivate productive disagreement.</p>
+        <div class="statement">Conflict is welcomed when it serves truth. Conflict becomes destructive when it serves ego.</div>
+        <div class="conflict-grid">
+          <div class="chip">Assume positive intent</div>
+          <div class="chip">Seek evidence</div>
+          <div class="chip">Listen completely</div>
+          <div class="chip">Question assumptions</div>
+          <div class="chip">Focus on shared purpose</div>
+          <div class="chip">Attack problems</div>
+          <div class="chip">Protect relationships</div>
+          <div class="chip">Escalate unresolved matters</div>
+        </div>
+      </article>
+    </section>
+
+    <section id="feedback" class="reader">
+      <div class="article-label">Article V</div>
+      <article class="article">
+        <h2>Feedback</h2>
+        <p>Feedback is an act of stewardship. Every member has both the responsibility to give feedback and the humility to receive it.</p>
+        <div class="feedback-grid">
+          <div class="chip">Specific</div>
+          <div class="chip">Timely</div>
+          <div class="chip">Respectful</div>
+          <div class="chip">Evidence-based</div>
+          <div class="chip">Actionable</div>
+          <div class="chip">Private when corrective</div>
+          <div class="chip">Public when recognizing excellence</div>
+        </div>
+        <div class="statement">Feedback is not criticism. It is investment.</div>
+      </article>
+    </section>
+
+    <section id="accountability" class="reader">
+      <div class="article-label">Article VI</div>
+      <article class="article">
+        <h2>Accountability</h2>
+        <p>Freedom requires accountability. Every commitment made within AXION becomes a promise to the organization.</p>
+        <div class="account-grid">
+          <div class="card"><b>Follow Through</b><span>Do what was agreed.</span></div>
+          <div class="card"><b>Communicate Early</b><span>Name changing circumstances before they become hidden risks.</span></div>
+          <div class="card"><b>Learn</b><span>Turn mistakes into intelligence.</span></div>
+          <div class="card"><b>Own</b><span>Take responsibility without excuses.</span></div>
+          <div class="card"><b>Solve</b><span>Seek solutions before assigning blame.</span></div>
+        </div>
+        <div class="statement">Mistakes are expected. Avoiding responsibility is not.</div>
+      </article>
+    </section>
+
+    <section id="writing" class="reader">
+      <div class="article-label">Article VII</div>
+      <article class="article">
+        <h2>Writing</h2>
+        <p>Writing is one of AXION's highest forms of thinking. If an idea cannot be clearly written, it has not yet been fully understood.</p>
+        <div class="grid">
+          <div class="chip">Better reasoning</div>
+          <div class="chip">Better decisions</div>
+          <div class="chip">Better institutional memory</div>
+          <div class="chip">Better collaboration</div>
+        </div>
+        <p>Every important decision should be documented. Every project should leave behind knowledge. Every insight should strengthen organizational intelligence.</p>
+        <div class="statement">Writing is how intelligence compounds.</div>
+      </article>
+    </section>
+
+    <section id="learning" class="reader">
+      <div class="article-label">Article VIII</div>
+      <article class="article">
+        <h2>Learning</h2>
+        <p>Every member of AXION is expected to remain a lifelong learner. Learning is not confined to formal education.</p>
+        <div class="learning-grid">
+          <div class="chip">Books</div>
+          <div class="chip">Research</div>
+          <div class="chip">Dialogue</div>
+          <div class="chip">Experimentation</div>
+          <div class="chip">Observation</div>
+          <div class="chip">Reflection</div>
+          <div class="chip">Failure</div>
+          <div class="chip">Teaching</div>
+        </div>
+        <div class="statement">Every employee receives dedicated time for continuous learning. Learning is considered productive work.</div>
+      </article>
+    </section>
+
+    <section id="curiosity" class="reader">
+      <div class="article-label">Article IX</div>
+      <article class="article">
+        <h2>Curiosity</h2>
+        <p>Curiosity is mandatory. Organizations stop growing when questions stop being asked.</p>
+        <div class="short-lines">
+          <div>Why?</div>
+          <div>What if?</div>
+          <div>What are we missing?</div>
+          <div>What assumptions are limiting us?</div>
+          <div>How might this improve?</div>
+        </div>
+        <div class="statement">Curiosity is rewarded more than certainty.</div>
+      </article>
+    </section>
+
+    <section id="ai" class="reader">
+      <div class="article-label">Article X</div>
+      <article class="article">
+        <h2>AI Practice</h2>
+        <p>Every employee works alongside Artificial Intelligence. AI is not optional. Neither is human judgment. Every member is expected to become proficient in collaborating with ARI and specialized AI agents.</p>
+        <div class="ai-grid">
+          <div class="card"><b>Use AI To</b><span>Increase understanding, reduce repetitive work, accelerate research, improve creativity, strengthen decisions, and expand human capability.</span></div>
+          <div class="card"><b>Never Replace</b><span>Empathy, ethics, leadership, responsibility, or meaning.</span></div>
+        </div>
+        <div class="statement">The highest-performing teams are those where humans and AI learn together.</div>
+      </article>
+    </section>
+
+    <section id="decision" class="reader">
+      <div class="article-label">Article XI</div>
+      <article class="article">
+        <h2>Decision Culture</h2>
+        <p>Before making important decisions, members should ask five questions.</p>
+        <div class="standard-grid">
+          <div class="card"><b>Truth</b><span>Is it true?</span></div>
+          <div class="card"><b>Necessity</b><span>Is it necessary?</span></div>
+          <div class="card"><b>Mission</b><span>Is it aligned with our mission?</span></div>
+          <div class="card"><b>Organization</b><span>Will it improve the organization?</span></div>
+          <div class="card"><b>Generations</b><span>Will future generations thank us for this decision?</span></div>
+        </div>
+        <div class="statement">Only then should action follow.</div>
+      </article>
+    </section>
+
+    <section id="safety" class="reader">
+      <div class="article-label">Article XII</div>
+      <article class="article">
+        <h2>Psychological Safety</h2>
+        <p>Innovation requires intellectual courage. Members must feel safe to question leaders, challenge assumptions, admit mistakes, present unconventional ideas, ask for help, and disagree respectfully.</p>
+        <div class="statement">Without psychological safety, organizations optimize for agreement rather than intelligence.</div>
+      </article>
+    </section>
+
+    <section id="recognition" class="reader">
+      <div class="article-label">Article XIII</div>
+      <article class="article">
+        <h2>Recognition</h2>
+        <p>Recognition is based upon contribution rather than visibility.</p>
+        <div class="recognition-grid">
+          <div class="chip">Integrity</div>
+          <div class="chip">Curiosity</div>
+          <div class="chip">Leadership</div>
+          <div class="chip">Learning</div>
+          <div class="chip">Collaboration</div>
+          <div class="chip">Innovation</div>
+          <div class="chip">Stewardship</div>
+          <div class="chip">Humility</div>
+        </div>
+        <div class="statement">The greatest recognition within AXION is trust.</div>
+      </article>
+    </section>
+
+    <section id="improvement" class="reader">
+      <div class="article-label">Article XIV</div>
+      <article class="article">
+        <h2>Continuous Improvement</h2>
+        <p>Every process can improve. Every venture can evolve. Every person can grow. Every AI system can learn. Improvement is never complete.</p>
+        <div class="statement">Members are expected to leave every project stronger than they found it. Progress compounds through countless small improvements.</div>
+      </article>
+    </section>
+
+    <section id="living" class="reader">
+      <div class="article-label">Article XV</div>
+      <article class="article">
+        <h2>Living the Constitution</h2>
+        <p>Culture cannot be enforced through policy alone. It must be embodied by every employee, executive, founder, partner, AI agent, and decision.</p>
+        <div class="statement">Every decision either strengthens or weakens the culture. Culture is maintained by daily practice.</div>
+      </article>
+    </section>
+
+    <section id="code">
+      <p class="kicker">The AXION Cultural Code</p>
+      <h2>Ten Daily Practices</h2>
+      <p class="hero-copy">Every member of AXION commits to these practices as the living expression of the culture.</p>
+      <div class="code-grid">
+        <article class="practice-card"><div class="n">1</div><div><b>Seek truth</b><span>Seek truth before defending opinions.</span></div></article>
+        <article class="practice-card"><div class="n">2</div><div><b>Choose curiosity</b><span>Choose curiosity over certainty.</span></div></article>
+        <article class="practice-card"><div class="n">3</div><div><b>Communicate clearly</b><span>Communicate with clarity and respect.</span></div></article>
+        <article class="practice-card"><div class="n">4</div><div><b>Take ownership</b><span>Take ownership before assigning blame.</span></div></article>
+        <article class="practice-card"><div class="n">5</div><div><b>Write to clarify</b><span>Write to clarify thinking and preserve knowledge.</span></div></article>
+        <article class="practice-card"><div class="n">6</div><div><b>Use AI wisely</b><span>Use AI to augment wisdom, not replace it.</span></div></article>
+        <article class="practice-card"><div class="n">7</div><div><b>Collaborate broadly</b><span>Collaborate across disciplines and perspectives.</span></div></article>
+        <article class="practice-card"><div class="n">8</div><div><b>Strengthen systems</b><span>Leave every system stronger than you found it.</span></div></article>
+        <article class="practice-card"><div class="n">9</div><div><b>Protect the culture</b><span>Protect the culture through your actions, not merely your words.</span></div></article>
+        <article class="practice-card"><div class="n">10</div><div><b>Remember the civilization</b><span>Every interaction shapes the civilization we are building.</span></div></article>
+      </div>
+    </section>
+
+    <section id="closing">
+      <div class="ending">
+        <div class="ending-card">
+          <p class="kicker">Book V Axiom</p>
+          <blockquote>Technology builds capability. Capital builds opportunity. Culture determines whether either becomes civilization.</blockquote>
+        </div>
+        <div class="ending-card">
+          <p class="kicker">Steward's Commitment</p>
+          <p>Having completed Book V, I understand that culture is the living expression of AXION's values. I commit to communicating with honesty, listening with humility, learning continuously, embracing constructive conflict, and working in partnership with both people and AI. I recognize that every conversation, every decision, and every written word contributes to the culture we leave behind. I therefore accept my responsibility not merely to work within AXION, but to embody the principles that allow it to flourish across generations.</p>
+        </div>
+      </div>
+    </section>
+
+    <nav class="booknav" aria-label="Book navigation" style="display:flex;align-items:center;gap:20px;padding:26px;margin:34px 0 0;border:1px solid rgba(118,97,47,.28);border-radius:8px;background:rgba(255,250,240,.72);box-shadow:0 14px 36px rgba(31,24,7,.08);">
+      <a href="book-iv-intelligence-operating-system.html" style="text-decoration:none;color:#2f3c31;flex:1;min-width:0;"><span style="display:block;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#7d642d;font-weight:900;">← Book IV</span><span style="display:block;font-family:ui-serif,Georgia,serif;font-size:18px;">Intelligence Operating System</span></a>
+      <a href="index.html" style="flex:0 0 auto;text-decoration:none;font-size:11px;letter-spacing:.16em;text-transform:uppercase;font-weight:900;color:#161d12;background:#ecd36f;border-radius:999px;padding:11px 18px;">All Books</a>
+      <a href="book-vi-financial-ecosystem.html" style="text-decoration:none;color:#2f3c31;flex:1;min-width:0;text-align:right;"><span style="display:block;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#7d642d;font-weight:900;">Book VI →</span><span style="display:block;font-family:ui-serif,Georgia,serif;font-size:18px;">The Financial Ecosystem</span></a>
+    </nav>
+    <footer>
+      <p>Book V: The Culture. Part of The AXION Constitution.</p>
+    </footer>
+  </main>
+</body>
+</html>

@@ -1,0 +1,672 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AXION Constitution - Book IV: The Intelligence Operating System</title>
+  <style>
+    :root {
+      --ink: #151b17;
+      --muted: #63705f;
+      --cream: #f4ecd8;
+      --paper: #fffaf0;
+      --line: rgba(118, 97, 47, .28);
+      --gold: #c8a83d;
+      --earth: #7d642d;
+      --deep: #0c120e;
+      --forest: #203a29;
+      --blue: #186c80;
+      --violet: #5d437d;
+      --shadow: 0 18px 52px rgba(31, 24, 7, .12);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 12% -4%, rgba(24, 108, 128, .18), transparent 28rem),
+        radial-gradient(circle at 88% 6%, rgba(200, 168, 61, .20), transparent 30rem),
+        linear-gradient(180deg, #f8f1de 0%, #efe3c3 100%);
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.62;
+    }
+    a { color: inherit; }
+    .page { width: min(1120px, calc(100vw - 42px)); margin: 0 auto; }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(244, 236, 216, .92);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--line);
+    }
+    .topbar .page {
+      min-height: 62px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+    .brand {
+      text-decoration: none;
+      font-weight: 900;
+      letter-spacing: .15em;
+      font-size: 12px;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .sigil {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: var(--deep);
+      color: var(--gold);
+      border: 1px solid var(--gold);
+    }
+    .nav {
+      display: flex;
+      gap: 16px;
+      color: #4e584c;
+      font-size: 13px;
+      font-weight: 800;
+    }
+    .nav a { text-decoration: none; white-space: nowrap; }
+    .nav .back {
+      border: 1px solid rgba(118, 97, 47, .35);
+      border-radius: 999px;
+      padding: 8px 13px;
+      background: rgba(255,250,240,.68);
+    }
+
+    .hero {
+      min-height: calc(100vh - 62px);
+      display: grid;
+      grid-template-columns: 1fr .48fr;
+      gap: 54px;
+      align-items: center;
+      padding: 58px 0 44px;
+    }
+    .kicker {
+      color: var(--earth);
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: .28em;
+      text-transform: uppercase;
+      margin: 0 0 16px;
+    }
+    h1, h2, h3, p { margin-top: 0; }
+    h1 {
+      font-family: ui-serif, Georgia, "Times New Roman", serif;
+      font-size: clamp(48px, 7vw, 94px);
+      line-height: .94;
+      letter-spacing: 0;
+      margin-bottom: 20px;
+    }
+    .subtitle {
+      font-family: ui-serif, Georgia, "Times New Roman", serif;
+      color: var(--earth);
+      font-style: italic;
+      font-size: 25px;
+      margin-bottom: 26px;
+    }
+    .hero-copy {
+      max-width: 760px;
+      color: #384536;
+      font-size: 21px;
+    }
+    .quote {
+      border-left: 4px solid var(--gold);
+      padding: 16px 0 16px 22px;
+      margin: 28px 0 0;
+      font-family: ui-serif, Georgia, "Times New Roman", serif;
+      font-size: 21px;
+      line-height: 1.42;
+      color: #263224;
+    }
+    .toc {
+      background: rgba(255, 250, 240, .76);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+      padding: 22px;
+    }
+    .toc h2 {
+      font-size: 13px;
+      letter-spacing: .24em;
+      color: var(--earth);
+      text-transform: uppercase;
+      margin: 0 0 14px;
+    }
+    .toc a {
+      display: grid;
+      grid-template-columns: 38px 1fr;
+      gap: 10px;
+      align-items: center;
+      text-decoration: none;
+      padding: 10px 0;
+      border-top: 1px solid rgba(118,97,47,.18);
+      color: #29352a;
+      font-weight: 800;
+      font-size: 14px;
+    }
+    .toc a:first-of-type { border-top: 0; }
+    .toc span {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: #ecd36f;
+      font-size: 11px;
+      font-weight: 900;
+    }
+
+    section { padding: 66px 0; border-top: 1px solid rgba(118,97,47,.18); }
+    .reader {
+      display: grid;
+      grid-template-columns: 220px minmax(0, 1fr);
+      gap: 42px;
+      align-items: start;
+    }
+    .article-label {
+      position: sticky;
+      top: 86px;
+      color: var(--earth);
+      font-size: 12px;
+      letter-spacing: .24em;
+      text-transform: uppercase;
+      font-weight: 900;
+    }
+    .article {
+      background: rgba(255, 250, 240, .67);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 34px;
+      box-shadow: 0 14px 36px rgba(31,24,7,.08);
+    }
+    h2 {
+      font-family: ui-serif, Georgia, "Times New Roman", serif;
+      font-size: clamp(32px, 4.2vw, 56px);
+      line-height: 1;
+      letter-spacing: 0;
+      margin-bottom: 22px;
+    }
+    .article p {
+      max-width: 760px;
+      font-size: 18px;
+      color: #2f3c31;
+      margin-bottom: 18px;
+    }
+    .statement {
+      max-width: 800px;
+      border-radius: 8px;
+      border: 1px solid rgba(200,168,61,.45);
+      background: #fbf0ce;
+      padding: 18px 20px;
+      color: #1f2c1d;
+      font-weight: 800;
+      font-size: 18px;
+      margin: 24px 0;
+    }
+    .short-lines {
+      display: grid;
+      gap: 7px;
+      margin: 22px 0;
+      max-width: 720px;
+    }
+    .short-lines div {
+      border-left: 3px solid rgba(200,168,61,.65);
+      padding: 7px 0 7px 14px;
+      color: #2f3c31;
+      font-size: 18px;
+      background: rgba(255,255,255,.32);
+    }
+    .split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+      margin-top: 22px;
+    }
+    .visual-panel {
+      background: rgba(12, 18, 14, .95);
+      border: 1px solid rgba(200,168,61,.45);
+      border-radius: 8px;
+      padding: 16px;
+      box-shadow: var(--shadow);
+      margin-top: 24px;
+    }
+    .visual-panel img {
+      display: block;
+      width: 100%;
+      border-radius: 6px;
+      border: 1px solid rgba(255,255,255,.12);
+    }
+    .visual-panel p {
+      color: #f4e9c4;
+      font-size: 14px;
+      margin: 12px 0 0;
+      max-width: none;
+    }
+    .grid, .layer-grid, .agent-grid, .decision-grid, .memory-grid, .governance-grid, .authority-grid {
+      display: grid;
+      gap: 12px;
+      margin-top: 22px;
+    }
+    .grid { grid-template-columns: repeat(4, 1fr); }
+    .layer-grid { grid-template-columns: repeat(5, 1fr); }
+    .agent-grid { grid-template-columns: repeat(3, 1fr); }
+    .decision-grid { grid-template-columns: repeat(7, 1fr); }
+    .memory-grid { grid-template-columns: repeat(3, 1fr); }
+    .governance-grid, .authority-grid { grid-template-columns: repeat(4, 1fr); }
+    .card, .chip, .layer-card, .agent-card {
+      border-radius: 7px;
+      border: 1px solid rgba(118,97,47,.22);
+      background: rgba(255,255,255,.42);
+      padding: 14px;
+      color: #33402f;
+    }
+    .chip {
+      font-weight: 800;
+    }
+    .card b, .layer-card b, .agent-card b {
+      display: block;
+      color: var(--earth);
+      margin-bottom: 6px;
+    }
+    .card span, .layer-card span, .agent-card span {
+      display: block;
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 650;
+      line-height: 1.45;
+    }
+    .layer-card {
+      min-height: 232px;
+    }
+    .layer-number {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: #ecd36f;
+      color: #161d12;
+      font-size: 12px;
+      font-weight: 900;
+      margin-bottom: 12px;
+    }
+    .flywheel {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 10px;
+      margin: 24px 0;
+      max-width: 920px;
+    }
+    .wheel-step {
+      position: relative;
+      border-radius: 7px;
+      border: 1px solid rgba(118,97,47,.24);
+      background: rgba(255,255,255,.48);
+      padding: 13px;
+      font-weight: 900;
+      text-align: center;
+      color: #253224;
+    }
+    .wheel-step::after {
+      content: "";
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      border-top: 2px solid var(--earth);
+      border-right: 2px solid var(--earth);
+      transform: rotate(45deg);
+      top: 50%;
+      right: -9px;
+      margin-top: -4px;
+    }
+    .wheel-step:nth-child(5n)::after,
+    .wheel-step:last-child::after { display: none; }
+    .ending {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+    .ending-card {
+      border-radius: 8px;
+      padding: 24px;
+      border: 1px solid var(--line);
+      background: rgba(255,250,240,.76);
+      box-shadow: var(--shadow);
+    }
+    .ending-card blockquote {
+      margin: 0;
+      font-family: ui-serif, Georgia, "Times New Roman", serif;
+      font-size: 23px;
+      line-height: 1.38;
+      color: #22301f;
+    }
+    footer { padding: 34px 0 58px; color: var(--muted); font-size: 13px; }
+
+    @media (max-width: 980px) {
+      .nav { display: none; }
+      .hero, .reader, .ending, .split { grid-template-columns: 1fr; }
+      .article-label { position: static; }
+      .grid, .layer-grid, .agent-grid, .decision-grid, .memory-grid, .governance-grid, .authority-grid, .flywheel { grid-template-columns: 1fr; }
+      .wheel-step::after { display: none; }
+      .article { padding: 24px; }
+    }
+    @media print {
+      body { background: #fffaf0; }
+      .topbar { display: none; }
+      .page { width: auto; margin: 0 34px; }
+      .hero { min-height: auto; grid-template-columns: 1fr; padding: 38px 0; }
+      section { padding: 34px 0; }
+      .article, .toc, .ending-card, .visual-panel { box-shadow: none; }
+      .reader { grid-template-columns: 140px 1fr; gap: 24px; }
+      .layer-grid, .agent-grid, .governance-grid, .authority-grid { grid-template-columns: repeat(2, 1fr); }
+      .grid, .decision-grid, .memory-grid, .flywheel { grid-template-columns: repeat(2, 1fr); }
+      @page { size: letter; margin: .46in; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="page">
+      <a class="brand" href="index.html">
+        <span class="sigil">✦</span>
+        AXION Constitution
+      </a>
+      <nav class="nav" aria-label="Book IV navigation">
+        <a href="#purpose">Purpose</a>
+        <a href="#architecture">Architecture</a>
+        <a href="#agents">AI Agents</a>
+        <a href="#governance">Governance</a>
+        <a href="#flywheel">Flywheel</a>
+        <a class="back" href="index.html">Back to Constitution</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page">
+    <section class="hero">
+      <div>
+        <p class="kicker">The AXION Constitution - Book IV</p>
+        <h1>The Intelligence Operating System</h1>
+        <p class="subtitle">The Nervous System of a Civilization</p>
+        <p class="hero-copy">Book IV defines ARI, the living intelligence layer that connects people, ventures, divisions, decisions, memory, and action into one continuously learning organizational system.</p>
+        <blockquote class="quote">Organizations that rely only on people forget. Organizations that rely only on machines lose wisdom. Civilization advances when human judgment and artificial intelligence become one coherent system.</blockquote>
+      </div>
+      <aside class="toc">
+        <h2>Book IV Contents</h2>
+        <a href="#preamble"><span>0</span>Preamble</a>
+        <a href="#purpose"><span>I</span>The Purpose of ARI</a>
+        <a href="#human-led"><span>II</span>Human-Led Model</a>
+        <a href="#architecture"><span>III</span>Intelligence Architecture</a>
+        <a href="#graph"><span>IV</span>Knowledge Graph</a>
+        <a href="#agents"><span>V</span>Specialized AI Agents</a>
+        <a href="#decision"><span>VI</span>Decision Intelligence</a>
+        <a href="#memory"><span>VII</span>Institutional Memory</a>
+        <a href="#governance"><span>VIII</span>Data Governance</a>
+        <a href="#authority"><span>IX</span>Human Authority</a>
+        <a href="#flywheel"><span>X</span>Intelligence Flywheel</a>
+        <a href="#life"><span>XII</span>Service of Life</a>
+      </aside>
+    </section>
+
+    <section id="preamble" class="reader">
+      <div class="article-label">Preamble</div>
+      <article class="article">
+        <h2>When Information Becomes Intelligence</h2>
+        <p>Throughout history, civilizations have been limited by the speed at which intelligence could move. Knowledge remained trapped within individuals. Experience disappeared when leaders retired. Mistakes repeated because institutions forgot.</p>
+        <div class="short-lines">
+          <div>Information existed.</div>
+          <div>Intelligence did not.</div>
+          <div>The Intelligence Age demands a new organizational architecture.</div>
+        </div>
+        <p>It requires an intelligence system capable of continuously sensing reality, organizing knowledge, coordinating action, preserving institutional memory, and learning from every interaction.</p>
+        <div class="statement">Within AXION, that intelligence is known as ARI.</div>
+        <p>ARI is not software, another employee, or another department. ARI is the living intelligence layer connecting every person, every venture, every division, and every decision into one continuously evolving system.</p>
+      </article>
+    </section>
+
+    <section id="purpose" class="reader">
+      <div class="article-label">Article I</div>
+      <article class="article">
+        <h2>The Purpose of ARI</h2>
+        <p>ARI, Advanced Research Intelligence, exists to transform fragmented information into coordinated organizational intelligence.</p>
+        <div class="statement">No knowledge is lost. No lesson is forgotten. No major decision is made without access to the collective wisdom of the organization.</div>
+        <div class="grid">
+          <div class="chip">Increase intelligence</div>
+          <div class="chip">Reduce complexity</div>
+          <div class="chip">Eliminate repetitive work</div>
+          <div class="chip">Improve decisions</div>
+          <div class="chip">Coordinate AI agents</div>
+          <div class="chip">Preserve memory</div>
+          <div class="chip">Accelerate innovation</div>
+          <div class="chip">Strengthen every venture</div>
+        </div>
+        <p>ARI is measured not by how much work it performs, but by how much human capability it amplifies.</p>
+      </article>
+    </section>
+
+    <section id="human-led" class="reader">
+      <div class="article-label">Article II</div>
+      <article class="article">
+        <h2>Human-Led. Intelligence-Orchestrated.</h2>
+        <p>AXION rejects two extremes: one assumes humans should perform every task; the other assumes AI should replace human judgment. Instead, AXION adopts a third model.</p>
+        <div class="split">
+          <div class="card"><b>Humans Define</b><span>Purpose, vision, ethics, values, relationships, creativity, judgment, and meaning.</span></div>
+          <div class="card"><b>ARI Provides</b><span>Knowledge, analysis, predictions, coordination, automation, optimization, memory, and recommendations.</span></div>
+        </div>
+        <div class="statement">Execution becomes a partnership rather than a replacement. The human remains responsible. ARI remains accountable to human oversight.</div>
+      </article>
+    </section>
+
+    <section id="architecture">
+      <p class="kicker">Article III</p>
+      <h2>The Intelligence Architecture</h2>
+      <p class="hero-copy">ARI functions through five interconnected intelligence layers: perception, understanding, reasoning, orchestration, and learning.</p>
+      <div class="visual-panel">
+        <img src="assets/ios-chart.png" alt="AXION Intelligence Operating System chart showing ARI, executive roles, divisions, AI agents, data ecosystem, and workflow." />
+        <p>The AXION IOS chart visualizes ARI as the coordinating intelligence layer between human leadership, specialized AI agents, divisions, ventures, and data flows.</p>
+      </div>
+      <div class="statement" style="display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;">
+        <span>ARI has its own founding document — the ARI Codex — governing the architecture, laws, and evolution of the Digital Species in full.</span>
+        <a href="../ARI Site/index.html" style="flex:0 0 auto;text-decoration:none;font-size:12px;letter-spacing:.14em;text-transform:uppercase;font-weight:900;color:#161d12;background:#ecd36f;border-radius:999px;padding:12px 20px;">Read the ARI Codex →</a>
+      </div>
+      <div class="layer-grid">
+        <article class="layer-card"><div class="layer-number">I</div><h3>Perception</h3><p>ARI continuously observes internal operations, projects, markets, research, scientific discoveries, economic shifts, technology trends, customer behavior, and organizational performance.</p><span>The objective is awareness, not surveillance.</span></article>
+        <article class="layer-card"><div class="layer-number">II</div><h3>Understanding</h3><p>Collected information becomes organized knowledge. ARI identifies patterns, relationships, dependencies, risks, emerging opportunities, and cross-disciplinary insights.</p><span>Understanding transforms information into intelligence.</span></article>
+        <article class="layer-card"><div class="layer-number">III</div><h3>Reasoning</h3><p>ARI evaluates possible actions, models outcomes, tests assumptions, identifies constraints, generates alternatives, measures uncertainty, and presents recommendations.</p><span>It advises. Humans decide.</span></article>
+        <article class="layer-card"><div class="layer-number">IV</div><h3>Orchestration</h3><p>Once decisions are made, ARI assembles specialized AI teams, assigns workflows, synchronizes divisions, tracks progress, removes bottlenecks, and monitors priorities.</p><span>Every project becomes an intelligently coordinated system.</span></article>
+        <article class="layer-card"><div class="layer-number">V</div><h3>Learning</h3><p>Every completed project returns knowledge to ARI. Successes become best practices. Failures become institutional learning.</p><span>No experience is wasted. Every venture strengthens every future venture.</span></article>
+      </div>
+    </section>
+
+    <section id="graph" class="reader">
+      <div class="article-label">Article IV</div>
+      <article class="article">
+        <h2>The Knowledge Graph</h2>
+        <p>Most organizations store documents. AXION builds relationships between knowledge.</p>
+        <div class="grid">
+          <div class="chip">People</div>
+          <div class="chip">Ventures</div>
+          <div class="chip">Research</div>
+          <div class="chip">Projects</div>
+          <div class="chip">Patents</div>
+          <div class="chip">Publications</div>
+          <div class="chip">Customers</div>
+          <div class="chip">Partners</div>
+          <div class="chip">Markets</div>
+          <div class="chip">Technologies</div>
+          <div class="chip">Scientific literature</div>
+          <div class="chip">Strategic context</div>
+        </div>
+        <div class="statement">Rather than searching for information, the organization discovers relationships. Knowledge becomes contextual. Intelligence becomes exponential.</div>
+      </article>
+    </section>
+
+    <section id="agents">
+      <p class="kicker">Article V</p>
+      <h2>Specialized AI Agents</h2>
+      <p class="hero-copy">ARI is composed of specialized intelligence rather than one generalized system. Every AI agent has a defined responsibility while ARI coordinates the whole.</p>
+      <div class="agent-grid">
+        <article class="agent-card"><b>Research Agent</b><span>Scientific literature, competitive analysis, trend forecasting, and evidence synthesis.</span></article>
+        <article class="agent-card"><b>Strategy Agent</b><span>Scenario planning, opportunity mapping, strategic recommendations, and risk analysis.</span></article>
+        <article class="agent-card"><b>Financial Agent</b><span>Forecasting, treasury monitoring, capital allocation, and budget optimization.</span></article>
+        <article class="agent-card"><b>Legal & Compliance Agent</b><span>Regulatory review, policy verification, contract intelligence, and risk identification.</span></article>
+        <article class="agent-card"><b>Engineering Agent</b><span>Software architecture, code review, infrastructure optimization, and cybersecurity assistance.</span></article>
+        <article class="agent-card"><b>Product Agent</b><span>User research, experience design, feature prioritization, and innovation support.</span></article>
+        <article class="agent-card"><b>Story Agent</b><span>Publishing, brand consistency, educational content, and media strategy.</span></article>
+        <article class="agent-card"><b>Health Intelligence Agent</b><span>Medical literature, functional medicine, performance optimization, and clinical insights.</span></article>
+        <article class="agent-card"><b>Venture Builder Agent</b><span>Business models, validation, competitive positioning, market analysis, and investment readiness.</span></article>
+      </div>
+    </section>
+
+    <section id="decision" class="reader">
+      <div class="article-label">Article VI</div>
+      <article class="article">
+        <h2>Decision Intelligence</h2>
+        <p>Every significant organizational decision passes through ARI before recommendations are presented to human leadership.</p>
+        <div class="decision-grid">
+          <div class="chip">Mission alignment</div>
+          <div class="chip">Financial implications</div>
+          <div class="chip">Operational feasibility</div>
+          <div class="chip">Strategic impact</div>
+          <div class="chip">Risk profile</div>
+          <div class="chip">Ethical considerations</div>
+          <div class="chip">Long-term consequences</div>
+        </div>
+        <div class="statement">ARI informs. Humans decide. Responsibility remains human.</div>
+      </article>
+    </section>
+
+    <section id="memory" class="reader">
+      <div class="article-label">Article VII</div>
+      <article class="article">
+        <h2>Institutional Memory</h2>
+        <p>Organizations often lose decades of knowledge when people leave. AXION considers this unacceptable.</p>
+        <div class="memory-grid">
+          <div class="chip">Meeting outcomes</div>
+          <div class="chip">Research findings</div>
+          <div class="chip">Lessons learned</div>
+          <div class="chip">Strategic decisions</div>
+          <div class="chip">Partnership history</div>
+          <div class="chip">Technical architecture</div>
+          <div class="chip">Operational improvements</div>
+          <div class="chip">Customer insights</div>
+          <div class="chip">Venture knowledge</div>
+        </div>
+        <p>Every employee contributes to institutional memory. Every future employee benefits from it.</p>
+      </article>
+    </section>
+
+    <section id="governance" class="reader">
+      <div class="article-label">Article VIII</div>
+      <article class="article">
+        <h2>Data Governance</h2>
+        <p>Intelligence is only valuable when it can be trusted. ARI therefore operates according to strict governance principles.</p>
+        <div class="governance-grid">
+          <div class="chip">Accurate</div>
+          <div class="chip">Verified</div>
+          <div class="chip">Traceable</div>
+          <div class="chip">Secure</div>
+          <div class="chip">Ethically obtained</div>
+          <div class="chip">Permissioned</div>
+          <div class="chip">Auditable</div>
+          <div class="chip">Privacy protected</div>
+        </div>
+        <div class="statement">Sensitive information is compartmentalized. Human accountability always supersedes algorithmic recommendation. Trust is the foundation of intelligence.</div>
+      </article>
+    </section>
+
+    <section id="authority" class="reader">
+      <div class="article-label">Article IX</div>
+      <article class="article">
+        <h2>Human Decision Authority</h2>
+        <p>No AI system within AXION possesses independent authority over responsibilities that belong to human stewardship.</p>
+        <div class="authority-grid">
+          <div class="chip">Hiring</div>
+          <div class="chip">Termination</div>
+          <div class="chip">Capital allocation</div>
+          <div class="chip">Governance</div>
+          <div class="chip">Ethics</div>
+          <div class="chip">Mission</div>
+          <div class="chip">Culture</div>
+          <div class="chip">Strategic direction</div>
+          <div class="chip">Legal accountability</div>
+          <div class="chip">Relationships</div>
+        </div>
+        <div class="statement">AI enhances leadership. It never replaces stewardship.</div>
+      </article>
+    </section>
+
+    <section id="flywheel">
+      <p class="kicker">Article X</p>
+      <h2>The Intelligence Flywheel</h2>
+      <p class="hero-copy">Every action strengthens the entire ecosystem. As intelligence compounds, organizational capability compounds with it.</p>
+      <div class="flywheel" aria-label="AXION intelligence flywheel">
+        <div class="wheel-step">Research</div>
+        <div class="wheel-step">Knowledge</div>
+        <div class="wheel-step">ARI</div>
+        <div class="wheel-step">Insight</div>
+        <div class="wheel-step">Decision</div>
+        <div class="wheel-step">Execution</div>
+        <div class="wheel-step">Measurement</div>
+        <div class="wheel-step">Learning</div>
+        <div class="wheel-step">Institutional Memory</div>
+        <div class="wheel-step">Better Research</div>
+      </div>
+      <div class="statement">This cycle never ends.</div>
+    </section>
+
+    <section id="evolution" class="reader">
+      <div class="article-label">Article XI</div>
+      <article class="article">
+        <h2>Continuous Evolution</h2>
+        <p>ARI is not static. It evolves continuously as new agents are created, existing agents improve, knowledge expands, models become more accurate, and workflows become more efficient.</p>
+        <div class="statement">The Intelligence Operating System grows alongside civilization itself. Its objective is perpetual learning.</div>
+      </article>
+    </section>
+
+    <section id="life" class="reader">
+      <div class="article-label">Article XII</div>
+      <article class="article">
+        <h2>Intelligence in Service of Life</h2>
+        <p>The purpose of intelligence is not control, surveillance, or automation for its own sake.</p>
+        <div class="statement">The purpose of intelligence is to expand humanity's capacity to create, discover, heal, educate, collaborate, and flourish.</div>
+        <p>Technology becomes meaningful only when it serves life. This is the constitutional responsibility of ARI.</p>
+      </article>
+    </section>
+
+    <section id="closing">
+      <div class="ending">
+        <div class="ending-card">
+          <p class="kicker">Book IV Axiom</p>
+          <blockquote>Knowledge stored is information. Knowledge connected becomes intelligence. Intelligence guided by wisdom becomes civilization.</blockquote>
+        </div>
+        <div class="ending-card">
+          <p class="kicker">Steward's Commitment</p>
+          <p>Having completed Book IV, I understand that ARI is not a substitute for human judgment but an extension of our collective intelligence. I commit to contributing accurate knowledge, preserving institutional memory, using AI responsibly, and exercising wisdom in every decision. I recognize that every interaction with ARI strengthens or weakens the intelligence of the entire organization. Together, we do not merely build technology; we cultivate an enduring intelligence in service of humanity.</p>
+        </div>
+      </div>
+    </section>
+
+    <nav class="booknav" aria-label="Book navigation" style="display:flex;align-items:center;gap:20px;padding:26px;margin:34px 0 0;border:1px solid rgba(118,97,47,.28);border-radius:8px;background:rgba(255,250,240,.72);box-shadow:0 14px 36px rgba(31,24,7,.08);">
+      <a href="book-iii-organizational-architecture.html" style="text-decoration:none;color:#2f3c31;flex:1;min-width:0;"><span style="display:block;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#7d642d;font-weight:900;">← Book III</span><span style="display:block;font-family:ui-serif,Georgia,serif;font-size:18px;">Organizational Architecture</span></a>
+      <a href="index.html" style="flex:0 0 auto;text-decoration:none;font-size:11px;letter-spacing:.16em;text-transform:uppercase;font-weight:900;color:#161d12;background:#ecd36f;border-radius:999px;padding:11px 18px;">All Books</a>
+      <a href="book-v-the-culture.html" style="text-decoration:none;color:#2f3c31;flex:1;min-width:0;text-align:right;"><span style="display:block;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#7d642d;font-weight:900;">Book V →</span><span style="display:block;font-family:ui-serif,Georgia,serif;font-size:18px;">The Culture</span></a>
+    </nav>
+    <footer>
+      <p>Book IV: The Intelligence Operating System. Part of The AXION Constitution.</p>
+    </footer>
+  </main>
+</body>
+</html>

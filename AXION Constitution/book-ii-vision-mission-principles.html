@@ -1,0 +1,605 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AXION Constitution — Book II: Vision, Mission & Principles</title>
+  <style>
+    :root {
+      --ink: #151b17;
+      --muted: #63705f;
+      --cream: #f4ecd8;
+      --paper: #fffaf0;
+      --line: rgba(118, 97, 47, .28);
+      --gold: #c8a83d;
+      --earth: #7d642d;
+      --deep: #0c120e;
+      --forest: #203a29;
+      --blue: #186c80;
+      --violet: #5d437d;
+      --shadow: 0 18px 52px rgba(31, 24, 7, .12);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 12% -4%, rgba(200, 168, 61, .22), transparent 26rem),
+        linear-gradient(180deg, #f8f1de 0%, #efe3c3 100%);
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.62;
+    }
+    a { color: inherit; }
+    .page { width: min(1120px, calc(100vw - 42px)); margin: 0 auto; }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(244, 236, 216, .92);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--line);
+    }
+    .topbar .page {
+      min-height: 62px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+    .brand {
+      text-decoration: none;
+      font-weight: 900;
+      letter-spacing: .15em;
+      font-size: 12px;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .sigil {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: var(--deep);
+      color: var(--gold);
+      border: 1px solid var(--gold);
+    }
+    .nav {
+      display: flex;
+      gap: 16px;
+      color: #4e584c;
+      font-size: 13px;
+      font-weight: 800;
+    }
+    .nav a { text-decoration: none; white-space: nowrap; }
+    .nav .back {
+      border: 1px solid rgba(118, 97, 47, .35);
+      border-radius: 999px;
+      padding: 8px 13px;
+      background: rgba(255,250,240,.68);
+    }
+
+    .hero {
+      min-height: calc(100vh - 62px);
+      display: grid;
+      grid-template-columns: 1fr .48fr;
+      gap: 54px;
+      align-items: center;
+      padding: 58px 0 44px;
+    }
+    .kicker {
+      color: var(--earth);
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: .28em;
+      text-transform: uppercase;
+      margin: 0 0 16px;
+    }
+    h1, h2, h3, p { margin-top: 0; }
+    h1 {
+      font-family: ui-serif, Georgia, "Times New Roman", serif;
+      font-size: clamp(48px, 7.3vw, 98px);
+      line-height: .94;
+      letter-spacing: 0;
+      margin-bottom: 20px;
+    }
+    .subtitle {
+      font-family: ui-serif, Georgia, "Times New Roman", serif;
+      color: var(--earth);
+      font-style: italic;
+      font-size: 25px;
+      margin-bottom: 26px;
+    }
+    .hero-copy {
+      max-width: 760px;
+      color: #384536;
+      font-size: 21px;
+    }
+    .quote {
+      border-left: 4px solid var(--gold);
+      padding: 16px 0 16px 22px;
+      margin: 28px 0 0;
+      font-family: ui-serif, Georgia, "Times New Roman", serif;
+      font-size: 21px;
+      line-height: 1.42;
+      color: #263224;
+    }
+    .toc {
+      background: rgba(255, 250, 240, .76);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+      padding: 22px;
+    }
+    .toc h2 {
+      font-size: 13px;
+      letter-spacing: .24em;
+      color: var(--earth);
+      text-transform: uppercase;
+      margin: 0 0 14px;
+    }
+    .toc a {
+      display: grid;
+      grid-template-columns: 38px 1fr;
+      gap: 10px;
+      align-items: center;
+      text-decoration: none;
+      padding: 10px 0;
+      border-top: 1px solid rgba(118,97,47,.18);
+      color: #29352a;
+      font-weight: 800;
+      font-size: 14px;
+    }
+    .toc a:first-of-type { border-top: 0; }
+    .toc span {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: #ecd36f;
+      font-size: 11px;
+      font-weight: 900;
+    }
+
+    section { padding: 66px 0; border-top: 1px solid rgba(118,97,47,.18); }
+    .reader {
+      display: grid;
+      grid-template-columns: 220px minmax(0, 1fr);
+      gap: 42px;
+      align-items: start;
+    }
+    .article-label {
+      position: sticky;
+      top: 86px;
+      color: var(--earth);
+      font-size: 12px;
+      letter-spacing: .24em;
+      text-transform: uppercase;
+      font-weight: 900;
+    }
+    .article {
+      background: rgba(255, 250, 240, .67);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 34px;
+      box-shadow: 0 14px 36px rgba(31,24,7,.08);
+    }
+    h2 {
+      font-family: ui-serif, Georgia, "Times New Roman", serif;
+      font-size: clamp(32px, 4.2vw, 56px);
+      line-height: 1;
+      letter-spacing: 0;
+      margin-bottom: 22px;
+    }
+    .article p {
+      max-width: 760px;
+      font-size: 18px;
+      color: #2f3c31;
+      margin-bottom: 18px;
+    }
+    .statement {
+      max-width: 800px;
+      border-radius: 8px;
+      border: 1px solid rgba(200,168,61,.45);
+      background: #fbf0ce;
+      padding: 18px 20px;
+      color: #1f2c1d;
+      font-weight: 800;
+      font-size: 18px;
+      margin: 24px 0;
+    }
+    .short-lines {
+      display: grid;
+      gap: 7px;
+      margin: 22px 0;
+      max-width: 680px;
+    }
+    .short-lines div {
+      border-left: 3px solid rgba(200,168,61,.65);
+      padding: 7px 0 7px 14px;
+      color: #2f3c31;
+      font-size: 18px;
+      background: rgba(255,255,255,.32);
+    }
+    .domain-grid, .integration-grid, .ai-grid, .ethics-grid, .compass-grid {
+      display: grid;
+      gap: 10px;
+      margin-top: 18px;
+    }
+    .domain-grid { grid-template-columns: repeat(4, 1fr); }
+    .integration-grid { grid-template-columns: repeat(2, 1fr); }
+    .ai-grid { grid-template-columns: repeat(3, 1fr); }
+    .ethics-grid, .compass-grid { grid-template-columns: repeat(5, 1fr); }
+    .chip, .tile {
+      border-radius: 7px;
+      border: 1px solid rgba(118,97,47,.22);
+      background: rgba(255,255,255,.42);
+      padding: 13px;
+      font-weight: 800;
+      color: #33402f;
+    }
+    .tile b {
+      display: block;
+      color: var(--earth);
+      margin-bottom: 6px;
+    }
+    .tile span {
+      display: block;
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 650;
+      line-height: 1.45;
+    }
+    .principles {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 24px;
+    }
+    .principle {
+      min-height: 226px;
+      border-radius: 8px;
+      border: 1px solid rgba(118,97,47,.24);
+      background: rgba(255,255,255,.46);
+      padding: 18px;
+    }
+    .principle .n {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: #ecd36f;
+      color: #161d12;
+      font-size: 12px;
+      font-weight: 900;
+      margin-bottom: 12px;
+    }
+    .principle h3 {
+      font-size: 19px;
+      line-height: 1.15;
+      margin-bottom: 10px;
+    }
+    .principle p {
+      color: #3b4738;
+      font-size: 15px;
+      line-height: 1.48;
+      margin-bottom: 0;
+    }
+    .ending {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+    .ending-card {
+      border-radius: 8px;
+      padding: 24px;
+      border: 1px solid var(--line);
+      background: rgba(255,250,240,.76);
+      box-shadow: var(--shadow);
+    }
+    .ending-card blockquote {
+      margin: 0;
+      font-family: ui-serif, Georgia, "Times New Roman", serif;
+      font-size: 23px;
+      line-height: 1.38;
+      color: #22301f;
+    }
+    footer { padding: 34px 0 58px; color: var(--muted); font-size: 13px; }
+
+    @media (max-width: 980px) {
+      .nav { display: none; }
+      .hero, .reader, .ending { grid-template-columns: 1fr; }
+      .article-label { position: static; }
+      .domain-grid, .integration-grid, .ai-grid, .ethics-grid, .compass-grid, .principles { grid-template-columns: 1fr; }
+      .article { padding: 24px; }
+    }
+    @media print {
+      body { background: #fffaf0; font-size: 11pt; line-height: 1.45; }
+      .topbar { display: none; }
+      .page { width: auto; margin: 0; }
+      .hero {
+        min-height: auto;
+        grid-template-columns: 1fr;
+        gap: 18px;
+        padding: 0;
+        break-after: page;
+      }
+      h1 { font-size: 54pt; max-width: 6.5in; }
+      .subtitle { font-size: 16pt; margin-bottom: 14px; }
+      .hero-copy { font-size: 13pt; max-width: 6.7in; }
+      .quote { font-size: 13pt; margin-top: 14px; padding: 10px 0 10px 16px; }
+      .toc { margin-top: 18px; padding: 16px; }
+      .toc a { padding: 6px 0; font-size: 10pt; }
+      section { padding: 0; border-top: 0; }
+      .article, .toc, .ending-card { box-shadow: none; }
+      .reader { display: block; break-before: page; }
+      .article-label { position: static; margin: 0 0 8px; }
+      .article { padding: 20px 22px; }
+      h2 { font-size: 25pt; margin-bottom: 14px; line-height: 1.05; }
+      .article p { font-size: 10.5pt; margin-bottom: 10px; }
+      .statement { font-size: 10.5pt; padding: 10px 12px; margin: 12px 0; }
+      .short-lines { gap: 4px; margin: 10px 0; }
+      .short-lines div { font-size: 10pt; padding: 4px 0 4px 10px; }
+      .chip, .tile { padding: 8px; font-size: 9pt; }
+      .tile span { font-size: 8.5pt; line-height: 1.35; }
+      #principles { break-before: page; }
+      #principles .hero-copy { font-size: 11pt; }
+      .principles { grid-template-columns: repeat(2, 1fr); }
+      .principle {
+        min-height: auto;
+        padding: 10px 12px;
+        break-inside: avoid;
+        page-break-inside: avoid;
+      }
+      .principle .n { width: 24px; height: 24px; margin-bottom: 6px; }
+      .principle h3 { font-size: 12pt; margin-bottom: 4px; }
+      .principle p { font-size: 8.8pt; line-height: 1.35; }
+      .domain-grid { grid-template-columns: repeat(4, 1fr); }
+      .integration-grid { grid-template-columns: repeat(2, 1fr); }
+      .ai-grid { grid-template-columns: repeat(3, 1fr); }
+      .ethics-grid, .compass-grid { grid-template-columns: repeat(5, 1fr); }
+      #closing { break-before: page; }
+      .ending { grid-template-columns: 1fr; gap: 12px; }
+      .ending-card { padding: 18px; break-inside: avoid; }
+      .ending-card blockquote { font-size: 14pt; }
+      footer { padding: 18px 0 0; font-size: 8pt; }
+      @page { size: letter; margin: .52in; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="page">
+      <a class="brand" href="index.html">
+        <span class="sigil">✦</span>
+        AXION Constitution
+      </a>
+      <nav class="nav" aria-label="Book II navigation">
+        <a href="#vision">Vision</a>
+        <a href="#mission">Mission</a>
+        <a href="#principles">21 Principles</a>
+        <a href="#ethics">Ethics</a>
+        <a href="#compass">Decision Compass</a>
+        <a class="back" href="index.html">Back to Constitution</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page">
+    <section class="hero">
+      <div>
+        <p class="kicker">The AXION Constitution • Book II</p>
+        <h1>Vision • Mission • Principles</h1>
+        <p class="subtitle">The Philosophy That Governs Every Decision</p>
+        <p class="hero-copy">Book II establishes the philosophical architecture of AXION: the vision that determines direction, the mission that disciplines action, and the principles that preserve coherence as the ecosystem grows.</p>
+        <blockquote class="quote">Vision determines direction. Principles determine behavior. Character determines legacy.</blockquote>
+      </div>
+      <aside class="toc">
+        <h2>Book II Contents</h2>
+        <a href="#preamble"><span>0</span>Preamble</a>
+        <a href="#vision"><span>I</span>Our Vision</a>
+        <a href="#mission"><span>II</span>Our Mission</a>
+        <a href="#purpose"><span>III</span>Our Purpose</a>
+        <a href="#principles"><span>IV</span>The 21 Principles</a>
+        <a href="#ethics"><span>V</span>Ethical Framework</a>
+        <a href="#ai"><span>VI</span>Human-First AI</a>
+        <a href="#stewardship"><span>VII</span>Stewardship</a>
+        <a href="#compass"><span>VIII</span>Decision Compass</a>
+        <a href="#closing"><span>IX</span>Axiom & Commitment</a>
+      </aside>
+    </section>
+
+    <section id="preamble" class="reader">
+      <div class="article-label">Preamble</div>
+      <article class="article">
+        <h2>Principles Preserve Coherence</h2>
+        <p>Every enduring civilization has been guided by a philosophy greater than any individual.</p>
+        <div class="short-lines">
+          <div>Buildings eventually decay.</div>
+          <div>Technology eventually becomes obsolete.</div>
+          <div>Markets inevitably change.</div>
+          <div>Leadership inevitably transitions.</div>
+          <div>But principles endure.</div>
+        </div>
+        <p>Without principles, organizations drift. Without vision, organizations react. Without mission, organizations become occupied with activity while forgetting purpose.</p>
+        <div class="statement">Book II establishes the philosophical architecture that governs every decision made within AXION.</div>
+        <p>These principles are not intended to restrict creativity. They exist to preserve coherence. As AXION grows across ventures, industries, technologies, and generations, these principles ensure that innovation never loses its humanity, intelligence never loses its ethics, and growth never loses its purpose.</p>
+      </article>
+    </section>
+
+    <section id="vision" class="reader">
+      <div class="article-label">Article I</div>
+      <article class="article">
+        <h2>Our Vision</h2>
+        <div class="statement">To build the intelligence infrastructure that enables humanity to flourish through integrated systems of science, technology, education, health, economics, and conscious innovation.</div>
+        <p>AXION envisions a civilization where intelligence becomes a shared resource rather than a competitive advantage.</p>
+        <div class="short-lines">
+          <div>Where technology expands human potential rather than replacing it.</div>
+          <div>Where organizations exist to cultivate life rather than merely extract value.</div>
+          <div>Where capital serves innovation.</div>
+          <div>Where innovation serves humanity.</div>
+          <div>Where humanity serves future generations.</div>
+        </div>
+      </article>
+    </section>
+
+    <section id="mission" class="reader">
+      <div class="article-label">Article II</div>
+      <article class="article">
+        <h2>Our Mission</h2>
+        <div class="statement">To design, launch, and steward ventures, technologies, and institutions that restore coherence between human intelligence, artificial intelligence, capital, and civilization.</div>
+        <p>Every venture built within AXION must strengthen at least one essential dimension of civilization.</p>
+        <div class="domain-grid">
+          <div class="chip">Human Health</div>
+          <div class="chip">Intelligence</div>
+          <div class="chip">Education</div>
+          <div class="chip">Community</div>
+          <div class="chip">Economy</div>
+          <div class="chip">Environment</div>
+          <div class="chip">Governance</div>
+          <div class="chip">Culture</div>
+        </div>
+        <p>No venture exists independently. Each contributes to the larger operating system.</p>
+      </article>
+    </section>
+
+    <section id="purpose" class="reader">
+      <div class="article-label">Article III</div>
+      <article class="article">
+        <h2>Our Purpose</h2>
+        <div class="statement">How do we build institutions capable of helping humanity evolve rather than merely survive?</div>
+        <p>AXION answers this question by integrating the disciplines that are too often separated.</p>
+        <div class="integration-grid">
+          <div class="tile"><b>Scientific Discovery</b><span>Knowledge disciplined by evidence.</span></div>
+          <div class="tile"><b>Systems Thinking</b><span>Understanding causes, incentives, and interdependence.</span></div>
+          <div class="tile"><b>Artificial Intelligence</b><span>Acceleration under human purpose and ethical oversight.</span></div>
+          <div class="tile"><b>Entrepreneurship</b><span>Turning insight into institutions, ventures, and tools.</span></div>
+          <div class="tile"><b>Human Development</b><span>Increasing capability, meaning, and coherence.</span></div>
+          <div class="tile"><b>Ethical Leadership</b><span>Power governed by responsibility.</span></div>
+          <div class="tile"><b>Collective Intelligence</b><span>Knowledge compounded across people, teams, and generations.</span></div>
+          <div class="tile"><b>Daily Decision</b><span>Every decision must strengthen this integration.</span></div>
+        </div>
+      </article>
+    </section>
+
+    <section id="principles">
+      <p class="kicker">Article IV</p>
+      <h2>The 21 Principles of AXION</h2>
+      <p class="hero-copy">These principles govern every employee, executive, venture, AI agent, partner, and future institution within the AXION ecosystem.</p>
+      <div class="principles">
+        <article class="principle"><div class="n">1</div><h3>Purpose Before Profit</h3><p>Profit sustains the mission. Purpose defines the mission. AXION creates value that generates profit rather than pursuing profit without value.</p></article>
+        <article class="principle"><div class="n">2</div><h3>Intelligence Creates Freedom</h3><p>The greatest form of capital is intelligence. Knowledge expands possibility. Wisdom directs action. Learning never ends.</p></article>
+        <article class="principle"><div class="n">3</div><h3>Human Flourishing Is the Ultimate Metric</h3><p>Revenue, growth, and valuation are measured. The highest measure is whether human lives become healthier, wiser, freer, and more capable.</p></article>
+        <article class="principle"><div class="n">4</div><h3>Stewardship Over Ownership</h3><p>Nothing is truly owned. Everything is temporarily stewarded. Leadership is measured by what is preserved and improved for future generations.</p></article>
+        <article class="principle"><div class="n">5</div><h3>Truth Before Comfort</h3><p>Truth is never negotiated. Evidence overrides ego. Reality is the foundation upon which intelligent action depends.</p></article>
+        <article class="principle"><div class="n">6</div><h3>Long-Term Thinking</h3><p>Every decision should consider tomorrow, next year, next decade, and next century. Immediate gains must never compromise enduring value.</p></article>
+        <article class="principle"><div class="n">7</div><h3>Systems Before Symptoms</h3><p>Every problem exists within a larger system. Addressing symptoms without understanding structures creates dependency rather than transformation.</p></article>
+        <article class="principle"><div class="n">8</div><h3>Innovation Must Serve Humanity</h3><p>Technology has no inherent morality. Its ethical value is determined by the intentions guiding its design and application.</p></article>
+        <article class="principle"><div class="n">9</div><h3>AI Amplifies Humanity</h3><p>Artificial intelligence exists to enhance human capability. It should never diminish dignity, agency, responsibility, or human wisdom.</p></article>
+        <article class="principle"><div class="n">10</div><h3>Curiosity Is an Organizational Duty</h3><p>Questions create discovery. Discovery creates innovation. Every member of AXION has a responsibility to remain intellectually curious.</p></article>
+        <article class="principle"><div class="n">11</div><h3>Simplicity Reveals Intelligence</h3><p>The most elegant solution is often the simplest. Complexity should emerge only where reality requires it.</p></article>
+        <article class="principle"><div class="n">12</div><h3>Collaboration Multiplies Intelligence</h3><p>Individual brilliance creates ideas. Collective intelligence creates civilizations. AXION designs systems where knowledge compounds across disciplines.</p></article>
+        <article class="principle"><div class="n">13</div><h3>Integrity Is Non-Negotiable</h3><p>Trust is built slowly and lost instantly. Integrity governs every decision regardless of circumstance.</p></article>
+        <article class="principle"><div class="n">14</div><h3>Humility Accelerates Learning</h3><p>Certainty limits growth. Humility allows continuous evolution. Every person remains a lifelong student.</p></article>
+        <article class="principle"><div class="n">15</div><h3>Excellence Is a Daily Practice</h3><p>Mastery is never achieved. It is continually pursued through disciplined improvement.</p></article>
+        <article class="principle"><div class="n">16</div><h3>Capital Is a Tool for Creation</h3><p>Money is neither the mission nor the measure of worth. Capital exists to accelerate ideas capable of improving civilization.</p></article>
+        <article class="principle"><div class="n">17</div><h3>Failure Is Intelligence Acquired</h3><p>Every unsuccessful experiment contributes knowledge. Failure becomes valuable only when learning is captured and shared.</p></article>
+        <article class="principle"><div class="n">18</div><h3>Diversity Strengthens Intelligence</h3><p>Different disciplines, cultures, perspectives, and experiences produce more resilient systems when integrated.</p></article>
+        <article class="principle"><div class="n">19</div><h3>Coherence Over Scale</h3><p>Growth without coherence creates fragility. AXION expands only when principles, culture, and intelligence remain aligned.</p></article>
+        <article class="principle"><div class="n">20</div><h3>Build What Outlives You</h3><p>The highest achievement is not personal success. It is creating institutions that continue serving humanity beyond one lifetime.</p></article>
+        <article class="principle"><div class="n">21</div><h3>Civilization Is Our Customer</h3><p>Every venture, technology, partnership, investment, and decision ultimately serves one stakeholder: the future of civilization.</p></article>
+      </div>
+    </section>
+
+    <section id="ethics" class="reader">
+      <div class="article-label">Article V</div>
+      <article class="article">
+        <h2>Ethical Framework</h2>
+        <p>Every decision within AXION must satisfy five ethical questions. If any answer is no, the decision must be reconsidered.</p>
+        <div class="ethics-grid">
+          <div class="tile"><b>Is it true?</b><span>Does it align with reality?</span></div>
+          <div class="tile"><b>Is it beneficial?</b><span>Does it improve human flourishing?</span></div>
+          <div class="tile"><b>Is it sustainable?</b><span>Can future generations inherit it responsibly?</span></div>
+          <div class="tile"><b>Is it just?</b><span>Does it treat individuals with dignity and fairness?</span></div>
+          <div class="tile"><b>Is it coherent?</b><span>Does it strengthen the larger system rather than fragment it?</span></div>
+        </div>
+      </article>
+    </section>
+
+    <section id="ai" class="reader">
+      <div class="article-label">Article VI</div>
+      <article class="article">
+        <h2>Human-First Artificial Intelligence</h2>
+        <p>ARI and every AI system developed within AXION exists to serve humanity.</p>
+        <div class="ai-grid">
+          <div class="chip">Expand intelligence</div>
+          <div class="chip">Reduce unnecessary complexity</div>
+          <div class="chip">Preserve human autonomy</div>
+          <div class="chip">Improve decision quality</div>
+          <div class="chip">Enhance creativity</div>
+          <div class="chip">Increase access to knowledge</div>
+          <div class="chip">Protect privacy</div>
+          <div class="chip">Operate transparently</div>
+          <div class="chip">Remain accountable to human oversight</div>
+        </div>
+        <div class="statement">Humans define purpose. AI accelerates execution.</div>
+      </article>
+    </section>
+
+    <section id="stewardship" class="reader">
+      <div class="article-label">Article VII</div>
+      <article class="article">
+        <h2>Stewardship</h2>
+        <p>Stewardship is the highest expression of leadership.</p>
+        <p>Every resource entrusted to AXION, whether financial, technological, intellectual, ecological, or human, must be managed with responsibility and foresight.</p>
+        <div class="statement">Stewardship requires asking not only, “What can this create today?” but also, “What legacy will this leave tomorrow?”</div>
+        <p>Leaders are evaluated not only by the success they achieve, but by the strength, resilience, and wisdom of the systems they leave behind.</p>
+      </article>
+    </section>
+
+    <section id="compass" class="reader">
+      <div class="article-label">Article VIII</div>
+      <article class="article">
+        <h2>The AXION Decision Compass</h2>
+        <p>Every major decision should pass through five filters. Only when all five align should action proceed.</p>
+        <div class="compass-grid">
+          <div class="tile"><b>Purpose</b><span>Does this advance our mission?</span></div>
+          <div class="tile"><b>People</b><span>Does it improve human flourishing?</span></div>
+          <div class="tile"><b>Principles</b><span>Does it honor the 21 Principles?</span></div>
+          <div class="tile"><b>Performance</b><span>Is it operationally and financially sound?</span></div>
+          <div class="tile"><b>Posterity</b><span>Will future generations view this as wise?</span></div>
+        </div>
+      </article>
+    </section>
+
+    <section id="closing">
+      <div class="ending">
+        <div class="ending-card">
+          <p class="kicker">Book II Axiom</p>
+          <blockquote>Vision reveals the destination. Principles determine the path. Character ensures that the destination remains worthy of the journey.</blockquote>
+        </div>
+        <div class="ending-card">
+          <p class="kicker">Steward’s Commitment</p>
+          <p>Having completed Book II, I understand that every action within AXION is guided not by convenience or short-term opportunity, but by enduring principles. I commit to making decisions with integrity, humility, courage, and long-term responsibility. I recognize that my conduct reflects not only upon myself, but upon the mission, culture, and future of AXION.</p>
+        </div>
+      </div>
+    </section>
+
+    <nav class="booknav" aria-label="Book navigation" style="display:flex;align-items:center;gap:20px;padding:26px;margin:34px 0 0;border:1px solid rgba(118,97,47,.28);border-radius:8px;background:rgba(255,250,240,.72);box-shadow:0 14px 36px rgba(31,24,7,.08);">
+      <a href="book-i-foundation.html" style="text-decoration:none;color:#2f3c31;flex:1;min-width:0;"><span style="display:block;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#7d642d;font-weight:900;">← Book I</span><span style="display:block;font-family:ui-serif,Georgia,serif;font-size:18px;">The Foundation</span></a>
+      <a href="index.html" style="flex:0 0 auto;text-decoration:none;font-size:11px;letter-spacing:.16em;text-transform:uppercase;font-weight:900;color:#161d12;background:#ecd36f;border-radius:999px;padding:11px 18px;">All Books</a>
+      <a href="book-iii-organizational-architecture.html" style="text-decoration:none;color:#2f3c31;flex:1;min-width:0;text-align:right;"><span style="display:block;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#7d642d;font-weight:900;">Book III →</span><span style="display:block;font-family:ui-serif,Georgia,serif;font-size:18px;">Organizational Architecture</span></a>
+    </nav>
+    <footer>
+      <p>Book II: Vision • Mission • Principles. Part of The AXION Constitution.</p>
+    </footer>
+  </main>
+</body>
+</html>

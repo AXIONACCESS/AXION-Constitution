@@ -1,0 +1,844 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AXION Constitution — Foundational Handbook</title>
+  <template id="__bundler_thumbnail">
+    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+      <rect width="200" height="200" fill="#161d12"/>
+      <rect x="60" y="50" width="80" height="100" rx="4" fill="none" stroke="#ecd36f" stroke-width="4"/>
+      <path d="M74 74 h52 M74 92 h52 M74 110 h32" stroke="#ecd36f" stroke-width="4" stroke-linecap="round"/>
+      <text x="100" y="168" text-anchor="middle" font-family="monospace" font-size="14" fill="#ecd36f" letter-spacing="2">AXION</text>
+    </svg>
+  </template>
+  <style>
+    :root {
+      --ink: #17201a;
+      --muted: #66715f;
+      --cream: #f4ecd8;
+      --paper: #fffaf0;
+      --earth: #76612f;
+      --gold: #c8a83d;
+      --line: rgba(118, 97, 47, .28);
+      --deep: #0b100c;
+      --forest: #1f3a28;
+      --moss: #6d7f35;
+      --clay: #9b5f3d;
+      --blue: #186c80;
+      --violet: #5c407f;
+      --rose: #8d3d5d;
+      --shadow: 0 18px 52px rgba(31, 24, 7, .12);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background:
+        radial-gradient(circle at 18% 0%, rgba(200, 168, 61, .22), transparent 30rem),
+        linear-gradient(180deg, #f8f1de 0%, #efe3c3 100%);
+      color: var(--ink);
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.55;
+    }
+
+    a { color: inherit; }
+    .page {
+      width: min(1180px, calc(100vw - 40px));
+      margin: 0 auto;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(244, 236, 216, .9);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--line);
+    }
+    .topbar .page {
+      min-height: 62px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      font-weight: 800;
+      letter-spacing: .16em;
+      font-size: 13px;
+      text-transform: uppercase;
+    }
+    .sigil {
+      width: 34px;
+      height: 34px;
+      border: 1px solid var(--gold);
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      color: var(--gold);
+      background: rgba(11, 16, 12, .92);
+    }
+    .sigil svg { width: 20px; height: 20px; }
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      color: #4e584c;
+      font-size: 13px;
+      font-weight: 700;
+    }
+    .nav a {
+      text-decoration: none;
+      white-space: nowrap;
+    }
+    .nav .cta {
+      border: 1px solid rgba(118, 97, 47, .35);
+      border-radius: 999px;
+      padding: 9px 14px;
+      background: rgba(255, 250, 240, .7);
+    }
+
+    .hero {
+      min-height: calc(100vh - 62px);
+      display: grid;
+      grid-template-columns: 1fr .72fr;
+      gap: 54px;
+      align-items: center;
+      padding: 58px 0 40px;
+    }
+    .kicker {
+      color: var(--earth);
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: .28em;
+      text-transform: uppercase;
+      margin: 0 0 18px;
+    }
+    h1, h2, h3, p { margin-top: 0; }
+    h1 {
+      font-family: ui-serif, Georgia, "Times New Roman", serif;
+      font-size: clamp(52px, 7.6vw, 104px);
+      line-height: .92;
+      letter-spacing: 0;
+      margin-bottom: 24px;
+    }
+    .hero-copy {
+      max-width: 720px;
+      font-size: 21px;
+      color: #374334;
+    }
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 32px;
+    }
+    .button {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border-radius: 999px;
+      padding: 13px 18px;
+      text-decoration: none;
+      font-weight: 800;
+      border: 1px solid rgba(118, 97, 47, .35);
+      background: var(--paper);
+    }
+    .button.primary {
+      color: #171e11;
+      border-color: transparent;
+      background: linear-gradient(135deg, #9a7a24, #efd36f 48%, #c8a83d);
+    }
+    .hero-panel {
+      background: rgba(255, 250, 240, .68);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      border-radius: 8px;
+      padding: 24px;
+    }
+    .mini-title {
+      font-size: 12px;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--earth);
+      font-weight: 900;
+      margin-bottom: 14px;
+    }
+    .constitution-stack {
+      display: grid;
+      gap: 8px;
+    }
+    .stack-row {
+      display: grid;
+      grid-template-columns: 44px 1fr;
+      gap: 12px;
+      align-items: center;
+      min-height: 44px;
+      padding: 8px 10px;
+      border: 1px solid rgba(118, 97, 47, .18);
+      border-radius: 6px;
+      background: rgba(255,255,255,.45);
+    }
+    .stack-row strong {
+      color: var(--deep);
+      font-size: 14px;
+    }
+    .stack-row span {
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .num {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      color: #171e11;
+      background: #e9d074;
+      font-weight: 900;
+      font-size: 13px;
+    }
+
+    section {
+      padding: 74px 0;
+      border-top: 1px solid rgba(118, 97, 47, .18);
+    }
+    .section-head {
+      display: grid;
+      grid-template-columns: .78fr 1fr;
+      gap: 42px;
+      align-items: end;
+      margin-bottom: 30px;
+    }
+    h2 {
+      font-family: ui-serif, Georgia, "Times New Roman", serif;
+      font-size: clamp(34px, 4.5vw, 62px);
+      line-height: 1;
+      margin-bottom: 0;
+    }
+    .lead {
+      color: #3f4b3d;
+      font-size: 18px;
+      max-width: 720px;
+    }
+
+    .grid-12 {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+    }
+    .book-card {
+      min-height: 198px;
+      background: rgba(255, 250, 240, .74);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 18px;
+      box-shadow: 0 12px 28px rgba(31, 24, 7, .06);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      color: inherit;
+      text-decoration: none;
+    }
+    .book-card[href] { cursor: pointer; }
+    .book-card[href]:hover {
+      transform: translateY(-2px);
+      border-color: rgba(200, 168, 61, .62);
+      transition: transform .18s ease, border-color .18s ease;
+    }
+    .book-card h3 {
+      font-size: 19px;
+      line-height: 1.15;
+      margin-bottom: 0;
+    }
+    .book-card p {
+      color: var(--muted);
+      font-size: 14px;
+      margin-bottom: 0;
+    }
+
+    .diagram-card,
+    .chart-card {
+      background: rgba(255, 250, 240, .78);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 24px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+    .chart-title {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      align-items: flex-start;
+      margin-bottom: 20px;
+    }
+    .chart-title h3 {
+      margin: 0;
+      font-size: 22px;
+    }
+    .chart-title p {
+      max-width: 520px;
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .architecture {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 10px;
+      position: relative;
+    }
+    .arch-node {
+      min-height: 118px;
+      border-radius: 8px;
+      padding: 14px;
+      background: #11180f;
+      color: #f8efd6;
+      border: 1px solid rgba(200, 168, 61, .45);
+    }
+    .arch-node strong {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 13px;
+      color: #f1d971;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+    }
+    .arch-node span {
+      display: block;
+      font-size: 13px;
+      color: #d6d0bd;
+    }
+    .ari-strip {
+      margin: 16px 0;
+      border-radius: 8px;
+      background: linear-gradient(135deg, #10151d, #17102a);
+      color: #f8efd6;
+      padding: 22px;
+      border: 1px solid rgba(86, 166, 211, .45);
+    }
+    .ari-strip strong {
+      font-size: 34px;
+      letter-spacing: .08em;
+      margin-right: 14px;
+    }
+    .divisions {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+    }
+    .division {
+      border-radius: 8px;
+      padding: 14px;
+      background: rgba(11, 16, 12, .9);
+      color: #fff7df;
+      min-height: 96px;
+      border: 1px solid rgba(200, 168, 61, .32);
+    }
+    .division b {
+      display: block;
+      color: #e8c56a;
+      margin-bottom: 6px;
+    }
+    .division span {
+      display: block;
+      font-size: 12px;
+      color: #d2c8ae;
+    }
+
+    .ios-image {
+      width: 100%;
+      display: block;
+      border-radius: 8px;
+      border: 1px solid rgba(255,255,255,.12);
+      box-shadow: var(--shadow);
+      background: #050609;
+    }
+
+    .flow {
+      display: grid;
+      grid-template-columns: repeat(8, 1fr);
+      gap: 10px;
+      align-items: stretch;
+    }
+    .flow-step {
+      position: relative;
+      min-height: 120px;
+      border-radius: 8px;
+      padding: 14px;
+      color: #f8efd6;
+      background: #11180f;
+      border: 1px solid rgba(200, 168, 61, .36);
+    }
+    .flow-step:not(:last-child)::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      right: -10px;
+      width: 10px;
+      height: 1px;
+      background: var(--gold);
+    }
+    .flow-step b {
+      display: block;
+      color: #e8c56a;
+      margin-bottom: 6px;
+      font-size: 13px;
+    }
+    .flow-step span {
+      display: block;
+      color: #d9d0b8;
+      font-size: 12px;
+    }
+
+    .bar-chart {
+      display: grid;
+      gap: 12px;
+      margin-top: 18px;
+    }
+    .bar-row {
+      display: grid;
+      grid-template-columns: 210px 1fr 50px;
+      align-items: center;
+      gap: 12px;
+      font-size: 13px;
+      color: #344031;
+    }
+    .track {
+      height: 16px;
+      border-radius: 999px;
+      background: rgba(118, 97, 47, .16);
+      overflow: hidden;
+    }
+    .bar {
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--forest), var(--gold));
+    }
+
+    .timeline {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 8px;
+    }
+    .gate {
+      background: rgba(255,255,255,.55);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 14px;
+      min-height: 135px;
+    }
+    .gate b {
+      display: block;
+      color: var(--earth);
+      font-size: 12px;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+    .gate strong {
+      display: block;
+      font-size: 16px;
+      margin-bottom: 6px;
+    }
+    .gate span {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .matrix {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+      overflow: hidden;
+      border-radius: 8px;
+      border: 1px solid var(--line);
+    }
+    .matrix th {
+      background: #11180f;
+      color: #f4ecd8;
+      text-align: left;
+      padding: 12px;
+    }
+    .matrix td {
+      padding: 12px;
+      border-top: 1px solid rgba(118, 97, 47, .18);
+      vertical-align: top;
+      background: rgba(255,255,255,.38);
+    }
+    .matrix tr:nth-child(even) td { background: rgba(255,250,240,.72); }
+
+    .flywheel {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 12px;
+    }
+    .wheel-node {
+      border-radius: 50%;
+      aspect-ratio: 1;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding: 20px;
+      background: #11180f;
+      color: #fff4cf;
+      border: 1px solid rgba(200, 168, 61, .42);
+      font-weight: 800;
+      font-size: 14px;
+    }
+
+    .appendix-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+    }
+    .appendix {
+      border: 1px solid var(--line);
+      background: rgba(255,250,240,.7);
+      padding: 14px;
+      border-radius: 8px;
+      min-height: 92px;
+    }
+    .appendix b {
+      display: block;
+      color: var(--earth);
+      margin-bottom: 6px;
+    }
+    .appendix span {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .oath {
+      background:
+        linear-gradient(135deg, rgba(11, 16, 12, .96), rgba(31, 58, 40, .94)),
+        radial-gradient(circle at 80% 10%, rgba(200,168,61,.24), transparent 26rem);
+      color: #f8efd6;
+      border: 1px solid rgba(200,168,61,.46);
+      border-radius: 8px;
+      padding: 34px;
+      box-shadow: var(--shadow);
+    }
+    .oath h2 { color: #fff8df; }
+    .oath p { color: #ded4b8; font-size: 18px; }
+    .oath .signature {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-top: 24px;
+    }
+    .sigline {
+      border-top: 1px solid rgba(200,168,61,.55);
+      padding-top: 8px;
+      color: #bdb397;
+      font-size: 12px;
+    }
+
+    footer {
+      padding: 36px 0 60px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    @media (max-width: 980px) {
+      .hero,
+      .section-head { grid-template-columns: 1fr; }
+      .grid-12 { grid-template-columns: repeat(2, 1fr); }
+      .architecture,
+      .divisions,
+      .flow,
+      .timeline,
+      .flywheel,
+      .appendix-grid,
+      .oath .signature { grid-template-columns: 1fr; }
+      .bar-row { grid-template-columns: 1fr; }
+      .nav { display: none; }
+    }
+
+    @media print {
+      body { background: #fffaf0; }
+      .topbar, .hero-actions { display: none; }
+      .page { width: auto; margin: 0 36px; }
+      .hero { min-height: auto; grid-template-columns: 1fr; padding-top: 44px; }
+      section { break-inside: avoid; padding: 36px 0; }
+      .book-card, .diagram-card, .chart-card, .hero-panel, .oath { box-shadow: none; }
+      .grid-12 { grid-template-columns: repeat(3, 1fr); }
+      .flow { grid-template-columns: repeat(4, 1fr); }
+      .timeline { grid-template-columns: repeat(4, 1fr); }
+      .appendix-grid { grid-template-columns: repeat(3, 1fr); }
+      @page { size: letter; margin: .45in; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="page">
+      <a class="brand" href="#top" aria-label="AXION Constitution">
+        <span class="sigil" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none">
+            <path d="M12 2l2.5 7.5L22 12l-7.5 2.5L12 22l-2.5-7.5L2 12l7.5-2.5L12 2z" stroke="currentColor" stroke-width="1.6"/>
+          </svg>
+        </span>
+        AXION Constitution
+      </a>
+      <nav class="nav" aria-label="Page sections">
+        <a href="#books">12 Books</a>
+        <a href="#ios">IOS</a>
+        <a href="#finance">Finance</a>
+        <a href="#ventures">Ventures</a>
+        <a href="#governance">Governance</a>
+        <a class="cta" href="#oath">Oath</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <div class="page">
+      <section class="hero">
+        <div>
+          <p class="kicker">The Foundational Handbook For Building A New Civilization</p>
+          <h1>The AXION Constitution</h1>
+          <p class="hero-copy">A living framework for intelligence, stewardship, innovation, venture creation, and human flourishing. This is the governing document that lets AXION scale from onboarding to institution-building without losing its founding philosophy.</p>
+          <div class="hero-actions">
+            <a class="button primary" href="#books">Explore the Twelve Books</a>
+            <a class="button" href="#ios">View the IOS</a>
+          </div>
+        </div>
+        <aside class="hero-panel" aria-label="Constitution structure summary">
+          <div class="mini-title">Constitution Spine</div>
+          <div class="constitution-stack">
+            <div class="stack-row"><div class="num">I</div><div><strong>Foundation</strong><br><span>Origin, purpose, civilization design.</span></div></div>
+            <div class="stack-row"><div class="num">II</div><div><strong>Principles</strong><br><span>Vision, mission, ethics, decision logic.</span></div></div>
+            <div class="stack-row"><div class="num">III</div><div><strong>Architecture</strong><br><span>Holding company, venture studio, AI, research.</span></div></div>
+            <div class="stack-row"><div class="num">IV</div><div><strong>Intelligence OS</strong><br><span>ARI, agents, knowledge graph, orchestration.</span></div></div>
+            <div class="stack-row"><div class="num">VI</div><div><strong>Financial Ecosystem</strong><br><span>Treasury, capital, royalties, reinvestment.</span></div></div>
+            <div class="stack-row"><div class="num">XII</div><div><strong>The Future</strong><br><span>100-year thinking and the AXION Oath.</span></div></div>
+          </div>
+        </aside>
+      </section>
+
+      <section id="books">
+        <div class="section-head">
+          <div>
+            <p class="kicker">Document Architecture</p>
+            <h2>The Twelve Books</h2>
+          </div>
+          <p class="lead">The Constitution is organized like a modern institutional canon: part employee handbook, part operating system, part venture doctrine, part governance charter.</p>
+        </div>
+        <a href="../ARI Site/index.html" class="statement" style="display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;text-decoration:none;margin-bottom:28px;">
+          <span style="max-width:60ch;">The Constitution governs the human organization. Its companion, the <strong>ARI Codex</strong>, governs the Digital Species — the architecture, laws, and evolution of ARI in full. Two founding documents, one civilization.</span>
+          <span style="flex:0 0 auto;font-size:12px;letter-spacing:.14em;text-transform:uppercase;font-weight:900;color:#161d12;background:#ecd36f;border-radius:999px;padding:12px 22px;">Enter the ARI Codex →</span>
+        </a>
+        <div class="grid-12">
+          <a class="book-card" href="book-i-foundation.html"><div class="num">I</div><h3>The Foundation</h3><p>Why AXION exists, the origin story, founder letter, and the responsibility of building beyond companies.</p></a>
+          <a class="book-card" href="book-ii-vision-mission-principles.html"><div class="num">II</div><h3>Vision • Mission • Principles</h3><p>The 21 Principles of AXION, ethics, long-term thinking, truth, humility, human-first AI, and stewardship.</p></a>
+          <a class="book-card" href="book-iii-organizational-architecture.html"><div class="num">III</div><h3>Organizational Architecture</h3><p>Holding company, venture studio, research institute, education platform, media company, and civilization builder.</p></a>
+          <a class="book-card" href="book-iv-intelligence-operating-system.html"><div class="num">IV</div><h3>Intelligence Operating System</h3><p>ARI, AI agents, knowledge graph, decision support, data governance, and human-led orchestration.</p></a>
+          <a class="book-card" href="book-v-the-culture.html"><div class="num">V</div><h3>The Culture</h3><p>Communication, conflict, feedback, meetings, accountability, writing, curiosity, learning, and AI practice.</p></a>
+          <a class="book-card" href="book-vi-financial-ecosystem.html"><div class="num">VI</div><h3>The Financial Ecosystem</h3><p>Revenue, treasury, licensing, AI, subscriptions, ventures, media, royalties, IP, research, and reinvestment.</p></a>
+          <a class="book-card" href="book-vii-equity.html"><div class="num">VII</div><h3>Equity</h3><p>Parent ownership, venture ownership, profit sharing, phantom equity, options, vesting, mission lock, and exits.</p></a>
+          <a class="book-card" href="book-viii-building-ventures.html"><div class="num">VIII</div><h3>Building Ventures</h3><p>Idea submission, research, prototype, validation, funding, incubation, scale, spinoff, failure, and learning.</p></a>
+          <a class="book-card" href="book-ix-roles.html"><div class="num">IX</div><h3>Roles</h3><p>Executives, division heads, human specialists, AI agents, volunteers, advisors, researchers, partners, and KPIs.</p></a>
+          <a class="book-card" href="book-x-governance.html"><div class="num">X</div><h3>Governance</h3><p>Board, committees, ethics, risk, voting, founder powers, succession, IP, security, compliance, and transparency.</p></a>
+          <a class="book-card" href="book-xi-community.html"><div class="num">XI</div><h3>Community</h3><p>Members, events, masterminds, fellows, builders, founders, partners, chapters, recognition, and education.</p></a>le>
+          <article class="book-card"><div class="num">XII</div><h3>The Future</h3><p>100-year and 1000-year thinking, planetary intelligence, human flourishing, science, business, AI, and the Oath.</p></article>
+        </div>
+      </section>
+
+      <section id="architecture">
+        <div class="section-head">
+          <div>
+            <p class="kicker">Book III</p>
+            <h2>Organizational Architecture</h2>
+          </div>
+          <p class="lead">AXION is not a single company. It is a coordinated architecture of stewardship, intelligence, venture creation, research, capital, media, education, and community prototypes.</p>
+        </div>
+        <div class="diagram-card">
+          <div class="chart-title">
+            <h3>Human-Led, Intelligence-Orchestrated</h3>
+            <p>Executive stewardship sets intent. ARI translates intent into intelligence, workflow, recommendations, and dynamic AI team assembly. Divisions convert intelligence into ventures and systems.</p>
+          </div>
+          <div class="architecture">
+            <div class="arch-node"><strong>Founder / CVO</strong><span>Vision, purpose, long-term strategy, civilization design.</span></div>
+            <div class="arch-node"><strong>CIntO</strong><span>Integrates strategy, intelligence, ARI, and cross-system coherence.</span></div>
+            <div class="arch-node"><strong>COO</strong><span>Operations, systems, execution, scaling, performance.</span></div>
+            <div class="arch-node"><strong>CFO</strong><span>Capital, structure, investments, financial stewardship.</span></div>
+            <div class="arch-node"><strong>Chief of Staff</strong><span>Alignment, executive force multiplication, priority protection.</span></div>
+          </div>
+          <div class="ari-strip"><strong>ARI</strong> Advanced Research Intelligence as the central nervous system of AXION.</div>
+          <div class="divisions">
+            <div class="division"><b>Product & Design</b><span>New systems, experiences, prototypes.</span></div>
+            <div class="division"><b>Capital & Fundraising</b><span>Investor relations, grants, cash flow.</span></div>
+            <div class="division"><b>Growth & Adoption</b><span>Community growth, CRM, journeys.</span></div>
+            <div class="division"><b>Talent & Stewardship</b><span>Recruiting, learning, performance.</span></div>
+            <div class="division"><b>Research & Data</b><span>ARI core, market intelligence, prediction.</span></div>
+            <div class="division"><b>Strategic Partnerships</b><span>Alliances, contracts, ecosystem matching.</span></div>
+            <div class="division"><b>Story & Media</b><span>Publishing, brand, content, cultural reach.</span></div>
+            <div class="division"><b>Engineering & Technology</b><span>Software, AI systems, security, data.</span></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="ios">
+        <div class="section-head">
+          <div>
+            <p class="kicker">Book IV</p>
+            <h2>The Intelligence Operating System</h2>
+          </div>
+          <p class="lead">ARI is the operating intelligence layer: sensing, synthesis, matching, workflow orchestration, compliance review, insights, and continuous learning. Every employee and venture should know how to work through it.</p>
+        </div>
+        <img class="ios-image" src="assets/ios-chart.png" alt="AXION Intelligence Operating System chart showing executive leadership, ARI, data ecosystem, divisions, AI agents, human teams, and workflow." />
+      </section>
+
+      <section id="finance">
+        <div class="section-head">
+          <div>
+            <p class="kicker">Book VI</p>
+            <h2>The Financial Ecosystem</h2>
+          </div>
+          <p class="lead">The Constitution should explain how AXION makes money, how revenue flows, and why capital is governed for long-term civilization-building rather than short-term extraction.</p>
+        </div>
+        <div class="chart-card">
+          <div class="chart-title">
+            <h3>Revenue Flow</h3>
+            <p>A simplified operating model for how capital enters the AXION ecosystem and compounds across operations, research, ventures, reserves, people, and communities.</p>
+          </div>
+          <div class="flow">
+            <div class="flow-step"><b>Revenue</b><span>Licensing, AI, subscriptions, education, ventures, media, royalties, patents, IP, research, data, advisory.</span></div>
+            <div class="flow-step"><b>AXION Treasury</b><span>Central financial coordination and operating visibility.</span></div>
+            <div class="flow-step"><b>Operations</b><span>Payroll, systems, delivery, infrastructure, compliance.</span></div>
+            <div class="flow-step"><b>Research</b><span>ARI, labs, market intelligence, scientific inquiry.</span></div>
+            <div class="flow-step"><b>Future Ventures</b><span>Seed ideas, prototypes, incubated companies.</span></div>
+            <div class="flow-step"><b>Innovation Fund</b><span>Strategic experiments and venture acceleration.</span></div>
+            <div class="flow-step"><b>Capital Reserve</b><span>Durability, downside protection, continuity.</span></div>
+            <div class="flow-step"><b>Community Initiatives</b><span>Education, access, chapters, recognition, care.</span></div>
+          </div>
+          <div class="bar-chart" aria-label="Illustrative financial allocation model">
+            <div class="bar-row"><strong>Operations & Delivery</strong><div class="track"><div class="bar" style="width: 32%"></div></div><span>32%</span></div>
+            <div class="bar-row"><strong>Research & ARI</strong><div class="track"><div class="bar" style="width: 18%"></div></div><span>18%</span></div>
+            <div class="bar-row"><strong>Future Ventures</strong><div class="track"><div class="bar" style="width: 16%"></div></div><span>16%</span></div>
+            <div class="bar-row"><strong>Capital Reserve</strong><div class="track"><div class="bar" style="width: 12%"></div></div><span>12%</span></div>
+            <div class="bar-row"><strong>Employee Growth</strong><div class="track"><div class="bar" style="width: 10%"></div></div><span>10%</span></div>
+            <div class="bar-row"><strong>Community Initiatives</strong><div class="track"><div class="bar" style="width: 12%"></div></div><span>12%</span></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="ventures">
+        <div class="section-head">
+          <div>
+            <p class="kicker">Book VIII</p>
+            <h2>Building Ventures</h2>
+          </div>
+          <p class="lead">Every venture should follow the AXION Venture Playbook: ideas become research, research becomes prototypes, prototypes become validated systems, and validated systems become companies, platforms, or community infrastructure.</p>
+        </div>
+        <div class="diagram-card">
+          <div class="timeline">
+            <div class="gate"><b>Gate 0</b><strong>Idea</strong><span>Submission, mission fit, source, problem, intended beneficiary.</span></div>
+            <div class="gate"><b>Gate 1</b><strong>Research</strong><span>ARI synthesis, market signal, feasibility, constraints, risks.</span></div>
+            <div class="gate"><b>Gate 2</b><strong>Prototype</strong><span>Design, build, test, simulate, recruit early users.</span></div>
+            <div class="gate"><b>Gate 3</b><strong>Validation</strong><span>Revenue, adoption, impact evidence, delivery economics.</span></div>
+            <div class="gate"><b>Gate 4</b><strong>Funding</strong><span>Treasury, grant, partner, investor, or venture studio capital.</span></div>
+            <div class="gate"><b>Gate 5</b><strong>Scale</strong><span>Team, systems, governance, market expansion, quality control.</span></div>
+            <div class="gate"><b>Gate 6</b><strong>Learn</strong><span>Spinoff, exit, renewal, wind-down, lessons returned to ARI.</span></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="governance">
+        <div class="section-head">
+          <div>
+            <p class="kicker">Book X</p>
+            <h2>Governance</h2>
+          </div>
+          <p class="lead">The governance book should make decision rights visible: who decides, what requires review, where founder powers end, and how AXION protects mission, IP, security, data, and community trust.</p>
+        </div>
+        <div class="chart-card">
+          <table class="matrix">
+            <thead>
+              <tr><th>Decision Domain</th><th>Primary Authority</th><th>Required Guardrails</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Vision & Doctrine</td><td>Founder / CVO with Stewardship Council</td><td>Mission lock, constitutional review, annual founder letter.</td></tr>
+              <tr><td>Capital & Equity</td><td>CFO, Board, Finance Committee</td><td>Conflict review, securities compliance, allocation policy, reserve thresholds.</td></tr>
+              <tr><td>ARI & Data</td><td>CIntO, Engineering, Data Governance</td><td>Privacy, security, audit trails, human accountability, AI ethics.</td></tr>
+              <tr><td>Ventures</td><td>Venture Studio Committee</td><td>Stage gates, validation metrics, IP agreements, failure review.</td></tr>
+              <tr><td>Culture & People</td><td>Chief of Staff, Talent & Stewardship</td><td>Feedback protocols, conflict resolution, psychological safety, role clarity.</td></tr>
+              <tr><td>Community</td><td>Community Council / Local Chapters</td><td>Transparency, eligibility, recognition, safety, contribution standards.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="community">
+        <div class="section-head">
+          <div>
+            <p class="kicker">Book XI</p>
+            <h2>The Civilization Layer</h2>
+          </div>
+          <p class="lead">AXION's communities are not just audiences. They are living prototypes: places where systems are built with the people who live them, and where contribution becomes education, recognition, venture formation, and belonging.</p>
+        </div>
+        <div class="diagram-card">
+          <div class="flywheel">
+            <div class="wheel-node">Members & Contributors</div>
+            <div class="wheel-node">Education & Certification</div>
+            <div class="wheel-node">Builders & Founders</div>
+            <div class="wheel-node">Ventures & Chapters</div>
+            <div class="wheel-node">Recognition & Renewal</div>
+          </div>
+        </div>
+      </section>
+
+      <section id="appendices">
+        <div class="section-head">
+          <div>
+            <p class="kicker">Institutional Memory</p>
+            <h2>Appendices</h2>
+          </div>
+          <p class="lead">The appendices turn philosophy into operating assets: charts, architecture, examples, standards, legal frameworks, and annual founder letters.</p>
+        </div>
+        <div class="appendix-grid">
+          <div class="appendix"><b>A</b><span>Organizational Charts</span></div>
+          <div class="appendix"><b>B</b><span>ARI Technical Architecture</span></div>
+          <div class="appendix"><b>C</b><span>AI Agent Library</span></div>
+          <div class="appendix"><b>D</b><span>Equity Examples</span></div>
+          <div class="appendix"><b>E</b><span>Financial Allocation Models</span></div>
+          <div class="appendix"><b>F</b><span>Investment Policy</span></div>
+          <div class="appendix"><b>G</b><span>Brand Guidelines</span></div>
+          <div class="appendix"><b>H</b><span>Communication Standards</span></div>
+          <div class="appendix"><b>I</b><span>Meeting Protocols</span></div>
+          <div class="appendix"><b>J</b><span>Decision Frameworks</span></div>
+          <div class="appendix"><b>K</b><span>Legal Framework</span></div>
+          <div class="appendix"><b>L</b><span>Founder Letters, updated yearly</span></div>
+        </div>
+      </section>
+
+      <section id="oath">
+        <div class="oath">
+          <p class="kicker">Book XII</p>
+          <h2>The AXION Oath</h2>
+          <p>I enter AXION not as an employee of a company, but as a steward of a civilization operating system. I commit to intelligence in service of life, innovation in service of humanity, capital in service of flourishing, and power in service of responsibility. I will build with truth, humility, discipline, curiosity, and care. I will protect the mission, strengthen the commons, and leave the system wiser than I found it.</p>
+          <div class="signature">
+            <div class="sigline">Employee / Builder</div>
+            <div class="sigline">Founder / Venture Lead</div>
+            <div class="sigline">Executive / Steward</div>
+            <div class="sigline">Partner / Investor</div>
+          </div>
+        </div>
+      </section>
+
+      <footer>
+        <p><strong>Website alignment:</strong> This artifact is shaped to sit beside axionglobal.org's current framing of AXION as a civilizational venture studio that builds future civilization infrastructure through focus areas, venture studio pathways, communities, capital architecture, portfolio, and entry into the work.</p>
+      </footer>
+    </div>
+  </main>
+</body>
+</html>

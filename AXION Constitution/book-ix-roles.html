@@ -1,0 +1,779 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AXION Constitution - Book IX: Roles</title>
+  <style>
+    :root {
+      --ink: #151b17;
+      --muted: #63705f;
+      --cream: #f4ecd8;
+      --paper: #fffaf0;
+      --line: rgba(118, 97, 47, .28);
+      --gold: #c8a83d;
+      --earth: #7d642d;
+      --deep: #0c120e;
+      --forest: #203a29;
+      --blue: #186c80;
+      --shadow: 0 18px 52px rgba(31, 24, 7, .12);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 14% -4%, rgba(24, 108, 128, .16), transparent 28rem),
+        radial-gradient(circle at 88% 6%, rgba(200, 168, 61, .22), transparent 30rem),
+        linear-gradient(180deg, #f8f1de 0%, #efe3c3 100%);
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.62;
+    }
+    a { color: inherit; }
+    .page { width: min(1120px, calc(100vw - 42px)); margin: 0 auto; }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(244, 236, 216, .92);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--line);
+    }
+    .topbar .page {
+      min-height: 62px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+    .brand {
+      text-decoration: none;
+      font-weight: 900;
+      letter-spacing: .15em;
+      font-size: 12px;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .sigil {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: var(--deep);
+      color: var(--gold);
+      border: 1px solid var(--gold);
+    }
+    .nav {
+      display: flex;
+      gap: 16px;
+      color: #4e584c;
+      font-size: 13px;
+      font-weight: 800;
+    }
+    .nav a { text-decoration: none; white-space: nowrap; }
+    .nav .back {
+      border: 1px solid rgba(118, 97, 47, .35);
+      border-radius: 999px;
+      padding: 8px 13px;
+      background: rgba(255,250,240,.68);
+    }
+
+    .hero {
+      min-height: calc(100vh - 62px);
+      display: grid;
+      grid-template-columns: 1fr .48fr;
+      gap: 54px;
+      align-items: center;
+      padding: 58px 0 44px;
+    }
+    .kicker {
+      color: var(--earth);
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: .28em;
+      text-transform: uppercase;
+      margin: 0 0 16px;
+    }
+    h1, h2, h3, p { margin-top: 0; }
+    h1 {
+      font-family: ui-serif, Georgia, "Times New Roman", serif;
+      font-size: clamp(56px, 8.4vw, 118px);
+      line-height: .94;
+      letter-spacing: 0;
+      margin-bottom: 20px;
+    }
+    .subtitle {
+      font-family: ui-serif, Georgia, "Times New Roman", serif;
+      color: var(--earth);
+      font-style: italic;
+      font-size: 25px;
+      margin-bottom: 26px;
+    }
+    .hero-copy {
+      max-width: 760px;
+      color: #384536;
+      font-size: 21px;
+    }
+    .quote {
+      border-left: 4px solid var(--gold);
+      padding: 16px 0 16px 22px;
+      margin: 28px 0 0;
+      font-family: ui-serif, Georgia, "Times New Roman", serif;
+      font-size: 21px;
+      line-height: 1.42;
+      color: #263224;
+    }
+    .toc {
+      background: rgba(255, 250, 240, .76);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+      padding: 22px;
+    }
+    .toc h2 {
+      font-size: 13px;
+      letter-spacing: .24em;
+      color: var(--earth);
+      text-transform: uppercase;
+      margin: 0 0 14px;
+    }
+    .toc a {
+      display: grid;
+      grid-template-columns: 42px 1fr;
+      gap: 10px;
+      align-items: center;
+      text-decoration: none;
+      padding: 7px 0;
+      border-top: 1px solid rgba(118,97,47,.18);
+      color: #29352a;
+      font-weight: 800;
+      font-size: 14px;
+    }
+    .toc a:first-of-type { border-top: 0; }
+    .toc span {
+      min-width: 30px;
+      height: 28px;
+      border-radius: 999px;
+      display: grid;
+      place-items: center;
+      background: #ecd36f;
+      font-size: 11px;
+      font-weight: 900;
+      padding: 0 8px;
+    }
+
+    section { padding: 66px 0; border-top: 1px solid rgba(118,97,47,.18); }
+    .reader {
+      display: grid;
+      grid-template-columns: 220px minmax(0, 1fr);
+      gap: 42px;
+      align-items: start;
+    }
+    .article-label {
+      position: sticky;
+      top: 86px;
+      color: var(--earth);
+      font-size: 12px;
+      letter-spacing: .24em;
+      text-transform: uppercase;
+      font-weight: 900;
+    }
+    .article {
+      background: rgba(255, 250, 240, .67);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 34px;
+      box-shadow: 0 14px 36px rgba(31,24,7,.08);
+    }
+    h2 {
+      font-family: ui-serif, Georgia, "Times New Roman", serif;
+      font-size: clamp(32px, 4.2vw, 56px);
+      line-height: 1;
+      letter-spacing: 0;
+      margin-bottom: 22px;
+    }
+    .article p {
+      max-width: 760px;
+      font-size: 18px;
+      color: #2f3c31;
+      margin-bottom: 18px;
+    }
+    .statement {
+      max-width: 800px;
+      border-radius: 8px;
+      border: 1px solid rgba(200,168,61,.45);
+      background: #fbf0ce;
+      padding: 18px 20px;
+      color: #1f2c1d;
+      font-weight: 800;
+      font-size: 18px;
+      margin: 24px 0;
+    }
+    .short-lines {
+      display: grid;
+      gap: 7px;
+      margin: 22px 0;
+      max-width: 720px;
+    }
+    .short-lines div {
+      border-left: 3px solid rgba(200,168,61,.65);
+      padding: 7px 0 7px 14px;
+      color: #2f3c31;
+      font-size: 18px;
+      background: rgba(255,255,255,.32);
+    }
+    .grid, .role-grid, .specialist-grid, .agent-grid, .advisor-grid, .partner-grid, .fellow-grid, .kpi-grid, .leader-grid, .growth-grid, .org-grid, .civilization-grid {
+      display: grid;
+      gap: 12px;
+      margin-top: 22px;
+    }
+    .grid { grid-template-columns: repeat(3, 1fr); }
+    .role-grid { grid-template-columns: repeat(3, 1fr); }
+    .specialist-grid, .agent-grid, .partner-grid, .leader-grid, .growth-grid, .org-grid, .civilization-grid { grid-template-columns: repeat(4, 1fr); }
+    .advisor-grid { grid-template-columns: repeat(5, 1fr); }
+    .fellow-grid { grid-template-columns: repeat(3, 1fr); }
+    .kpi-grid { grid-template-columns: repeat(4, 1fr); }
+    .chip, .card, .role-card, .kpi-card {
+      border-radius: 7px;
+      border: 1px solid rgba(118,97,47,.22);
+      background: rgba(255,255,255,.42);
+      padding: 14px;
+      color: #33402f;
+    }
+    .chip { font-weight: 800; }
+    .card b, .role-card b, .kpi-card b {
+      display: block;
+      color: var(--earth);
+      margin-bottom: 6px;
+    }
+    .card span, .role-card span, .kpi-card span {
+      display: block;
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 650;
+      line-height: 1.45;
+    }
+    .role-card {
+      min-height: 194px;
+      position: relative;
+      overflow: hidden;
+    }
+    .role-card::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(90deg, var(--blue), var(--gold));
+    }
+    .hierarchy, .ecosystem-map {
+      display: grid;
+      gap: 10px;
+      max-width: 820px;
+      margin-top: 24px;
+    }
+    .map-row {
+      border-radius: 8px;
+      border: 1px solid rgba(118,97,47,.24);
+      background: rgba(255,255,255,.46);
+      padding: 14px 16px;
+      font-weight: 900;
+      text-align: center;
+      color: #243023;
+    }
+    .map-row.primary {
+      background: #18221b;
+      color: #f7e9b8;
+      border-color: rgba(200,168,61,.55);
+    }
+    .map-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+    }
+    .map-grid.three { grid-template-columns: repeat(3, 1fr); }
+    .connector {
+      height: 24px;
+      width: 1px;
+      margin: 0 auto;
+      background: rgba(125,100,45,.55);
+    }
+    .flow-note {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 20px;
+      max-width: 820px;
+    }
+    .ending {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+    .ending-card {
+      border-radius: 8px;
+      padding: 24px;
+      border: 1px solid var(--line);
+      background: rgba(255,250,240,.76);
+      box-shadow: var(--shadow);
+    }
+    .ending-card blockquote {
+      margin: 0;
+      font-family: ui-serif, Georgia, "Times New Roman", serif;
+      font-size: 23px;
+      line-height: 1.38;
+      color: #22301f;
+    }
+    footer { padding: 34px 0 58px; color: var(--muted); font-size: 13px; }
+
+    @media (max-width: 980px) {
+      .nav { display: none; }
+      .hero, .reader, .ending, .flow-note { grid-template-columns: 1fr; }
+      .article-label { position: static; }
+      .grid, .role-grid, .specialist-grid, .agent-grid, .advisor-grid, .partner-grid, .fellow-grid, .kpi-grid, .leader-grid, .growth-grid, .org-grid, .civilization-grid, .map-grid, .map-grid.three { grid-template-columns: 1fr; }
+      .article { padding: 24px; }
+    }
+    @media print {
+      body { background: #fffaf0; }
+      .topbar { display: none; }
+      .page { width: auto; margin: 0 34px; }
+      .hero { min-height: auto; grid-template-columns: 1fr; padding: 38px 0; }
+      section { padding: 34px 0; }
+      .article, .toc, .ending-card { box-shadow: none; }
+      .reader { grid-template-columns: 140px 1fr; gap: 24px; }
+      .grid, .role-grid, .specialist-grid, .agent-grid, .advisor-grid, .partner-grid, .fellow-grid, .kpi-grid, .leader-grid, .growth-grid, .org-grid, .civilization-grid { grid-template-columns: repeat(2, 1fr); }
+      @page { size: letter; margin: .46in; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="page">
+      <a class="brand" href="index.html">
+        <span class="sigil">✦</span>
+        AXION Constitution
+      </a>
+      <nav class="nav" aria-label="Book IX navigation">
+        <a href="#hierarchy">Hierarchy</a>
+        <a href="#executives">Executives</a>
+        <a href="#ai-agents">AI Agents</a>
+        <a href="#kpis">KPIs</a>
+        <a href="#ecosystem">Role Ecosystem</a>
+        <a class="back" href="index.html">Back to Constitution</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page">
+    <section class="hero">
+      <div>
+        <p class="kicker">The AXION Constitution - Book IX</p>
+        <h1>Roles</h1>
+        <p class="subtitle">Every Role Exists to Strengthen the Whole</p>
+        <p class="hero-copy">Book IX defines AXION's role architecture: executives, division heads, specialists, researchers, advisors, partners, volunteers, fellows, ARI, and AI agents working as one integrated intelligence system.</p>
+        <blockquote class="quote">A title does not define leadership. Responsibility does. Within AXION, every role exists not to create hierarchy, but to contribute its unique intelligence to a larger living system.</blockquote>
+      </div>
+      <aside class="toc">
+        <h2>Book IX Contents</h2>
+        <a href="#preamble"><span>0</span>Preamble</a>
+        <a href="#philosophy"><span>I</span>Organizational Philosophy</a>
+        <a href="#hierarchy"><span>II</span>Leadership Hierarchy</a>
+        <a href="#founder"><span>III</span>Founder / CVO</a>
+        <a href="#cinto"><span>IV</span>CIntO</a>
+        <a href="#coo"><span>V</span>COO</a>
+        <a href="#cfo"><span>VI</span>CFO</a>
+        <a href="#cos"><span>VII</span>Chief of Staff</a>
+        <a href="#division-heads"><span>VIII</span>Division Heads</a>
+        <a href="#specialists"><span>IX</span>Human Specialists</a>
+        <a href="#ai-agents"><span>X</span>AI Agents</a>
+        <a href="#researchers"><span>XI</span>Researchers</a>
+        <a href="#advisors"><span>XII</span>Advisors</a>
+        <a href="#partners"><span>XIII</span>Partners</a>
+        <a href="#fellows"><span>XIV</span>Volunteers & Fellows</a>
+        <a href="#ari"><span>XV</span>Working with ARI</a>
+        <a href="#kpis"><span>XVI</span>Performance & KPIs</a>
+        <a href="#leadership"><span>XVII</span>Leadership Expectations</a>
+        <a href="#growth"><span>XVIII</span>Growth Pathways</a>
+        <a href="#succession"><span>XIX</span>Succession</a>
+        <a href="#one"><span>XX</span>One Organization</a>
+        <a href="#civilization"><span>XXI</span>Every Role Builds</a>
+      </aside>
+    </section>
+
+    <section id="preamble" class="reader">
+      <div class="article-label">Preamble</div>
+      <article class="article">
+        <h2>Organized Around Purpose</h2>
+        <p>Traditional organizations organize people around departments. AXION organizes people around purpose.</p>
+        <div class="short-lines">
+          <div>Titles exist to clarify responsibility.</div>
+          <div>Not status.</div>
+          <div>Not authority.</div>
+          <div>Not prestige.</div>
+        </div>
+        <p>Every person, AI agent, venture, and executive contributes to one interconnected intelligence ecosystem. Leadership is therefore measured by contribution rather than position.</p>
+        <div class="statement">Every role exists to answer one question: How does this strengthen civilization?</div>
+      </article>
+    </section>
+
+    <section id="philosophy" class="reader">
+      <div class="article-label">Article I</div>
+      <article class="article">
+        <h2>Organizational Philosophy</h2>
+        <p>AXION operates according to three constitutional truths.</p>
+        <div class="grid">
+          <div class="card"><b>Mission</b><span>Every role exists to serve the Mission.</span></div>
+          <div class="card"><b>Intelligence</b><span>Every role exists to strengthen the Intelligence Operating System.</span></div>
+          <div class="card"><b>Human Flourishing</b><span>Every role exists to increase Human Flourishing.</span></div>
+        </div>
+        <div class="statement">If a role no longer advances these objectives, it should evolve. The organization is designed to adapt. The mission is not.</div>
+      </article>
+    </section>
+
+    <section id="hierarchy">
+      <p class="kicker">Article II</p>
+      <h2>Leadership Hierarchy</h2>
+      <p class="hero-copy">Leadership within AXION exists to create alignment rather than control.</p>
+      <div class="hierarchy" aria-label="AXION leadership hierarchy">
+        <div class="map-row primary">Stewardship Council / Board</div>
+        <div class="connector"></div>
+        <div class="map-row primary">Founder & Chief Vision Officer</div>
+        <div class="connector"></div>
+        <div class="map-grid three">
+          <div class="map-row">Chief Integration Officer</div>
+          <div class="map-row">Chief Operating Officer</div>
+          <div class="map-row">Chief Financial Officer</div>
+        </div>
+        <div class="connector"></div>
+        <div class="map-row">Chief of Staff</div>
+        <div class="connector"></div>
+        <div class="map-row">Eight Strategic Division Heads</div>
+        <div class="connector"></div>
+        <div class="map-row">Human Specialists</div>
+        <div class="connector"></div>
+        <div class="map-row primary">ARI Intelligence System</div>
+        <div class="connector"></div>
+        <div class="map-row">Specialized AI Agents</div>
+      </div>
+      <div class="flow-note">
+        <div class="card"><b>Leadership</b><span>Leadership flows downward.</span></div>
+        <div class="card"><b>Intelligence</b><span>Intelligence flows upward.</span></div>
+        <div class="card"><b>Purpose</b><span>Purpose connects both.</span></div>
+      </div>
+    </section>
+
+    <section id="executives">
+      <p class="kicker">Articles III-VII</p>
+      <h2>Executive Roles</h2>
+      <p class="hero-copy">Each executive role protects a distinct dimension of the whole while remaining accountable to the Constitution.</p>
+      <div class="role-grid">
+        <article id="founder" class="role-card"><h3>Founder / Chief Vision Officer</h3><p>The constitutional architect of AXION.</p><span>Protects the Mission and Constitution, designs long-term civilization strategy, guides institutional philosophy, represents AXION globally, and approves constitutional evolution.</span></article>
+        <article id="cinto" class="role-card"><h3>Chief Integration & Strategy Officer</h3><p>Transforms vision into coordinated action.</p><span>Leads strategic integration, organizational alignment, cross-venture coordination, ARI integration, executive collaboration, and institutional coherence.</span></article>
+        <article id="coo" class="role-card"><h3>Chief Operating Officer</h3><p>Transforms strategy into execution.</p><span>Leads operations, infrastructure, systems, performance, scaling, resource coordination, and operational excellence.</span></article>
+        <article id="cfo" class="role-card"><h3>Chief Financial Officer</h3><p>Stewards capital.</p><span>Leads Treasury, financial planning, capital allocation, investment strategy, risk management, reporting, and long-term sustainability.</span></article>
+        <article id="cos" class="role-card"><h3>Chief of Staff</h3><p>The executive force multiplier.</p><span>Protects priorities, coordinates cross-functional initiatives, drives accountability, removes bottlenecks, facilitates executive communication, ensures follow-through, and supports the executive team.</span></article>
+      </div>
+    </section>
+
+    <section id="division-heads" class="reader">
+      <div class="article-label">Article VIII</div>
+      <article class="article">
+        <h2>Division Heads</h2>
+        <p>Each Division Head leads one constitutional capability and is expected to lead through systems rather than supervision.</p>
+        <div class="specialist-grid">
+          <div class="chip">Strategic planning</div>
+          <div class="chip">Human leadership</div>
+          <div class="chip">AI orchestration</div>
+          <div class="chip">Resource allocation</div>
+          <div class="chip">Performance</div>
+          <div class="chip">Continuous improvement</div>
+          <div class="chip">Knowledge contribution</div>
+        </div>
+      </article>
+    </section>
+
+    <section id="specialists" class="reader">
+      <div class="article-label">Article IX</div>
+      <article class="article">
+        <h2>Human Specialists</h2>
+        <p>Human Specialists provide expertise that cannot be automated.</p>
+        <div class="specialist-grid">
+          <div class="chip">Scientists</div>
+          <div class="chip">Designers</div>
+          <div class="chip">Engineers</div>
+          <div class="chip">Psychologists</div>
+          <div class="chip">Physicians</div>
+          <div class="chip">Educators</div>
+          <div class="chip">Writers</div>
+          <div class="chip">Researchers</div>
+          <div class="chip">Developers</div>
+          <div class="chip">Operators</div>
+          <div class="chip">Strategists</div>
+          <div class="chip">Legal professionals</div>
+        </div>
+        <div class="statement">Their value lies in creativity, judgment, relationships, ethics, leadership, and original thinking.</div>
+      </article>
+    </section>
+
+    <section id="ai-agents" class="reader">
+      <div class="article-label">Article X</div>
+      <article class="article">
+        <h2>AI Agents</h2>
+        <p>AI Agents are members of the Intelligence Operating System. Every AI Agent has a defined specialization, measurable purpose, and constitutional responsibility.</p>
+        <div class="agent-grid">
+          <div class="chip">Research</div>
+          <div class="chip">Finance</div>
+          <div class="chip">Engineering</div>
+          <div class="chip">Product</div>
+          <div class="chip">Media</div>
+          <div class="chip">Legal review</div>
+          <div class="chip">Strategy</div>
+          <div class="chip">Education</div>
+          <div class="chip">Health</div>
+          <div class="chip">Operations</div>
+        </div>
+        <div class="statement">They execute. Humans remain accountable.</div>
+      </article>
+    </section>
+
+    <section id="researchers" class="reader">
+      <div class="article-label">Article XI</div>
+      <article class="article">
+        <h2>Researchers</h2>
+        <p>Researchers expand organizational intelligence and are expected to inform every major initiative.</p>
+        <div class="specialist-grid">
+          <div class="chip">Scientific inquiry</div>
+          <div class="chip">Evidence synthesis</div>
+          <div class="chip">Experimental design</div>
+          <div class="chip">Knowledge validation</div>
+          <div class="chip">Publishing</div>
+          <div class="chip">Supporting venture creation</div>
+        </div>
+      </article>
+    </section>
+
+    <section id="advisors" class="reader">
+      <div class="article-label">Article XII</div>
+      <article class="article">
+        <h2>Advisors</h2>
+        <p>Advisors provide perspective, not authority. They strengthen decisions without replacing executive accountability.</p>
+        <div class="advisor-grid">
+          <div class="chip">Experience</div>
+          <div class="chip">Networks</div>
+          <div class="chip">Specialized knowledge</div>
+          <div class="chip">Strategic insight</div>
+          <div class="chip">Institutional wisdom</div>
+        </div>
+      </article>
+    </section>
+
+    <section id="partners" class="reader">
+      <div class="article-label">Article XIII</div>
+      <article class="article">
+        <h2>Partners</h2>
+        <p>Partnerships extend AXION's capability and are evaluated by alignment rather than financial opportunity alone.</p>
+        <div class="partner-grid">
+          <div class="chip">Knowledge</div>
+          <div class="chip">Technology</div>
+          <div class="chip">Capital</div>
+          <div class="chip">Education</div>
+          <div class="chip">Community</div>
+          <div class="chip">Research</div>
+          <div class="chip">Innovation</div>
+        </div>
+      </article>
+    </section>
+
+    <section id="fellows" class="reader">
+      <div class="article-label">Article XIV</div>
+      <article class="article">
+        <h2>Volunteers & Fellows</h2>
+        <p>Some contributors participate through service rather than employment. Volunteers are respected as contributors to the mission.</p>
+        <div class="fellow-grid">
+          <div class="chip">Research Fellows</div>
+          <div class="chip">Community Leaders</div>
+          <div class="chip">Event Volunteers</div>
+          <div class="chip">Academic Collaborators</div>
+          <div class="chip">Innovation Fellows</div>
+          <div class="chip">Student Researchers</div>
+        </div>
+        <div class="statement">Every contribution matters.</div>
+      </article>
+    </section>
+
+    <section id="ari" class="reader">
+      <div class="article-label">Article XV</div>
+      <article class="article">
+        <h2>Working with ARI</h2>
+        <p>Every role within AXION collaborates with ARI. No position operates independently.</p>
+        <div class="short-lines">
+          <div>Every member contributes knowledge.</div>
+          <div>Every member receives intelligence.</div>
+          <div>ARI serves as the connective tissue between all roles.</div>
+          <div>The future organization is not Human versus AI. It is Human with AI.</div>
+        </div>
+      </article>
+    </section>
+
+    <section id="kpis" class="reader">
+      <div class="article-label">Article XVI</div>
+      <article class="article">
+        <h2>Performance & KPIs</h2>
+        <p>Performance is measured through four dimensions rather than output alone. These dimensions apply to every role.</p>
+        <div class="kpi-grid">
+          <div class="kpi-card"><b>Mission Impact</b><span>Did your work strengthen AXION's mission?</span></div>
+          <div class="kpi-card"><b>Organizational Intelligence</b><span>Did you contribute knowledge that improves the organization?</span></div>
+          <div class="kpi-card"><b>Operational Excellence</b><span>Were commitments fulfilled with quality, discipline, and accountability?</span></div>
+          <div class="kpi-card"><b>Human Flourishing</b><span>Did your work strengthen people, relationships, learning, and long-term capability?</span></div>
+        </div>
+      </article>
+    </section>
+
+    <section id="leadership" class="reader">
+      <div class="article-label">Article XVII</div>
+      <article class="article">
+        <h2>Leadership Expectations</h2>
+        <p>Every leader is expected to embody character, systems thinking, and service.</p>
+        <div class="leader-grid">
+          <div class="chip">Integrity</div>
+          <div class="chip">Humility</div>
+          <div class="chip">Curiosity</div>
+          <div class="chip">Discipline</div>
+          <div class="chip">Stewardship</div>
+          <div class="chip">Systems thinking</div>
+          <div class="chip">Emotional intelligence</div>
+          <div class="chip">Service</div>
+        </div>
+        <div class="statement">Leadership exists to elevate others.</div>
+      </article>
+    </section>
+
+    <section id="growth" class="reader">
+      <div class="article-label">Article XVIII</div>
+      <article class="article">
+        <h2>Growth Pathways</h2>
+        <p>AXION encourages continuous evolution. No career path is fixed. The organization evolves with its people.</p>
+        <div class="growth-grid">
+          <div class="chip">Learning</div>
+          <div class="chip">Leadership</div>
+          <div class="chip">Research</div>
+          <div class="chip">Innovation</div>
+          <div class="chip">Cross-disciplinary contribution</div>
+          <div class="chip">Venture creation</div>
+          <div class="chip">Teaching</div>
+          <div class="chip">Mentorship</div>
+        </div>
+      </article>
+    </section>
+
+    <section id="succession" class="reader">
+      <div class="article-label">Article XIX</div>
+      <article class="article">
+        <h2>Succession</h2>
+        <p>Every role should eventually become teachable. Every leader should develop future leaders. Institutional knowledge should never depend upon one individual.</p>
+        <div class="statement">True leadership creates successors. Not dependence.</div>
+      </article>
+    </section>
+
+    <section id="one" class="reader">
+      <div class="article-label">Article XX</div>
+      <article class="article">
+        <h2>One Organization</h2>
+        <p>Although responsibilities differ, everyone serves one organization. Together they form one integrated intelligence system.</p>
+        <div class="org-grid">
+          <div class="chip">Executives</div>
+          <div class="chip">Researchers</div>
+          <div class="chip">Designers</div>
+          <div class="chip">Engineers</div>
+          <div class="chip">AI Agents</div>
+          <div class="chip">Volunteers</div>
+          <div class="chip">Partners</div>
+          <div class="chip">Builders</div>
+          <div class="chip">Investors</div>
+          <div class="chip">Communities</div>
+        </div>
+        <div class="statement">No role exists in isolation.</div>
+      </article>
+    </section>
+
+    <section id="ecosystem">
+      <p class="kicker">The AXION Role Ecosystem</p>
+      <h2>Mission to Civilization</h2>
+      <p class="hero-copy">The role ecosystem shows how responsibility, intelligence, ventures, communities, and civilization connect into one system.</p>
+      <div class="ecosystem-map" aria-label="AXION role ecosystem">
+        <div class="map-row primary">Mission</div>
+        <div class="connector"></div>
+        <div class="map-row">Founder / Chief Vision Officer</div>
+        <div class="connector"></div>
+        <div class="map-grid">
+          <div class="map-row">Chief Integration Officer</div>
+          <div class="map-row">Chief Operating Officer</div>
+          <div class="map-row">Chief Financial Officer</div>
+          <div class="map-row">Chief of Staff</div>
+        </div>
+        <div class="connector"></div>
+        <div class="map-row">Eight Strategic Division Heads</div>
+        <div class="connector"></div>
+        <div class="map-row primary">Human Specialists ↔ ARI ↔ AI Agents</div>
+        <div class="connector"></div>
+        <div class="map-row">Researchers • Advisors • Partners</div>
+        <div class="connector"></div>
+        <div class="map-row">Ventures</div>
+        <div class="connector"></div>
+        <div class="map-row">Communities</div>
+        <div class="connector"></div>
+        <div class="map-row primary">Civilization</div>
+      </div>
+    </section>
+
+    <section id="civilization" class="reader">
+      <div class="article-label">Article XXI</div>
+      <article class="article">
+        <h2>Every Role Builds Civilization</h2>
+        <p>No contribution is insignificant. Roles represent responsibilities to something greater than ourselves.</p>
+        <div class="civilization-grid">
+          <div class="chip">Every meeting</div>
+          <div class="chip">Every line of code</div>
+          <div class="chip">Every research paper</div>
+          <div class="chip">Every design</div>
+          <div class="chip">Every partnership</div>
+          <div class="chip">Every conversation</div>
+          <div class="chip">Every AI workflow</div>
+          <div class="chip">Every financial decision</div>
+          <div class="chip">Every educational experience</div>
+        </div>
+        <div class="statement">Together they become the architecture of a civilization.</div>
+      </article>
+    </section>
+
+    <section id="closing">
+      <div class="ending">
+        <div class="ending-card">
+          <p class="kicker">Book IX Axiom</p>
+          <blockquote>Titles organize responsibility. Character determines leadership. The greatest role within AXION is not the highest office, but the one that most faithfully strengthens the intelligence, integrity, and future of the whole.</blockquote>
+        </div>
+        <div class="ending-card">
+          <p class="kicker">Steward's Commitment</p>
+          <p>Having completed Book IX, I understand that my role within AXION is not defined by status, but by stewardship. I commit to fulfilling my responsibilities with integrity, collaborating openly with colleagues and AI, sharing knowledge generously, and continually developing my capabilities. Whether I serve as a founder, executive, researcher, specialist, advisor, volunteer, or AI architect, I recognize that my work contributes to a larger intelligence system dedicated to advancing human flourishing. I will therefore lead through service, build through collaboration, and measure success by the lasting value I help create for civilization.</p>
+        </div>
+      </div>
+    </section>
+
+    <nav class="booknav" aria-label="Book navigation" style="display:flex;align-items:center;gap:20px;padding:26px;margin:34px 0 0;border:1px solid rgba(118,97,47,.28);border-radius:8px;background:rgba(255,250,240,.72);box-shadow:0 14px 36px rgba(31,24,7,.08);">
+      <a href="book-viii-building-ventures.html" style="text-decoration:none;color:#2f3c31;flex:1;min-width:0;"><span style="display:block;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#7d642d;font-weight:900;">← Book VIII</span><span style="display:block;font-family:ui-serif,Georgia,serif;font-size:18px;">Building Ventures</span></a>
+      <a href="index.html" style="flex:0 0 auto;text-decoration:none;font-size:11px;letter-spacing:.16em;text-transform:uppercase;font-weight:900;color:#161d12;background:#ecd36f;border-radius:999px;padding:11px 18px;">All Books</a>
+      <a href="book-x-governance.html" style="text-decoration:none;color:#2f3c31;flex:1;min-width:0;text-align:right;"><span style="display:block;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#7d642d;font-weight:900;">Book X →</span><span style="display:block;font-family:ui-serif,Georgia,serif;font-size:18px;">Governance</span></a>
+    </nav>
+    <footer>
+      <p>Book IX: Roles. Part of The AXION Constitution.</p>
+    </footer>
+  </main>
+</body>
+</html>

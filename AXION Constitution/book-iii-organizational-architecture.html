@@ -1,0 +1,696 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AXION Constitution - Book III: Organizational Architecture</title>
+  <style>
+    :root {
+      --ink: #151b17;
+      --muted: #63705f;
+      --cream: #f4ecd8;
+      --paper: #fffaf0;
+      --line: rgba(118, 97, 47, .28);
+      --gold: #c8a83d;
+      --earth: #7d642d;
+      --deep: #0c120e;
+      --forest: #203a29;
+      --blue: #186c80;
+      --violet: #5d437d;
+      --shadow: 0 18px 52px rgba(31, 24, 7, .12);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 12% -4%, rgba(200, 168, 61, .22), transparent 26rem),
+        linear-gradient(180deg, #f8f1de 0%, #efe3c3 100%);
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.62;
+    }
+    a { color: inherit; }
+    .page { width: min(1120px, calc(100vw - 42px)); margin: 0 auto; }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(244, 236, 216, .92);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--line);
+    }
+    .topbar .page {
+      min-height: 62px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+    .brand {
+      text-decoration: none;
+      font-weight: 900;
+      letter-spacing: .15em;
+      font-size: 12px;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .sigil {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: var(--deep);
+      color: var(--gold);
+      border: 1px solid var(--gold);
+    }
+    .nav {
+      display: flex;
+      gap: 16px;
+      color: #4e584c;
+      font-size: 13px;
+      font-weight: 800;
+    }
+    .nav a { text-decoration: none; white-space: nowrap; }
+    .nav .back {
+      border: 1px solid rgba(118, 97, 47, .35);
+      border-radius: 999px;
+      padding: 8px 13px;
+      background: rgba(255,250,240,.68);
+    }
+
+    .hero {
+      min-height: calc(100vh - 62px);
+      display: grid;
+      grid-template-columns: 1fr .48fr;
+      gap: 54px;
+      align-items: center;
+      padding: 58px 0 44px;
+    }
+    .kicker {
+      color: var(--earth);
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: .28em;
+      text-transform: uppercase;
+      margin: 0 0 16px;
+    }
+    h1, h2, h3, p { margin-top: 0; }
+    h1 {
+      font-family: ui-serif, Georgia, "Times New Roman", serif;
+      font-size: clamp(48px, 7.1vw, 96px);
+      line-height: .94;
+      letter-spacing: 0;
+      margin-bottom: 20px;
+    }
+    .subtitle {
+      font-family: ui-serif, Georgia, "Times New Roman", serif;
+      color: var(--earth);
+      font-style: italic;
+      font-size: 25px;
+      margin-bottom: 26px;
+    }
+    .hero-copy {
+      max-width: 760px;
+      color: #384536;
+      font-size: 21px;
+    }
+    .quote {
+      border-left: 4px solid var(--gold);
+      padding: 16px 0 16px 22px;
+      margin: 28px 0 0;
+      font-family: ui-serif, Georgia, "Times New Roman", serif;
+      font-size: 21px;
+      line-height: 1.42;
+      color: #263224;
+    }
+    .toc {
+      background: rgba(255, 250, 240, .76);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+      padding: 22px;
+    }
+    .toc h2 {
+      font-size: 13px;
+      letter-spacing: .24em;
+      color: var(--earth);
+      text-transform: uppercase;
+      margin: 0 0 14px;
+    }
+    .toc a {
+      display: grid;
+      grid-template-columns: 38px 1fr;
+      gap: 10px;
+      align-items: center;
+      text-decoration: none;
+      padding: 10px 0;
+      border-top: 1px solid rgba(118,97,47,.18);
+      color: #29352a;
+      font-weight: 800;
+      font-size: 14px;
+    }
+    .toc a:first-of-type { border-top: 0; }
+    .toc span {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: #ecd36f;
+      font-size: 11px;
+      font-weight: 900;
+    }
+
+    section { padding: 66px 0; border-top: 1px solid rgba(118,97,47,.18); }
+    .reader {
+      display: grid;
+      grid-template-columns: 220px minmax(0, 1fr);
+      gap: 42px;
+      align-items: start;
+    }
+    .article-label {
+      position: sticky;
+      top: 86px;
+      color: var(--earth);
+      font-size: 12px;
+      letter-spacing: .24em;
+      text-transform: uppercase;
+      font-weight: 900;
+    }
+    .article {
+      background: rgba(255, 250, 240, .67);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 34px;
+      box-shadow: 0 14px 36px rgba(31,24,7,.08);
+    }
+    h2 {
+      font-family: ui-serif, Georgia, "Times New Roman", serif;
+      font-size: clamp(32px, 4.2vw, 56px);
+      line-height: 1;
+      letter-spacing: 0;
+      margin-bottom: 22px;
+    }
+    .article p {
+      max-width: 760px;
+      font-size: 18px;
+      color: #2f3c31;
+      margin-bottom: 18px;
+    }
+    .statement {
+      max-width: 800px;
+      border-radius: 8px;
+      border: 1px solid rgba(200,168,61,.45);
+      background: #fbf0ce;
+      padding: 18px 20px;
+      color: #1f2c1d;
+      font-weight: 800;
+      font-size: 18px;
+      margin: 24px 0;
+    }
+    .short-lines {
+      display: grid;
+      gap: 7px;
+      margin: 22px 0;
+      max-width: 720px;
+    }
+    .short-lines div {
+      border-left: 3px solid rgba(200,168,61,.65);
+      padding: 7px 0 7px 14px;
+      color: #2f3c31;
+      font-size: 18px;
+      background: rgba(255,255,255,.32);
+    }
+    .chip-grid, .layer-grid, .role-grid, .division-grid, .memory-grid, .question-grid {
+      display: grid;
+      gap: 12px;
+      margin-top: 22px;
+    }
+    .chip-grid { grid-template-columns: repeat(4, 1fr); }
+    .layer-grid { grid-template-columns: repeat(2, 1fr); }
+    .role-grid { grid-template-columns: repeat(5, 1fr); }
+    .division-grid { grid-template-columns: repeat(4, 1fr); }
+    .memory-grid { grid-template-columns: repeat(3, 1fr); }
+    .question-grid { grid-template-columns: repeat(5, 1fr); }
+    .chip, .tile, .layer-card, .role-card, .division-card, .question-card {
+      border-radius: 7px;
+      border: 1px solid rgba(118,97,47,.22);
+      background: rgba(255,255,255,.42);
+      padding: 14px;
+      color: #33402f;
+    }
+    .chip {
+      font-weight: 800;
+    }
+    .tile b, .layer-card b, .role-card b, .division-card b, .question-card b {
+      display: block;
+      color: var(--earth);
+      margin-bottom: 6px;
+    }
+    .tile span, .layer-card span, .role-card span, .division-card span, .question-card span {
+      display: block;
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 650;
+      line-height: 1.45;
+    }
+    .layer-card {
+      min-height: 214px;
+    }
+    .layer-number {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: #ecd36f;
+      color: #161d12;
+      font-size: 12px;
+      font-weight: 900;
+      margin-bottom: 12px;
+    }
+    .pathway, .scale-flow {
+      display: grid;
+      gap: 8px;
+      margin: 22px 0;
+      max-width: 820px;
+    }
+    .pathway {
+      grid-template-columns: repeat(5, 1fr);
+    }
+    .path-step {
+      position: relative;
+      border-radius: 7px;
+      border: 1px solid rgba(118,97,47,.24);
+      background: rgba(255,255,255,.48);
+      padding: 12px;
+      font-weight: 900;
+      text-align: center;
+      color: #253224;
+    }
+    .path-step::after {
+      content: "";
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      border-top: 2px solid var(--earth);
+      border-right: 2px solid var(--earth);
+      transform: rotate(45deg);
+      top: 50%;
+      right: -8px;
+      margin-top: -4px;
+    }
+    .path-step:nth-child(5n)::after,
+    .path-step:last-child::after { display: none; }
+    .architecture-map {
+      display: grid;
+      gap: 10px;
+      max-width: 760px;
+      margin-top: 22px;
+    }
+    .map-row {
+      border-radius: 8px;
+      border: 1px solid rgba(118,97,47,.24);
+      background: rgba(255,255,255,.46);
+      padding: 14px 16px;
+      font-weight: 900;
+      text-align: center;
+      color: #243023;
+    }
+    .map-row.primary {
+      background: #18221b;
+      color: #f7e9b8;
+      border-color: rgba(200,168,61,.55);
+    }
+    .map-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+    }
+    .map-grid .map-row { font-size: 14px; }
+    .connector {
+      height: 28px;
+      width: 1px;
+      margin: 0 auto;
+      background: rgba(125,100,45,.55);
+    }
+    .ending {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+    .ending-card {
+      border-radius: 8px;
+      padding: 24px;
+      border: 1px solid var(--line);
+      background: rgba(255,250,240,.76);
+      box-shadow: var(--shadow);
+    }
+    .ending-card blockquote {
+      margin: 0;
+      font-family: ui-serif, Georgia, "Times New Roman", serif;
+      font-size: 23px;
+      line-height: 1.38;
+      color: #22301f;
+    }
+    footer { padding: 34px 0 58px; color: var(--muted); font-size: 13px; }
+
+    @media (max-width: 980px) {
+      .nav { display: none; }
+      .hero, .reader, .ending { grid-template-columns: 1fr; }
+      .article-label { position: static; }
+      .chip-grid, .layer-grid, .role-grid, .division-grid, .memory-grid, .question-grid, .pathway, .map-grid { grid-template-columns: 1fr; }
+      .path-step::after { display: none; }
+      .article { padding: 24px; }
+    }
+    @media print {
+      body { background: #fffaf0; }
+      .topbar { display: none; }
+      .page { width: auto; margin: 0 34px; }
+      .hero { min-height: auto; grid-template-columns: 1fr; padding: 38px 0; }
+      section { padding: 34px 0; }
+      .article, .toc, .ending-card { box-shadow: none; }
+      .reader { grid-template-columns: 140px 1fr; gap: 24px; }
+      .layer-grid, .role-grid, .division-grid { grid-template-columns: repeat(2, 1fr); }
+      .chip-grid, .memory-grid, .question-grid, .pathway, .map-grid { grid-template-columns: repeat(2, 1fr); }
+      @page { size: letter; margin: .46in; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="page">
+      <a class="brand" href="index.html">
+        <span class="sigil">✦</span>
+        AXION Constitution
+      </a>
+      <nav class="nav" aria-label="Book III navigation">
+        <a href="#layers">Seven Layers</a>
+        <a href="#leadership">Leadership</a>
+        <a href="#divisions">Divisions</a>
+        <a href="#intelligence">Intelligence</a>
+        <a href="#coherence">Coherence</a>
+        <a class="back" href="index.html">Back to Constitution</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page">
+    <section class="hero">
+      <div>
+        <p class="kicker">The AXION Constitution - Book III</p>
+        <h1>Organizational Architecture</h1>
+        <p class="subtitle">Designing the Institution That Designs Institutions</p>
+        <p class="hero-copy">Book III defines AXION as a multi-layered intelligence system: a living institutional architecture for creating ventures, preserving knowledge, educating leaders, coordinating intelligence, and strengthening civilization.</p>
+        <blockquote class="quote">Organizations are not machines to be managed. They are living systems to be cultivated. Architecture determines behavior long before leadership does.</blockquote>
+      </div>
+      <aside class="toc">
+        <h2>Book III Contents</h2>
+        <a href="#preamble"><span>0</span>Preamble</a>
+        <a href="#identity"><span>I</span>What Is AXION?</a>
+        <a href="#layers"><span>II</span>The Seven Layers</a>
+        <a href="#orchestration"><span>III</span>Human-Led Orchestration</a>
+        <a href="#leadership"><span>IV</span>Executive Architecture</a>
+        <a href="#divisions"><span>V</span>Eight Strategic Divisions</a>
+        <a href="#intelligence"><span>VI</span>Organizational Intelligence</a>
+        <a href="#adaptive"><span>VII</span>Adaptive Architecture</a>
+        <a href="#scale"><span>VIII</span>Architecture of Scale</a>
+        <a href="#coherence"><span>IX</span>Institutional Coherence</a>
+        <a href="#map"><span>X</span>Architecture Map</a>
+      </aside>
+    </section>
+
+    <section id="preamble" class="reader">
+      <div class="article-label">Preamble</div>
+      <article class="article">
+        <h2>Architecture Shapes Civilization</h2>
+        <p>Every civilization is ultimately shaped by the architecture of its institutions.</p>
+        <div class="short-lines">
+          <div>The institutions of the Industrial Age were designed for efficiency.</div>
+          <div>The institutions of the Information Age were designed for scale.</div>
+          <div>The institutions of the Intelligence Age must be designed for coherence.</div>
+        </div>
+        <p>AXION was never intended to become another corporation. It was conceived as an adaptive ecosystem capable of continuously creating knowledge, launching ventures, educating leaders, coordinating intelligence, and strengthening civilization itself.</p>
+        <div class="statement">Unlike traditional organizations that optimize for a single product or market, AXION operates as a multi-layered intelligence system where every component strengthens every other component.</div>
+        <p>The organization itself becomes an evolving organism.</p>
+      </article>
+    </section>
+
+    <section id="identity" class="reader">
+      <div class="article-label">Article I</div>
+      <article class="article">
+        <h2>What Is AXION?</h2>
+        <p>AXION is neither a startup, nor a holding company, nor a venture studio. It is all of these simultaneously.</p>
+        <div class="statement">AXION is a Civilizational Intelligence Organization.</div>
+        <p>Its purpose is to continuously generate ideas, transform ideas into ventures, transform ventures into institutions, and transform institutions into civilization infrastructure.</p>
+        <div class="chip-grid">
+          <div class="chip">Knowledge compounds</div>
+          <div class="chip">Capital compounds</div>
+          <div class="chip">Technology compounds</div>
+          <div class="chip">Human potential compounds</div>
+        </div>
+        <p>Every venture built by AXION strengthens the whole. Every discovery made by one venture becomes intelligence available to every other venture.</p>
+      </article>
+    </section>
+
+    <section id="layers">
+      <p class="kicker">Article II</p>
+      <h2>The Seven Layers of AXION</h2>
+      <p class="hero-copy">AXION is composed of seven interconnected institutional layers. Each layer performs a unique function while remaining inseparable from the others.</p>
+      <div class="layer-grid">
+        <article class="layer-card">
+          <div class="layer-number">I</div>
+          <h3>The Holding Company</h3>
+          <p>Stewards the full ecosystem: intellectual property, patents, trademarks, AI infrastructure, research assets, capital, venture equity, brand assets, licensing rights, and strategic investments.</p>
+          <span>It does not exist to control ventures. It exists to strengthen them through stability, governance, capital allocation, shared intelligence, and long-term stewardship.</span>
+        </article>
+        <article class="layer-card">
+          <div class="layer-number">II</div>
+          <h3>The Venture Studio</h3>
+          <p>Transforms intelligence into enterprise through disciplined execution.</p>
+          <span>It continuously creates new organizations capable of solving meaningful problems.</span>
+        </article>
+        <article class="layer-card">
+          <div class="layer-number">III</div>
+          <h3>The Research Institute</h3>
+          <p>Explores artificial intelligence, medicine, psychology, economics, education, systems science, technology, governance, human performance, and collective intelligence.</p>
+          <span>Every discovery informs venture creation. Every venture generates new research.</span>
+        </article>
+        <article class="layer-card">
+          <div class="layer-number">IV</div>
+          <h3>The Intelligence Operating System</h3>
+          <p>At the center of AXION exists ARI, the organizational nervous system.</p>
+          <span>ARI collects intelligence, organizes knowledge, synthesizes research, coordinates AI agents, supports decisions, identifies opportunities, predicts trends, improves workflows, and learns from every interaction.</span>
+        </article>
+        <article class="layer-card">
+          <div class="layer-number">V</div>
+          <h3>The Education Platform</h3>
+          <p>Transforms institutional knowledge into learning experiences for employees, builders, founders, researchers, communities, organizations, governments, and future generations.</p>
+          <span>Education exists not merely to transfer information. It exists to cultivate wisdom.</span>
+        </article>
+        <article class="layer-card">
+          <div class="layer-number">VI</div>
+          <h3>The Media Company</h3>
+          <p>Communicates ideas through books, films, podcasts, research, journalism, publishing, courses, documentaries, and events.</p>
+          <span>Media becomes civilization's narrative infrastructure.</span>
+        </article>
+        <article class="layer-card">
+          <div class="layer-number">VII</div>
+          <h3>Civilization Builder</h3>
+          <p>Integrates communities, institutions, global chapters, innovation hubs, research networks, education systems, economic ecosystems, health systems, technology platforms, and public infrastructure.</p>
+          <span>Civilizations emerge from interconnected institutions working toward shared purpose.</span>
+        </article>
+      </div>
+      <div class="pathway" aria-label="Venture studio pathway">
+        <div class="path-step">Problem</div>
+        <div class="path-step">Research</div>
+        <div class="path-step">Validation</div>
+        <div class="path-step">Prototype</div>
+        <div class="path-step">Funding</div>
+        <div class="path-step">Launch</div>
+        <div class="path-step">Scale</div>
+        <div class="path-step">Optimization</div>
+        <div class="path-step">Institution</div>
+        <div class="path-step">Civilization Impact</div>
+      </div>
+    </section>
+
+    <section id="orchestration" class="reader">
+      <div class="article-label">Article III</div>
+      <article class="article">
+        <h2>Human-Led. Intelligence-Orchestrated.</h2>
+        <p>Traditional organizations are built around management. AXION is built around orchestration.</p>
+        <div class="short-lines">
+          <div>Leadership establishes vision.</div>
+          <div>ARI translates vision into intelligence.</div>
+          <div>AI agents execute specialized work.</div>
+          <div>Humans exercise judgment.</div>
+          <div>Knowledge continuously returns to the system.</div>
+        </div>
+        <div class="statement">This creates an organization capable of learning faster than it grows.</div>
+        <p>The role of leadership is therefore transformed. Executives no longer supervise repetitive work. They steward intelligence.</p>
+      </article>
+    </section>
+
+    <section id="leadership" class="reader">
+      <div class="article-label">Article IV</div>
+      <article class="article">
+        <h2>Executive Architecture</h2>
+        <p>Leadership exists to preserve coherence across the ecosystem.</p>
+        <div class="role-grid">
+          <div class="role-card"><b>Founder / CVO</b><span>Defines purpose, protects philosophy, designs civilization, and represents the future.</span></div>
+          <div class="role-card"><b>Chief Integration & Strategy Officer</b><span>Transforms vision into strategic alignment and coordinates intelligence across every venture.</span></div>
+          <div class="role-card"><b>Chief Operating Officer</b><span>Transforms strategy into execution, designs operational systems, optimizes performance, and scales ventures.</span></div>
+          <div class="role-card"><b>Chief Financial Officer</b><span>Stewards capital, allocates resources, protects financial resilience, and builds sustainable growth.</span></div>
+          <div class="role-card"><b>Chief of Staff</b><span>Serves as the executive force multiplier, protects priorities, coordinates execution, removes obstacles, and ensures accountability.</span></div>
+        </div>
+      </article>
+    </section>
+
+    <section id="divisions">
+      <p class="kicker">Article V</p>
+      <h2>The Eight Strategic Divisions</h2>
+      <p class="hero-copy">Every capability within AXION belongs to one of eight interconnected divisions. Each division operates through human leadership supported by specialized AI teams.</p>
+      <div class="division-grid">
+        <article class="division-card"><b>1. Product & Design</b><span>Designs experiences, products, services, interfaces, and human-centered innovation.</span></article>
+        <article class="division-card"><b>2. Capital & Fundraising</b><span>Secures financial resources, investor relationships, grants, and long-term capital partnerships.</span></article>
+        <article class="division-card"><b>3. Growth & Adoption</b><span>Builds communities, strategic growth systems, customer journeys, and global adoption.</span></article>
+        <article class="division-card"><b>4. Talent & Stewardship</b><span>Cultivates people, leadership, organizational culture, recruiting, and continuous learning.</span></article>
+        <article class="division-card"><b>5. Research & Data</b><span>Generates scientific insight, market intelligence, predictive modeling, and organizational knowledge.</span></article>
+        <article class="division-card"><b>6. Strategic Partnerships</b><span>Builds alliances between institutions, corporations, governments, nonprofits, and innovators.</span></article>
+        <article class="division-card"><b>7. Story & Media</b><span>Shapes narratives that communicate ideas, educate society, and expand cultural influence.</span></article>
+        <article class="division-card"><b>8. Engineering & Technology</b><span>Builds software, AI infrastructure, cybersecurity, platforms, and technical systems.</span></article>
+      </div>
+    </section>
+
+    <section id="intelligence" class="reader">
+      <div class="article-label">Article VI</div>
+      <article class="article">
+        <h2>Organizational Intelligence</h2>
+        <p>Every organization eventually forgets. Employees leave. Knowledge disappears. Mistakes repeat. AXION rejects institutional amnesia.</p>
+        <div class="memory-grid">
+          <div class="chip">Research</div>
+          <div class="chip">Meetings</div>
+          <div class="chip">Projects</div>
+          <div class="chip">Failures</div>
+          <div class="chip">Successes</div>
+          <div class="chip">Partnerships</div>
+          <div class="chip">Decisions</div>
+          <div class="chip">Experiments</div>
+          <div class="chip">Lessons learned</div>
+        </div>
+        <div class="statement">Every experience strengthens future intelligence. The organization becomes progressively wiser.</div>
+      </article>
+    </section>
+
+    <section id="adaptive" class="reader">
+      <div class="article-label">Article VII</div>
+      <article class="article">
+        <h2>Adaptive Architecture</h2>
+        <p>No organizational chart is permanent. AXION is intentionally adaptive.</p>
+        <div class="short-lines">
+          <div>Divisions evolve.</div>
+          <div>Ventures emerge.</div>
+          <div>Technologies change.</div>
+          <div>Markets transform.</div>
+          <div>Only the constitutional principles remain constant.</div>
+        </div>
+        <p>Structure exists to serve purpose. When purpose demands evolution, architecture evolves accordingly.</p>
+      </article>
+    </section>
+
+    <section id="scale" class="reader">
+      <div class="article-label">Article VIII</div>
+      <article class="article">
+        <h2>The Architecture of Scale</h2>
+        <p>Most organizations grow by adding people. AXION grows by increasing intelligence.</p>
+        <div class="pathway scale-flow" aria-label="Architecture of scale sequence">
+          <div class="path-step">Vision</div>
+          <div class="path-step">Strategy</div>
+          <div class="path-step">Intelligence</div>
+          <div class="path-step">AI</div>
+          <div class="path-step">Human Capability</div>
+          <div class="path-step">Ventures</div>
+          <div class="path-step">Civilization</div>
+        </div>
+        <div class="statement">Growth occurs through multiplication rather than accumulation.</div>
+      </article>
+    </section>
+
+    <section id="coherence" class="reader">
+      <div class="article-label">Article IX</div>
+      <article class="article">
+        <h2>Institutional Coherence</h2>
+        <p>Every new venture, division, partnership, or initiative must answer five questions before becoming part of AXION.</p>
+        <div class="question-grid">
+          <div class="question-card"><b>Mission</b><span>Does it advance the mission?</span></div>
+          <div class="question-card"><b>Ecosystem</b><span>Does it strengthen the ecosystem?</span></div>
+          <div class="question-card"><b>Intelligence</b><span>Does it contribute intelligence?</span></div>
+          <div class="question-card"><b>Human Flourishing</b><span>Does it improve human flourishing?</span></div>
+          <div class="question-card"><b>Generations</b><span>Will it remain valuable across generations?</span></div>
+        </div>
+        <div class="statement">If the answer to any of these questions is no, it does not belong within the architecture.</div>
+      </article>
+    </section>
+
+    <section id="map" class="reader">
+      <div class="article-label">Architecture</div>
+      <article class="article">
+        <h2>The Architecture of AXION</h2>
+        <div class="architecture-map" aria-label="AXION architecture map">
+          <div class="map-row primary">Civilization</div>
+          <div class="connector"></div>
+          <div class="map-row">AXION Holding Company</div>
+          <div class="connector"></div>
+          <div class="map-row primary">ARI Intelligence Operating System</div>
+          <div class="connector"></div>
+          <div class="map-grid">
+            <div class="map-row">Research</div>
+            <div class="map-row">Venture Studio</div>
+            <div class="map-row">Education</div>
+            <div class="map-row">Media</div>
+          </div>
+          <div class="connector"></div>
+          <div class="map-row">Eight Strategic Divisions</div>
+          <div class="connector"></div>
+          <div class="map-row">Human Leaders + Specialized AI Teams</div>
+          <div class="connector"></div>
+          <div class="map-row">Ventures</div>
+          <div class="connector"></div>
+          <div class="map-row">Communities</div>
+          <div class="connector"></div>
+          <div class="map-row primary">Future Civilization</div>
+        </div>
+      </article>
+    </section>
+
+    <section id="closing">
+      <div class="ending">
+        <div class="ending-card">
+          <p class="kicker">Book III Axiom</p>
+          <blockquote>Organizations build products. Institutions build societies. Architectures build civilizations.</blockquote>
+        </div>
+        <div class="ending-card">
+          <p class="kicker">Steward's Commitment</p>
+          <p>Having completed Book III, I understand that AXION is not a collection of departments, but an interconnected architecture of intelligence designed to create enduring value. I commit to seeing beyond my individual role, recognizing that every decision, every venture, and every contribution strengthens or weakens the coherence of the entire ecosystem. I will build with systems in mind, collaborate across disciplines, and steward the architecture so that it continues to evolve in service of humanity long after my own work is complete.</p>
+        </div>
+      </div>
+    </section>
+
+    <nav class="booknav" aria-label="Book navigation" style="display:flex;align-items:center;gap:20px;padding:26px;margin:34px 0 0;border:1px solid rgba(118,97,47,.28);border-radius:8px;background:rgba(255,250,240,.72);box-shadow:0 14px 36px rgba(31,24,7,.08);">
+      <a href="book-ii-vision-mission-principles.html" style="text-decoration:none;color:#2f3c31;flex:1;min-width:0;"><span style="display:block;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#7d642d;font-weight:900;">← Book II</span><span style="display:block;font-family:ui-serif,Georgia,serif;font-size:18px;">Vision • Mission • Principles</span></a>
+      <a href="index.html" style="flex:0 0 auto;text-decoration:none;font-size:11px;letter-spacing:.16em;text-transform:uppercase;font-weight:900;color:#161d12;background:#ecd36f;border-radius:999px;padding:11px 18px;">All Books</a>
+      <a href="book-iv-intelligence-operating-system.html" style="text-decoration:none;color:#2f3c31;flex:1;min-width:0;text-align:right;"><span style="display:block;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#7d642d;font-weight:900;">Book IV →</span><span style="display:block;font-family:ui-serif,Georgia,serif;font-size:18px;">Intelligence Operating System</span></a>
+    </nav>
+    <footer>
+      <p>Book III: Organizational Architecture. Part of The AXION Constitution.</p>
+    </footer>
+  </main>
+</body>
+</html>
